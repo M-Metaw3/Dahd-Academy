@@ -1,65 +1,91 @@
 import React from 'react'
-import { Navbar, Container, Nav, NavDropdown, Offcanvas } from 'react-bootstrap';  
-import { Link } from 'react-router-dom';
+import { Navbar, Container, Nav, NavDropdown, Offcanvas } from 'react-bootstrap';
+import {  NavLink } from 'react-router-dom';
+
+import './header.css';
+
+
+
 function Header() {
   return (
     <>
-        <Navbar bg="light" expand={'xl'} className="mb-3">
-        <Container fluid>
+    <Navbar expand={'xl'} className="mb-3 header">
+      <Container fluid>
         <Navbar.Brand href="#home">
-        <img
-              src={require("../../assets/images/logo.png")}
-              height="60"
-              className="d-inline-block align-top"
-              alt="logo"
-            />
+          <img
+            src={require("../../assets/images/logo.png")}
+            height="45"
+            className="d-inline-block align-top"
+            alt="logo"
+          />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-xl`} />
+        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-xl`} className='toggle-btn' />
         <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-xl`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-xl`}
-              placement="end"
-            >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-xl`}>
-                  Offcanvas
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  
-                  
-                  
-                  <Nav.Link href="#action1"><Link to="/links">Home</Link></Nav.Link>
+          id={`offcanvasNavbar-expand-xl`}
+          aria-labelledby={`offcanvasNavbarLabel-expand-xl`}
+          placement="end"
+        >
+          <Offcanvas.Header closeButton className=' justify-content-end'>
+            {/* <Offcanvas.Title id={`offcanvasNavbarLabel-expand-xl`}>
+                              <img
+                                  src={require("../../assets/images/logo.png")}
+                                  height="60"
+                                  className="d-inline-block align-top"
+                                  alt="logo"
+                              />
+                          </Offcanvas.Title> */}
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Nav className="justify-content-end flex-grow-1 pe-3 align-items-xl-center gap-3 nav-links">
+              <NavLink
+                to="/Home"
+                className={({ isActive }) => (isActive ? 'active' : '')}
 
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/About"
+                className={({ isActive }) => (isActive ? 'active' : '')}
 
-                  
-                
-                  <Nav.Link ><Link to="/links">Link  </Link></Nav.Link>
-       
+              >
+                About
+              </NavLink>
+              <NavDropdown
+                title="Courses"
+                id={`offcanvasNavbarDropdown-expand-xl`}
+              >
+                <NavDropdown.Item >course1</NavDropdown.Item>
+                <NavDropdown.Item >course2</NavDropdown.Item>
+                <NavDropdown.Item >course3</NavDropdown.Item>
+              </NavDropdown>
+              <NavLink
+                to="/Services"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                Services
+              </NavLink>
+              <NavLink
+                to="/Teachers"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                Teachers
+              </NavLink>
+              <NavLink
+                to="/Contact"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                Contact
+                </NavLink>
 
-                  <NavDropdown
-                    title="Dropdown"
-                    id={`offcanvasNavbarDropdown-expand-xl`}
-                  >
-                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
-                      Another action
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">
-                      Something else here
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-                
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
-        </Container>
+            </Nav>
+
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Container>
     </Navbar>
 
-    </>
-  )
+  </>  )
 }
 
 export default Header;

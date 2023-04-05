@@ -1,0 +1,16 @@
+.header {
+  background-color: var(--bg-color);
+}
+.toggle-btn{
+outline: none !important;
+/* color: blue !important; */
+border: none !important;
+}
+.nav-links a{
+  color:var(--black);
+  text-decoration: none;
+}
+
+.nav-links a.active ,.nav-links a:hover {
+  color: var(--brown);
+}
