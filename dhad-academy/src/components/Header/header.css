@@ -13,4 +13,5 @@ border: none !important;
 
 .nav-links a.active ,.nav-links a:hover {
   color: var(--brown);
+  background-color: transparent;
 }

@@ -9,10 +9,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
- 
- <Header/>
-    <Roting/>
-      <Footer/>
+  <Header/>
+  <Roting/>
+  <Footer/>
     </div>
   );
 }

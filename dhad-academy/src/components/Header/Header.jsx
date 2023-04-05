@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar, Container, Nav, NavDropdown, Offcanvas } from 'react-bootstrap';
-import {  NavLink } from 'react-router-dom';
+import {  Link, NavLink } from 'react-router-dom';
 
 import './header.css';
 
@@ -9,7 +9,7 @@ import './header.css';
 function Header() {
   return (
     <>
-    <Navbar expand={'xl'} className="mb-3 header">
+    <Navbar expand={'xl'} className="header">
       <Container fluid>
         <Navbar.Brand href="#home">
           <img
@@ -38,14 +38,14 @@ function Header() {
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3 align-items-xl-center gap-3 nav-links">
               <NavLink
-                to="/Home"
+                to="/home"
                 className={({ isActive }) => (isActive ? 'active' : '')}
 
               >
                 Home
               </NavLink>
               <NavLink
-                to="/About"
+                to="/about"
                 className={({ isActive }) => (isActive ? 'active' : '')}
 
               >
@@ -55,24 +55,24 @@ function Header() {
                 title="Courses"
                 id={`offcanvasNavbarDropdown-expand-xl`}
               >
-                <NavDropdown.Item >course1</NavDropdown.Item>
-                <NavDropdown.Item >course2</NavDropdown.Item>
-                <NavDropdown.Item >course3</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses" className={({ isActive }) => (isActive ? 'active' : '')}>course1</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses" className={({ isActive }) => (isActive ? 'active' : '')}>course2</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses" className={({ isActive }) => (isActive ? 'active' : '')}>course3</NavDropdown.Item>
               </NavDropdown>
               <NavLink
-                to="/Services"
+                to="/services"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Services
               </NavLink>
               <NavLink
-                to="/Teachers"
+                to="/teachers"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Teachers
               </NavLink>
               <NavLink
-                to="/Contact"
+                to="/contact"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Contact

@@ -10,10 +10,10 @@ function Footer() {
             <div className="col-lg-6 col-md-12 mb-4 mb-md-0 d-flex align-items-center justify-content-center">
                 <img src={require("../../assets/images/logo.png")} alt="" width={"50%"} />
             </div>
-            <div className="col-sm-12 col-md-6 mb-4 mb-md-0 mt-md-4 text-start ">
-            <div className="row d-flex  justify-content-center">
-            <div className="col-6 mb-4 mb-md-0 ">
-              <h6 className="text-uppercase mb-2">QUICK LINKS</h6>
+            <div className="col-sm-12 col-md-6 mb-4 mb-md-0 mt-md-4 text-start">
+            <div className="row d-flex  justify-content-center px-lg-5">
+            <div className="col-6 mb-4 mb-md-0 ps-lg-5">
+              <h6 className="text-uppercase mb-2 ">QUICK LINKS</h6>
               <ul className="list-unstyled">
               <li className='mb-2'>
                   <a href="#!">Home</a>
