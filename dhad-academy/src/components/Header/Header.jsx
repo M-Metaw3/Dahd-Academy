@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar, Container, Nav, NavDropdown, Offcanvas } from 'react-bootstrap';
-import {  Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './header.css';
 
