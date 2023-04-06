@@ -1,12 +1,21 @@
 import React, { useEffect } from 'react';
+import { useDispatch ,useSelector } from 'react-redux';
 
 const Home = () => {
+    const dispatch = useDispatch()
+    const selector2 = useSelector((state)=>state)
+
+
     useEffect(() => {
-        document.title ="Home";  
+        console.log("HomeComponent");
+
+        dispatch({type:"getAllTeacher"})
       }, []);
+
+      console.log(selector2);
     return (
         <div>
-            Home
+           {/* <button onClick={done}></button> */}
         </div>
     );
 }
