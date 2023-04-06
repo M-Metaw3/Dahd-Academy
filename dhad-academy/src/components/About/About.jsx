@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import CommonSection from '../Common-section/CommonSection';
+import about from "../../assets/images/about.png"
 
 
 function About() {
@@ -7,7 +9,7 @@ function About() {
   }, []);
   return (
     <div>
-      About
+        <CommonSection title="about" img={`${about}`} />
     </div>
   )
 }

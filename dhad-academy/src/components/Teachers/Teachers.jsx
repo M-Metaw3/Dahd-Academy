@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import CommonSection from '../Common-section/CommonSection';
+import teachers from "../../assets/images/teachers.png"
 
 function Teachers() {
     useEffect(() => {
@@ -6,7 +8,7 @@ function Teachers() {
       }, []);
   return (
     <div>
-      Teachers
+      <CommonSection title="INSTRUCTORS" img={`${teachers}`} />
     </div>
   )
 }

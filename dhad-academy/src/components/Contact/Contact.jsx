@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import CommonSection from '../Common-section/CommonSection';
+import contact from "../../assets/images/contact.png"
 
 function Contact() {
   useEffect(() => {
@@ -6,7 +8,7 @@ function Contact() {
   }, []);
   return (
     <div>
-      Contact
+      <CommonSection title="CONTACT US" img={`${contact}`} />
     </div>
   )
 }
