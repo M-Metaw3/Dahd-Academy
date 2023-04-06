@@ -1,9 +1,18 @@
 import React, { useEffect } from 'react';
 import bg from "../../assets/images/home-bg.png"
+import { useDispatch ,useSelector } from 'react-redux';
 const Home = () => {
+    const dispatch = useDispatch()
+    const selector2 = useSelector((state)=>state)
+
+
     useEffect(() => {
-        document.title ="Home";  
+        console.log("HomeComponent");
+
+        dispatch({type:"getAllTeacher"})
       }, []);
+
+      console.log(selector2);
     return (
         <div>
              <section className="position-relative" 
