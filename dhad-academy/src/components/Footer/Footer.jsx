@@ -65,11 +65,7 @@ function Footer() {
             </div>
           </div>
         </div>
-
       </footer>
-    <div>
-      <h1>footer</h1>
-    </div>
     </>
   )
 }
