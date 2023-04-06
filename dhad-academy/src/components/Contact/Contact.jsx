@@ -7,9 +7,9 @@ function Contact() {
     document.title ="Contact";  
   }, []);
   return (
-    <div>
+    <>
       <CommonSection title="CONTACT US" img={`${contact}`} />
-    </div>
+    </>
   )
 }
 

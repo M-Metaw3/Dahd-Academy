@@ -9,7 +9,7 @@ import './header.css';
 function Header() {
   return (
     <>
-    <Navbar expand={'xl'} className="header">
+    <Navbar expand={'xl'} className="header px-xl-5">
       <Container fluid>
         <Navbar.Brand href="#home">
           <img

@@ -7,11 +7,11 @@ outline: none !important;
 border: none !important;
 }
 .nav-links a{
-  color:var(--black);
+  color:var(--secondry-color);
   text-decoration: none;
 }
 
 .nav-links a.active ,.nav-links a:hover {
-  color: var(--brown);
+  color: var(--primary-color);
   background-color: transparent;
 }
