@@ -1,13 +1,13 @@
 const teacherstate = {
-    teachers:[]
+    teachers:'',
 }
 
 export default (state = teacherstate,action) => {
   
 switch (action.type) {
     case "getAllTeacher":
-        
-  return{...state, teachers:state.in+100}
+        console.log("redux")
+  return{...state, teachers:action.payload}
         
         break;
 
