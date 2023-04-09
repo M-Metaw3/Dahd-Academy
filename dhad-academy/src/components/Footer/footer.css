@@ -5,10 +5,14 @@ footer a {
   text-decoration: none;
   color: var(--white);
 }
-footer a:hover {
+footer a:hover,footer a.active {
     color: var(--primary-color);
   }
 
 footer h6{
     color: var(--primary-color);
+}
+.Copyright p{
+  background-color: #4E6C50;
+  color: var(--white) !important;
 }

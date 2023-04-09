@@ -2,13 +2,21 @@
 :root {
     --bg-color: #F4EBD0;
     --secondry-color: #122620;
+    --secondry-color-rgb:18, 38, 32;
     --white:#ffffff;
     --primary-color:#D6AD60;
+    --primary-color-rgb:214, 173, 96 ;
   }
   body{
     font-family: 'Tajawal', sans-serif !important;
+    color: var(--secondry-color) !important;
     background-color: var(--bg-color) !important;
-}
+
+  }
+  p{
+    color:rgba(18, 38, 32,75%) ;
+  }
+
 
 
 

@@ -1,0 +1,8 @@
+.be-instructor{
+    background-color: var(--primary-color);
+}
+.btn-apply{
+    background-color: var(--secondry-color) !important;
+    color: var(--white) !important;
+
+}
