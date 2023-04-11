@@ -69,7 +69,7 @@ function validateLogin (obj){
   
     email :joi.string().trim().min(3).max(50).required().email(),
     password :joi.string().trim().min(5).max(50).required(),
-    // image :joi.string().trim().required(),
+    image :joi.string().trim().required(),
     
     });
     return schema.validate(obj);

@@ -9,8 +9,8 @@ class users {
 
 static userRegistration =async(req,res)=>{
 
+   console.log(req.body)
 const {name,email,password} = req.body
-console.log(email)
 const {error}= userModel.validateRegistration(req.body)
 if (error) { 
    response(res,400,"error ocured","",error.details[0].message)
@@ -18,13 +18,14 @@ if (error) {
 
 try {
     const emaila= await userModel.User.findOne({email:email})
-    console.log("donnn"+emaila)
+   
     if (emaila) { 
       return  response(res,400,"email exsited")
      }
      else{
+      
         const hashingPassword  =await bycrpt.hash(password,12)
-        const createuser= await new userModel.User({name:name,email:email,password:hashingPassword})
+        const createuser= await new userModel.User({name:name,email:email,password:hashingPassword ,image:req.file.originalname})
 
         await createuser.save();
 
@@ -74,6 +75,27 @@ const {password,...other}= emailexsite._doc;
  } catch (error) {
    return  response(res,400,"password not correct ",'',error.message)
  } 
+    }
+//////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    static uploadimage = (req,res) => {
+
+
+
+ return response(res,200,"image uploaded")
+
+
+
+
+
+
+
+      
+      
     }
     
     }
