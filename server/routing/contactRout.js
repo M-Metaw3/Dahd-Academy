@@ -1,4 +1,6 @@
 const router=require('express').Router()
+const auth=require("../midleware/authentication")
+
 const contact = require('../controller/contactController')
 
 
