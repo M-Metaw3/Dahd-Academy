@@ -6,10 +6,7 @@ export const apihttp="http://localhost:5000/"
 
 
 
-
-
-
-export const getcontact= async (body) => {
+export const getcontact= async () => {
     try {
       return  await fetch(
         apihttp+'contact',

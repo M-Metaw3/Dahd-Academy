@@ -3,9 +3,9 @@ import * as api from "../api/api"
 
 const getALLcontact = ()=>async(dispatch)=>{
 
-    console.log(console.log("home"))
-    await api.Loggin(body).then((element)=>element.json().then((data)=>{
-    //   const {body} = data
+    // console.log("home")
+    await api.getcontact().then((element)=>element.json().then((data)=>{
+      const {body} = data
     //   const {message} = data
     // console.log(body.getContact)
     //   console.log(body)

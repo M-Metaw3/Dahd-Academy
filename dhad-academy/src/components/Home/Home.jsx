@@ -5,10 +5,10 @@ import actions from '../../actions/actions';
 import * as api from '../../api/api'
 const Home = () => {
     const dispatch = useDispatch()
-    const selector2 = useSelector((state)=>state.teacher)
+    const selector2 = useSelector((state) => state.teacher)
     useEffect(() => {
-        console.log("getEmpDetails");
-        dispatch( actions.getALLcontact)
+        // console.log("getEmpDetails");
+        dispatch(actions.getALLcontact())
     }, [dispatch]);
 
 
@@ -23,7 +23,7 @@ const Home = () => {
     //     dispatch({type:"getAllTeacher"})
     //   }, []);
 
-      console.log(selector2);
+    console.log(selector2.teachers);
     return (
         <>
             <section className="position-relative"
