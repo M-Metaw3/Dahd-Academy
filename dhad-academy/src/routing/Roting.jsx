@@ -6,6 +6,7 @@ import Courses from '../components/Courses/Courses';
 import Services from '../components/Services/Services';
 import Teachers from '../components/Teachers/Teachers';
 import Contact from '../components/Contact/Contact';
+import Blog from '../components/Blog/Blog';
 const Roting = () => {
     return (
         <div>
@@ -19,6 +20,7 @@ const Roting = () => {
         <Route path="/services" element={<Services/>} />
         <Route path="/teachers" element={<Teachers/>} />
         <Route path="/contact" element={<Contact/>} />
+        <Route path="/blog" element={<Blog/>} />
       </Routes>
     
         </div>

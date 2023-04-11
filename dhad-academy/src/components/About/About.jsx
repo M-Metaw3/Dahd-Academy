@@ -15,9 +15,9 @@ function About() {
       <Container className='p-5'>
         <div className='row d-flex justify-content-center justify-content-md-between align-items-center'>
           <div className='col-8 col-md-4 '>
-            <img src={require("../../assets/images/image 5.png")} className='w-100 rounded-4' alt="" />
+            <img src={require("../../assets/images/who we are.png")} className='w-100 rounded-4' alt="" />
           </div>
-          <div className='col-12 col-md-7'>
+          <div className='col-12 col-md-8 py-3 p-md-5'>
             <h3>Who we are</h3>
             <p>An academy for education and training to devote the Arab identity to non-native speakers.</p>
             <p>It is an institution that works to teach non-Arabic speaking students to teach them the Arabic language, whatever their religion. Field trips for non-native speakers to practically instil Arabic culture.</p>
@@ -33,7 +33,8 @@ function About() {
           <h3>Our History</h3>
           <p className='w-50'>History is not the past but a map of the past, drawn from a particular point of view, to be useful to the modern traveller.</p>
         </div>
-        <div className='pt-3 pt-lg-5 '>
+        <div className='row d-flex justify-content-center justify-content-md-between align-items-center '>
+        <div className='col-12 col-md-8 py-3 py-lg-5 '>
               <ul className="timeline">
                 <li className="event" data-date="2015">
                   <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
@@ -55,6 +56,14 @@ function About() {
                 </li>
               </ul>
         </div>
+        <div className='col-8 col-md-3 py-3 py-lg-5'>
+        <img src={require("../../assets/images/history2.png")} className='w-100 rounded-4 py-2' alt="" />
+        <img src={require("../../assets/images/history.png")} className='w-100 rounded-4 py-2' alt="" />
+
+        </div>
+
+        </div>
+    
       </Container>
 
     </>

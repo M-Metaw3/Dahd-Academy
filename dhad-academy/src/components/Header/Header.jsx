@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import './header.css';
 
 
-
 function Header() {
   return (
     <>
@@ -19,13 +18,13 @@ function Header() {
             alt="logo"
           />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-xl`} className='toggle-btn' />
+        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-xl`}  className='toggle-btn' />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-xl`}
           aria-labelledby={`offcanvasNavbarLabel-expand-xl`}
-          placement="end"
+          placement="start"
         >
-          <Offcanvas.Header closeButton className=' justify-content-end'>
+          <Offcanvas.Header closeButton className='justify-content-end'>
             {/* <Offcanvas.Title id={`offcanvasNavbarLabel-expand-xl`}>
                               <img
                                   src={require("../../assets/images/logo.png")}
@@ -51,6 +50,12 @@ function Header() {
               >
                 About
               </NavLink>
+              <NavLink
+                to="/services"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                Services
+              </NavLink>
               <NavDropdown
                 title="Courses"
                 id={`offcanvasNavbarDropdown-expand-xl`}
@@ -60,22 +65,23 @@ function Header() {
                 <NavDropdown.Item as={NavLink} to="/courses" className={({ isActive }) => (isActive ? 'active' : '')}>course3</NavDropdown.Item>
               </NavDropdown>
               <NavLink
-                to="/services"
+                to="/blog"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
-                Services
+                Blog
               </NavLink>
               <NavLink
                 to="/teachers"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
-                Teachers
+                Instructors
               </NavLink>
+             
               <NavLink
                 to="/contact"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
-                Contact
+                Contacts
                 </NavLink>
 
             </Nav>

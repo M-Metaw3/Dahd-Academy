@@ -35,10 +35,21 @@ function Teachers() {
         </Row>
 
       </Container>
-      <section className='be-instructor text-center py-5'>
-        <h3 className='pb-3'>Become a Instructor</h3>
-        <button className='btn btn-apply px-5'> Apply</button>
+      <section className='be-instructor position-relative d-flex justify-content-between align-items-center py-5 overflow-hidden'>
+        <div className="circle  rounded-circle position-absolute top-50 start-100 translate-middle">
+        </div>
+        <div className="circle circle2 rounded-circle position-absolute translate-middle">
+        </div>
+        <Container className='d-flex justify-content-between align-items-center'>
+        <div>
+        <h2 className='white fs-1 fw-bold'>Be part of us</h2>
+        <p className='white fs-5 fw-bold'>Become a Instructor</p>
+        </div>
+        <button className='btn btn-apply '> Apply</button>
+        </Container>
+        
       </section>
+      
     </>
   )
 }
