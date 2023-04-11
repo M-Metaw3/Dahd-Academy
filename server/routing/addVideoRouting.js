@@ -1,5 +1,5 @@
 const router=require('express').Router()
-const users = require('../controller/registrationController')
+const admin = require('../controller/adminaddvedioandcourseController')
 const multer = require('multer')
 const path =require('path')
 const fs = require('fs')
@@ -15,25 +15,33 @@ var storage = multer.diskStorage({
 }
   );
   
-  var upload = multer({ storage: storage }).single('image');
+  var upload = multer({ storage: storage }).single('video');
 
-
-router.post('/',upload,users.userRegistration)
-router.post('/login',users.userLogin)
-router.post('/uploade',upload,users.uploadimage)
-
-
-
-
-
-
-
-
-
-
-
-
+  router.get('/getVideo',admin.getallvideo)
+router.post('/addVideo',upload,admin.addvideo)
+router.patch('/updateVideo/:id',upload,admin.updatevideo)
+router.delete('/deleteVideo/:id',admin.deletevideo)
 
 
 
 module.exports=router
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
