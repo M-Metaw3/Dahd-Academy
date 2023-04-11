@@ -15,23 +15,14 @@ function Blog() {
         document.title = "Contact";
     }, []);
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const changeCurrentPage = ({ numPage }) => {
-        setCurrentPage(numPage);
-    };
+    const [isActive, setIsActive] = useState(false);
+    const [list, setList] = useState([1,2,3])
+    const handleClick = event => {
+        setIsActive(!isActive);
+      };
+    
 
-    let active = 2;
-    let items = [];
-    // for (let number = 1; number <= 3; number++) {
-    //   items.push(
-    //     <Pagination.Item key={number} active={number === active}>
-    //       {number}
-    //     </Pagination.Item>,
-    //   );
-    // } 
-    const productPerPage = 6;
-    const pageCount = 1;
-    const changePage = 2;
+
 
     return (
         <>
@@ -114,10 +105,19 @@ function Blog() {
                 </div>
 
                 <div className='d-flex justify-content-center align-items-center'>
-                <p className='d-flex justify-content-center align-items-center pagination-circle active-circle'>1</p>
+                <p className='d-flex justify-content-center align-items-center pagination-circle active-circle' onClick={handleClick}>1</p>
                 <p className='d-flex justify-content-center align-items-center pagination-circle'>2</p>
                 <p className='d-flex justify-content-center align-items-center pagination-circle'>3</p>
-
+                {/* {list.map((item) => {
+          return (
+            <p
+              key={item}
+              onClick={handleClick} 
+              className={isActive ? "active-circle d-flex justify-content-center align-items-center pagination-circle" : "d-flex justify-content-center align-items-center pagination-circle"}            >
+              {item}
+            </p>
+          )
+        })} */}
 
 
             </div>
