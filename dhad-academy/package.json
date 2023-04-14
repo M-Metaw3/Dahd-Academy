@@ -25,6 +25,9 @@
     "bootstrap": "^5.2.3",
 
 
+    "cdbreact": "^1.5.11",
+
+
     "moment": "^2.29.4",
 
 
@@ -44,6 +47,9 @@
 
 
     "react-pagination-js": "^2.0.0",
+
+
+    "react-pro-sidebar": "^1.0.0",
 
 
     "react-redux": "^8.0.5",

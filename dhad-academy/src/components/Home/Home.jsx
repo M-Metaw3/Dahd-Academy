@@ -3,6 +3,8 @@ import bg from "../../assets/images/home-bg.png"
 import { useDispatch, useSelector } from 'react-redux';
 import actions from '../../actions/actions';
 import * as api from '../../api/api'
+import moment from "moment"
+
 const Home = () => {
     const dispatch = useDispatch()
     const selector2 = useSelector((state) => state.teacher)
@@ -11,6 +13,7 @@ const Home = () => {
         dispatch(actions.getALLcontact())
     }, [dispatch]);
 
+// console.log( moment(Date).fromNow());
 
 
     const [file, setfile] = useState('')
@@ -32,7 +35,7 @@ const Home = () => {
                 {/* <Link to="/files/myfile.pdf" target="_blank" download>Download</Link> */}
 
                 {/* <a href='http://localhost:5000/197 Section Intro.mp4' download>Click to download</a> */}
-                <img src={bg} alt="" className='img-fluid' />
+                <img src={bg} alt="" className='w-100' height={400} />
                 <h3 className="text-light text-uppercase position-absolute top-50 start-50 translate-middle text-center">A journey of a thousand miles begins with a single step.</h3>
             </section>
             {
@@ -40,6 +43,8 @@ const Home = () => {
                     <div key={data.id}>
                         {/* <h6>{data.id}</h6> */}
                         <h2>{data.name}</h2>
+                        <h6>{data.createdAt}</h6>
+                        <h6>{moment(data.createdAt).fromNow()}</h6>
                     </div>
                 )) :""
             }

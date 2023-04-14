@@ -71,7 +71,7 @@ function Header() {
                 Blog
               </NavLink>
               <NavLink
-                to="/teachers"
+                to="/instructors"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Instructors
@@ -82,6 +82,12 @@ function Header() {
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Contacts
+                </NavLink>
+                <NavLink
+                to="/admin"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                Admin
                 </NavLink>
 
             </Nav>

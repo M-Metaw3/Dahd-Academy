@@ -12,7 +12,7 @@ function About() {
   return (
     <>
       <CommonSection title="about" img={`${about}`} />
-      <Container className='p-5'>
+      <Container className='py-5'>
         <div className='row d-flex justify-content-center justify-content-md-between align-items-center'>
           <div className='col-8 col-md-4 '>
             <img src={require("../../assets/images/who we are.png")} className='w-100 rounded-4' alt="" />
@@ -34,15 +34,18 @@ function About() {
           <p className='w-50'>History is not the past but a map of the past, drawn from a particular point of view, to be useful to the modern traveller.</p>
         </div>
         <div className='row d-flex justify-content-center justify-content-md-between align-items-center '>
-        <div className='col-12 col-md-8 py-3 py-lg-5 '>
+        <div className='col-6 col-md-4 py-3 py-md-5'>
+        <img src={require("../../assets/images/history2.png")} className='w-100 rounded-4 py-2' alt="" />
+        <img src={require("../../assets/images/history.png")} className='w-100 rounded-4 py-2' alt="" />
+        </div>
+        <div className='col-12 col-md-6 py-3 py-md-5 '>
               <ul className="timeline">
                 <li className="event" data-date="2015">
-                  <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
+                <p>Our academic career started from this year</p>
                 </li>
                 <li className="event" data-date="2017">
                   <p>
-                    We officially started working after hiring Ms. Amnah Al-Sayed Visiting Doctor at the University of Islamabad
-                  </p>
+                  We officially started working after hiring Ms. Amnah Al-Sayed Visiting Doctor at the University of Islamabad                  </p>
                 </li>
                 <li className="event" data-date="2021">
                   <p>
@@ -56,11 +59,7 @@ function About() {
                 </li>
               </ul>
         </div>
-        <div className='col-8 col-md-3 py-3 py-lg-5'>
-        <img src={require("../../assets/images/history2.png")} className='w-100 rounded-4 py-2' alt="" />
-        <img src={require("../../assets/images/history.png")} className='w-100 rounded-4 py-2' alt="" />
 
-        </div>
 
         </div>
     

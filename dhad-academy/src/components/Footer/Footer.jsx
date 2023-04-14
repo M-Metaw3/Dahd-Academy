@@ -18,36 +18,38 @@ function Footer() {
                   <ul className="list-unstyled">
                     <li className='mb-2'>
                       <NavLink to="/home"
-                        className={({ isActive }) => (isActive ? 'active' : '')}
                       >
                         Home
                       </NavLink>
                     </li>
                     <li className='mb-2'>
                       <NavLink to="/about"
-                        className={({ isActive }) => (isActive ? 'active' : '')}
                       >
                         About
                       </NavLink>
                     </li>
                     <li className='mb-2'>
-                      <NavLink to="/courses"
-                        className={({ isActive }) => (isActive ? 'active' : '')}
-                      >Courses</NavLink>
-                    </li>
-                    <li className='mb-2'>
                       <NavLink to="/services"
-                        className={({ isActive }) => (isActive ? 'active' : '')}
                       >Services</NavLink>
                     </li>
                     <li className='mb-2'>
-                      <NavLink to="/teachers"
-                        className={({ isActive }) => (isActive ? 'active' : '')}
-                      >Teachers</NavLink>
+                      <NavLink to="/courses"
+                      >Courses</NavLink>
+                    </li>
+                  
+                    <li className='mb-2'>
+                      <NavLink
+                        to="/blog"
+                      >
+                        Blog
+                      </NavLink>
+                    </li>
+                    <li className='mb-2'>
+                      <NavLink to="/instructors"
+                      >Instructors</NavLink>
                     </li>
                     <li className='mb-2'>
                       <NavLink to="/contact"
-                        className={({ isActive }) => (isActive ? 'active' : '')}
                       >Contact</NavLink>
                     </li>
                   </ul>
@@ -80,7 +82,7 @@ function Footer() {
                 </div>
               </div>
             </div>
-          </div>  
+          </div>
         </div>
         <div className="text-center Copyright ">
           <p className='py-3 m-0'>Copyright © 2022 <a href="https://irisstudio.org/" target="_blank" rel="noreferrer">IRIS Studio</a></p>
