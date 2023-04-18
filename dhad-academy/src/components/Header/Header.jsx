@@ -83,6 +83,15 @@ function Header() {
               >
                 Contacts
                 </NavLink>
+
+
+
+                <NavLink
+                to="/test"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                Test
+                </NavLink>
                 <NavLink
                 to="/admin"
                 className={({ isActive }) => (isActive ? 'active' : '')}

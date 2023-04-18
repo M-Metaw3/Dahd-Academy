@@ -4,7 +4,12 @@ const joi = require('joi')
 var jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
-    name: {
+
+    // usernam:{
+    //     type:String,
+
+    // }
+    usernam: {
         type:String,
         required:[true,"enter your name please"],
         trim: true,
@@ -84,3 +89,4 @@ function validateLogin (obj){
 
 const User = mongoose.model('User', userSchema)
 module.exports = {User, validateRegistration,validateLogin}
+// 

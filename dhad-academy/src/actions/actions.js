@@ -8,7 +8,7 @@ const getALLcontact = ()=>async(dispatch)=>{
       const {body} = data
     //   const {message} = data
     // console.log(body.getContact)
-    //   console.log(body)
+      console.log(body)
       if(body.getContact){
     
         dispatch({type:'getAllTeacher',payload:body.getContact})
@@ -20,4 +20,71 @@ const getALLcontact = ()=>async(dispatch)=>{
     })).catch((er)=>console.log(er))
     
     }
-export default {getALLcontact};
+
+
+
+
+    const registrationaction = (body)=>async(dispatch)=>{
+
+      console.log(body)
+      try {
+        
+        await api.registration(body) .then((response) => response.json())
+     .then((data) => {
+       console.log(data);
+     })
+      } catch (error) {
+        
+      }
+        // const {body} = data
+
+        // if(body.getContact){
+      
+        //   dispatch({type:'getAllTeacher',payload:body.getContact})
+        // }
+        // else{
+        //   // console.log(message   )
+        // }
+        
+      
+      }
+
+
+      
+    const loginaction = (body)=>async(dispatch)=>{
+
+    
+      try {
+        
+        await api.loginapi(body) .then((response) => response.json())
+     .then((data) => {
+       console.log(data);
+     })
+      } catch (error) {
+        
+      }
+        // const {body} = data
+
+        // if(body.getContact){
+      
+        //   dispatch({type:'getAllTeacher',payload:body.getContact})
+        // }
+        // else{
+        //   // console.log(message   )
+        // }
+        
+      
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+export default {getALLcontact,registrationaction,loginaction};

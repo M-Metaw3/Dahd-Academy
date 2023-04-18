@@ -9,30 +9,37 @@ class users {
 
 static userRegistration =async(req,res)=>{
 
-   console.log(req.body)
 const {name,email,password} = req.body
 const {error}= userModel.validateRegistration(req.body)
 if (error) { 
-   response(res,400,"error ocured","",error.details[0].message)
-}
+     return response(res,400,"error ocured","",error.details[0].message)
+   }
+  
 
 try {
-    const emaila= await userModel.User.findOne({email:email})
+
+
+
+  
+
+
+      const {name,email,password} = req.body;
    
-    if (emaila) { 
-      return  response(res,400,"email exsited")
-     }
-     else{
-      
-        const hashingPassword  =await bycrpt.hash(password,12)
-        const createuser= await new userModel.User({name:name,email:email,password:hashingPassword ,image:req.file.originalname})
 
-        await createuser.save();
+      const imagePath = req.file.originalname;
 
-   response(res,201,"account created successfully",{createuser},"")
+           const hashingPassword  =await bycrpt.hash(password,12)
+           const createuser= await new userModel.User(
+   {image:imagePath,usernam:req.body.name,email:email,password:hashingPassword  }
+
+           )
+           
+           await createuser.save();
+            return  response(res,201,"account created successfully",{createuser},"")
 
 
-     }
+
+
 
 } catch (error) {
     response(res,400,'error has occured',"",error.message)
@@ -47,13 +54,14 @@ static userLogin =async(req,res)=>{
     console.log(email)
     const {error}= userModel.validateLogin(req.body)
     if (error) { 
-       response(res,400,"invalid Data","",error.details[0].message)
+     return  response(res,400,"invalid Data","",error.details[0].message)
     }
     
  try {
 
 
     const emailexsite= await userModel.User.findOne({email:email})
+    console.log(emailexsite)
     if (!emailexsite) { 
       return  response(res,400,"email doesnt exsited")
      }
@@ -65,7 +73,7 @@ const passwordCorrect = bycrpt.compareSync(password, emailexsite.password)
 const token = emailexsite.generateAuthToken();
 
 const {password,...other}= emailexsite._doc;
-   response(res,200,"loggin successfully",{...other,token},"")
+return   response(res,200,"loggin successfully",{...other,token},"")
 
    }
    

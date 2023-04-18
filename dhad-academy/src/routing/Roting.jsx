@@ -7,17 +7,21 @@ import Services from '../components/Services/Services';
 import Teachers from '../components/Teachers/Teachers';
 import Contact from '../components/Contact/Contact';
 import Blog from '../components/Blog/Blog';
-import Admin from '../dashboard/Admin/Admin';
-import Contacts from '../dashboard/Contacts/Contacts';
+import Admin from '../Dashboard/Admin/Admin';
+import Contacts from '../Dashboard/Contacts/Contacts';
 import BlogDetails from '../components/Blog-Details/BlogDetails';
-import Login from '../dashboard/login/Login';
-import Register from '../dashboard/Register/Register';
+import Login from '../Dashboard/login/Login';
+import Register from '../Dashboard/Register/Register';
+import Test from '../api/Test';
+
 const Roting = () => {
     return (
         <>      
       <Routes>
         <Route index element={<Home />} />
         <Route path="/home" element={<Home/>} />
+        <Route path="/test" element={<Test/>} />
+
         <Route path="/about" element={<About/>} />
         <Route path="/courses" element={<Courses/>} />
         <Route path="/services" element={<Services/>} />

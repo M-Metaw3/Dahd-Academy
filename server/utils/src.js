@@ -11,9 +11,7 @@ const videoRout = require('../routing/addVideoRouting')
 const courseRout = require('../routing/addCourseRouting')
 const conatctRout = require('../routing/contactRout')
 
-app.use('/',(req,res) => {
-  res.send("metawea")
-})
+
 
 
 app.use(express.static(path.join(__dirname,"../images")))

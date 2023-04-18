@@ -17,7 +17,7 @@ export const getcontact= async () => {
             "Content-Type": " application/json",
             // Authorization: `Bearer ${token.token}`,
           },
-        //   body: JSON.stringify(body),
+          // body: JSON.stringify(body),
         }
       );
       
@@ -31,4 +31,68 @@ export const getcontact= async () => {
   
     
   }
+
+  export const registration= async (body) => {
+    try {
+      return  await fetch(
+        apihttp+'userRegistration',
+      
+        {
+          method: "post",
+          // headers: {
+          //   'Content-Type': 'multipart/form-data'
+          //   // Authorization: `Bearer ${token.token}`,
+          //   // "Content-Type": " application/json",
+
+          // },
+          body: body,
+          // body: body,
+
+        }
+      );
+      
+    } catch (error) {
+  
+      
+      
+    }
+  
+  
+  
+    
+  }
+
+
+  export const loginapi= async (body) => {
+    try {
+      return  await fetch(
+        apihttp+'userRegistration/login',
+        {
+          method: "post",
+          headers: {
+            // 'Content-Type': 'multipart/form-data'
+            // Authorization: `Bearer ${token.token}`,
+            "Content-Type": " application/json",
+
+          },
+          body: JSON.stringify(body),
+    
+        }
+      );
+      
+    } catch (error) {
+  
+      
+      
+    }
+  
+  
+  
+    
+  }
+
+
+
+
+
 
