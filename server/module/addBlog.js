@@ -30,8 +30,16 @@ const addBlogModel = mongoose.Schema({
     },
 
 
-},{timestamps:true})
-
+},{timestamps:true,
+toJSON:{virtuals:true},
+toObject:{virtuals:true},
+}
+);
+addBlogModel.virtual('comment',{
+    ref:'addcomment',
+    foreignField :"blogId",
+    localField:"_id"
+})
 
 function validateaddBlog (obj){
 
@@ -39,8 +47,6 @@ const schema = joi.object({
 title : joi.string().trim().min(10).max(200).required(),
 description :joi.string().trim().min(15).required(),
 details :joi.string().trim().min(15).required(),
-link :joi.string().trim().min(15).required(),
-
 
 });
 return schema.validate(obj);

@@ -79,25 +79,10 @@ response(res,400,"error occured",'',error)
         
     }
     
-    
-            
+             
     }
 
-
-
-
-
-
-
 try {
-
-
-
-
-
-
-
-
 
  
 const updateCourse= await coursemodel.addCourse.findByIdAndUpdate(id,{title:title,description:description,link:link,image:req.file.originalname},{new:true});

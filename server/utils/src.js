@@ -10,6 +10,8 @@ const userRout = require('../routing/usersRouting')
 const videoRout = require('../routing/addVideoRouting')
 const courseRout = require('../routing/addCourseRouting')
 const conatctRout = require('../routing/contactRout')
+const blogRout = require('../routing/blogandCommentRouting')
+
 
 
 
@@ -17,6 +19,8 @@ const conatctRout = require('../routing/contactRout')
 app.use(express.static(path.join(__dirname,"../images")))
 
 app.use('/userRegistration',userRout)
+app.use('/blog',blogRout)
+
 app.use('/video',videoRout)
 app.use('/course',courseRout)
 app.use('/contact',conatctRout)
