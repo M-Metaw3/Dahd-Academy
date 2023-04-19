@@ -1,6 +1,8 @@
 
 
 
+
+
 export const apihttp="http://localhost:5000/"
 
 
@@ -96,3 +98,34 @@ export const getcontact= async () => {
 
 
 
+  export const addblogapi=async (body) => {
+     
+    try {
+
+      return  await fetch(
+        apihttp+'blog/addblog',
+      
+        {
+          method: "post",
+          // headers: {
+          //   'Content-Type': 'multipart/form-data'
+          //   // Authorization: `Bearer ${token.token}`,
+          //   // "Content-Type": " application/json",
+
+          // },
+          body: body,
+          // body: body,
+
+        }
+      );
+      
+    } catch (error) {
+  
+    
+      
+    }
+  
+  
+  
+    
+  }
