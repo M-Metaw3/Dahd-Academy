@@ -34,6 +34,9 @@ router.post('/addblog',(req, res,next) => {
       }
     });
   },blog.postblog)
+
+
+  
 router.post('/comment/:id',blog.comment)
 router.get('/',blog.getblog)
 

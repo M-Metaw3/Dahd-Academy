@@ -2,7 +2,6 @@ const commentmodel= require('../module/commentModel')
 const blogmodel= require('../module/addBlog')
 const fs = require('fs')
 const path =require('path')
-
 const response= require('../utils/response')
 
 
@@ -70,19 +69,26 @@ console.log(req.body)
 
     try {
         const deleteblog= await blogmodel.addBlog.findByIdAndDelete(_id);
+        if(!deleteblog){
+          return response(res,400,"blog not found to deleted") 
+        }
         await   fs.unlink(path.join(__dirname,`../images/${deleteblog.image}`), (err => {
-            if (err) console.log(err);
+            if (err)  return response(res,400,"error occured when try to delete file","",err) ;
             else {
-                console.log("Deleted file: example_file.txt");
+                
+              return  response(res,200,"blog deleted successfully",{deleteVideo},"") 
             }
         }));
         
-      return  response(res,200,"blog deleted successfully",{deleteVideo},"") 
     } catch (error) {
         return response(res,400,"error occured",error) 
     }
   
 }
+
+
+
+
 
 
 
@@ -142,15 +148,42 @@ static comment = async(req, res) => {
 
 
 
+static deletecomment = async(req, res) => {
 
 
+  try {
 
+    
+   
+    const _id = req.params.id
 
+ 
 
+    
+           const comment= await new commentmodel.addcomment.findByIdAndDelete(_id)
+            return  response(res,201,"comment deleted successfully",{comment},"")
 
-
+    } catch (error) {
+      return  response(res,400,"get All Blogs failed",'',error.message)
+        
+    }
+    
+};
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 

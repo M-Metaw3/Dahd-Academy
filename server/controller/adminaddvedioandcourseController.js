@@ -87,32 +87,6 @@ try {
  
 const updateCourse= await coursemodel.addCourse.findByIdAndUpdate(id,{title:title,description:description,link:link,image:req.file.originalname},{new:true});
 
-// if(req.file){
-//     try {
-
-//         const getCourse= await coursemodel.addCourse.findById({_id:id});
-// console.log(getCourse.image)
-//     await   fs.unlink(path.join(__dirname,`../images/${getCourse.image}`), (err => {
-//             if (err) console.log(err);
-//             else {
-//               console.log("Deleted file: example_file.txt");
-//             }
-//           }));
-
-
-        
-//     } catch (error) {
-// response(res,400,"error occured",'',error) 
-        
-//     }
-    
-    
-            
-    // }
-
-
-
-
 response(res,201,"course updated successfully",{updateCourse},"") 
 
     
@@ -137,12 +111,12 @@ console.log("deleteCourse")
         await   fs.unlink(path.join(__dirname,`../images/${deletecourse.image}`), (err => {
             if (err) console.log(err);
             else {
-              console.log("Deleted file: example_file.txt");
+              
+                return response(res,200,"course deleted successfully",{deletecourse},"") 
             }
           }));
 
 
- response(res,200,"course deleted successfully",{deletecourse},"") 
 
         
     } catch (error) {

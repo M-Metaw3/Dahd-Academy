@@ -13,6 +13,7 @@ import BlogDetails from '../components/Blog-Details/BlogDetails';
 import Login from '../Dashboard/login/Login';
 import Register from '../Dashboard/Register/Register';
 import Test from '../api/Test';
+import AddBlogs from '../Dashboard/AddBlogs/AddBlogs';
 
 const Roting = () => {
     return (
@@ -33,6 +34,8 @@ const Roting = () => {
         <Route path="/register" element={<Register/>} />
         <Route path="/admin" element={<Admin/>} >
         <Route path='/admin/contacts' element={<Contacts/>} />
+        <Route path='/admin/Blogs' element={<AddBlogs/>} />
+
         {/* <Route path="/admin" element={<Contacts/>} /> */}
 
         </Route>

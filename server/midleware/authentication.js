@@ -34,7 +34,7 @@ return    response(res,401,"invalid token","please loggin",error);
 const isAdmin = (req,res,next) => {
 
     isUser(req,res,() => {
-      if(req.user.isAdmin){
+      if(req.user.isAdmin=="Admin"){
         next()
       }else{
         response(res,403,"only admin can access this")

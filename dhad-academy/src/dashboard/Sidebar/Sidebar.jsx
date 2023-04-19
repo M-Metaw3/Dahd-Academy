@@ -36,7 +36,7 @@ function Sidebar() {
                                     Courses
                                 </CDBSidebarMenuItem>
                             </NavLink>
-                            <NavLink exact="true" to="/Blogs" activeclassname="activeClicked">
+                            <NavLink exact="true" to="/admin/Blogs" activeclassname="activeClicked">
                                 <CDBSidebarMenuItem icon="fa-solid fa-book">
                                     Blogs
                                 </CDBSidebarMenuItem>

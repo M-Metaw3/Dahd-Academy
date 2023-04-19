@@ -41,7 +41,7 @@ static DeleteContactMessages =async(req,res)=>{
 
     try {
         const deletecontact = await contactmodel.contactModel.findByIdAndDelete(_id);
-        
+       
         response(res,200,"video deleted successfully",{deletecontact},"") 
     } catch (error) {
 response(res,400,"error occured",error) 
