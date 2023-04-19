@@ -1,21 +1,24 @@
 const blogs = {
     blogs:"",
-    error:'',
+    getallblogs:[],
 }
 
 export default (state = blogs,action) => {
   
 switch (action.type) {
-
+    case 'getallblogs':
+        console.log("getallblogs")
+  return{ ...state,getallblogs:action.payload}
     case 'wait for upload':
         console.log("wait for upload")
-  return{ blogs:"please wait to complete create"}
+  return{ ...state,blogs:"please wait to complete create"}
     case 'add blod successefully':
-        console.log("redux")
-  return{ blogs:action.payload}
+        console.log(action.payload.body)
+    //   state.getallblogs.push(action.payload.body.postBlog)
+  return{ ...state,blogs:action.payload.message}
   case 'error':
     console.log("error")
-return{ blogs:action.payload}
+return{ ...state,blogs:action.payload}
         break;
 
     default:

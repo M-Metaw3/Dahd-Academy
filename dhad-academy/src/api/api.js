@@ -107,14 +107,37 @@ export const getcontact= async () => {
       
         {
           method: "post",
-          // headers: {
-          //   'Content-Type': 'multipart/form-data'
-          //   // Authorization: `Bearer ${token.token}`,
-          //   // "Content-Type": " application/json",
-
-          // },
+  
           body: body,
           // body: body,
+
+        }
+      );
+      
+    } catch (error) {
+  
+    
+      
+    }
+  
+  
+  
+    
+  }
+
+
+
+  export const getallplogs=async () => {
+     
+    try {
+
+      return  await fetch(
+        apihttp+'blog',
+      
+        {
+          method: "get",
+  
+     
 
         }
       );

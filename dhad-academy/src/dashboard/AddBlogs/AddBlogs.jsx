@@ -2,12 +2,21 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import actions from '../../actions/actions'
-import { useState } from 'react';
+import  { apihttp } from '../../api/api'
+
+import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from "moment"
+
 function AddBlogs() {
   const dispatch = useDispatch()  
-  const addblog = useSelector((state) => state.addblog.blogs)
-
+  const addblogmessage = useSelector((state) => state.addblog.blogs)
+  const getallblogs = useSelector((state) => state.addblog.getallblogs)
+useEffect(() => {
+    dispatch(actions.getallblogs())
+   
+}, [dispatch]);
+// console.log(getallblogs.length);
   const [Show,setShowImage] =useState(null);
   const [description, setdescription] = useState('');
   const [details, setdetails] = useState('');
@@ -24,7 +33,9 @@ function AddBlogs() {
     formData.append('title', title);
     console.log(formData);
     dispatch(actions.addblogAction(formData))
+
     dispatch({type:'wait for upload'})
+   
 
   };
 
@@ -40,7 +51,7 @@ function AddBlogs() {
     <>
     <Container className='py-5'>
         <div className='w-25 m-auto'>
-        <h4 className='pb-3'>Register</h4>
+        <h4 className='pb-3'>BLOGS</h4>
     <form className='' onSubmit={handleSubmitBlog} encType="multipart/form-data">
               <div className='row'>
                 <div className="col-12 form-group pb-2">
@@ -65,15 +76,31 @@ function AddBlogs() {
       </div>
 <img src={Show} alt="" />
               <div className="pt-4 col-12">
-                <button type="submit" className="w-100 btn-submit btn px-5">Register</button>
+                <button type="submit" className="w-100 btn-submit btn px-5">create Blog</button>
               </div>
               </div>
 
             </form>
         </div>
-        {addblog? <h1>{addblog}</h1>:''}
+        {addblogmessage? <h1>{addblogmessage}</h1>:''}
     </Container>
-      
+    <div>
+      { getallblogs.length> 0?getallblogs.map(blogs => (
+        <div key={blogs._id}>
+          <p>{moment(blogs.createdAt).fromNow()}</p>
+          <h2>{blogs.title}</h2>
+          <p>{blogs.description}</p>
+          <p> {blogs.details}</p>
+          <p> {blogs.image}</p>
+          <img src={`${apihttp}${blogs.image}`} width={"50%"} alt="" />
+          <button>delete</button>
+          <button>update</button>
+
+          
+        
+        </div>
+      )):<div>no blogs</div>}
+    </div>
     </>
   )
 }

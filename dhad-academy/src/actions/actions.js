@@ -95,7 +95,7 @@ const getALLcontact = ()=>async(dispatch)=>{
    
 console.log(data)
         if(data.body){
-          dispatch({type:'add blod successefully',payload:data.message})
+          dispatch({type:'add blod successefully',payload:data})
         }
         if(data.error)
         dispatch({type:'error' ,payload:data.error})
@@ -108,4 +108,39 @@ console.log(data)
 
 
 
-export default {getALLcontact,registrationaction,loginaction,addblogAction};
+
+
+
+
+
+
+
+
+
+
+        const getallblogs = ()=>async(dispatch)=>{
+
+        
+          try {
+            
+            await api.getallplogs() .then((response) => response.json())
+         .then((data) => {
+           
+     
+
+          if(data.body){
+            dispatch({type:'getallblogs',payload:data.body})
+          }
+          if(data.error)
+          dispatch({type:'error' ,payload:data.error})
+         }).catch((error)=>  dispatch({type:'error' ,payload:error.message}))
+          } catch (error) {
+            
+          }
+     
+          }
+  
+
+
+
+export default {getALLcontact,registrationaction,loginaction,addblogAction,getallblogs};
