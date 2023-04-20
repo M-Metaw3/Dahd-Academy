@@ -36,12 +36,27 @@ function Sidebar() {
                                     Courses
                                 </CDBSidebarMenuItem>
                             </NavLink>
-                            <NavLink exact="true" to="/admin/Blogs" activeclassname="activeClicked">
+                            <NavLink exact="true" to="addCourses" activeclassname="activeClicked">
+                                <CDBSidebarMenuItem icon="fa-solid fa-book">
+                                add    Courses
+                                </CDBSidebarMenuItem>
+                            </NavLink>
+                            <NavLink exact="true" to="Blogs" activeclassname="activeClicked">
                                 <CDBSidebarMenuItem icon="fa-solid fa-book">
                                     Blogs
                                 </CDBSidebarMenuItem>
                             </NavLink>
-                            <NavLink exact="true" to="/admin/contacts" activeclassname="activeClicked"
+                            <NavLink exact="true" to="allcourses" activeclassname="activeClicked">
+                                <CDBSidebarMenuItem icon="fa-solid fa-book">
+                                    allcourses
+                                </CDBSidebarMenuItem>
+                            </NavLink>
+                            <NavLink exact="true" to="updatecourses" activeclassname="activeClicked">
+                                <CDBSidebarMenuItem icon="fa-solid fa-book">
+                                    updatedcourses
+                                </CDBSidebarMenuItem>
+                            </NavLink>
+                            <NavLink exact="true" to="contacts" activeclassname="activeClicked"
                             >
                                 <CDBSidebarMenuItem
                                     className='active-item'

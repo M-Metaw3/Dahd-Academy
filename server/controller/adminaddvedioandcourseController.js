@@ -38,11 +38,11 @@ static addCourse =async (req,res) => {
 
 //////////////////////////////////////////////////////////
 static getallCourse =async (req,res) => {
-console.log("getallCourse")
-try {
+    try {
+    console.log("getallCourse")
 
 const getCourse= await coursemodel.addCourse.find();
-
+console.log(getCourse)
 response(res,200,"get all posts successfully",{getCourse},"") 
 
     

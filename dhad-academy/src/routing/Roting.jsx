@@ -14,6 +14,9 @@ import Login from '../Dashboard/login/Login';
 import Register from '../Dashboard/Register/Register';
 import Test from '../api/Test';
 import AddBlogs from '../Dashboard/AddBlogs/AddBlogs';
+import AddCourses from '../Dashboard/courses/AddCourses';
+import CourseList from '../Dashboard/courses/CourseList';
+import CourseUpdate from '../Dashboard/courses/CourseUpdate';
 
 const Roting = () => {
     return (
@@ -35,8 +38,15 @@ const Roting = () => {
         <Route path="/admin" element={<Admin/>} >
         <Route path='/admin/contacts' element={<Contacts/>} />
         <Route path='/admin/Blogs' element={<AddBlogs/>} />
+        <Route path='/admin/addCourses' element={<AddCourses/>} />
+        <Route path='admin/allcourses' element={<CourseList/>} />
+        <Route path='admin/updatecourses' element={<CourseUpdate/>} />
 
-        {/* <Route path="/admin" element={<Contacts/>} /> */}
+
+
+   
+        
+        <Route path="/admin" element={<Contacts/>} />
 
         </Route>
 
