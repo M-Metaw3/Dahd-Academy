@@ -39,10 +39,10 @@ static getblog = async(req, res) => {
 
         const {title,description,details} = req.body;
    
+// console.log(req.files.image1.path)
+        // const imagePath = req.file.path;
 
-        const imagePath = req.file.path;
-
-        const filePath = imagePath;
+        // const filePath = imagePath;
 
 const fileName = path.basename(filePath);
 

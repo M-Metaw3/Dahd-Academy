@@ -26,6 +26,17 @@ function Sidebar() {
 
                     <CDBSidebarContent>
                         <CDBSidebarMenu>
+                       
+                        <NavLink exact="true" to="admin/addvideo" activeclassname="activeClicked">
+                                <CDBSidebarMenuItem icon={"fa-solid fa-user"}>
+                                    Add video
+                                </CDBSidebarMenuItem>
+                            </NavLink>
+                            <NavLink exact="true" to="admin/instructors" activeclassname="activeClicked">
+                                <CDBSidebarMenuItem icon={"fa-solid fa-user"}>
+                                  instructor
+                                </CDBSidebarMenuItem>
+                            </NavLink>
                             <NavLink exact="true" to="/Instractors" activeclassname="activeClicked">
                                 <CDBSidebarMenuItem icon={"fa-solid fa-user"}>
                                     Instractors
@@ -46,16 +57,12 @@ function Sidebar() {
                                     Blogs
                                 </CDBSidebarMenuItem>
                             </NavLink>
-                            <NavLink exact="true" to="allcourses" activeclassname="activeClicked">
+                            <NavLink exact="true" to="admin/allcourses" activeclassname="activeClicked">
                                 <CDBSidebarMenuItem icon="fa-solid fa-book">
                                     allcourses
                                 </CDBSidebarMenuItem>
                             </NavLink>
-                            <NavLink exact="true" to="updatecourses" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon="fa-solid fa-book">
-                                    updatedcourses
-                                </CDBSidebarMenuItem>
-                            </NavLink>
+
                             <NavLink exact="true" to="contacts" activeclassname="activeClicked"
                             >
                                 <CDBSidebarMenuItem

@@ -17,10 +17,30 @@ var storage = multer.diskStorage({
   
   var upload = multer({ storage: storage }).single('video');
 
+  router.post('/addVideo',upload,admin.addvideo)
   router.get('/getVideo',admin.getallvideo)
-router.post('/addVideo',upload,admin.addvideo)
 router.patch('/updateVideo/:id',upload,admin.updatevideo)
 router.delete('/deleteVideo/:id',admin.deletevideo)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 
 
 

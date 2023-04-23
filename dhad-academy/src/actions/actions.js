@@ -58,10 +58,12 @@ const getALLcontact = ()=>async(dispatch)=>{
         
         await api.loginapi(body) .then((response) => response.json())
      .then((data) => {
-       console.log(data);
+       localStorage.setItem("token",JSON.stringify( data))
+    
+       console.log(data.statuscode==400)
      })
       } catch (error) {
-        
+        console.log(error)
       }
         // const {body} = data
 

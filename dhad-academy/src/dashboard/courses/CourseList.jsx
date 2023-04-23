@@ -75,7 +75,7 @@ const CourseList = () => {
 
 
 
-
+{/* 
   <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="title">Title</label>
@@ -113,7 +113,7 @@ const CourseList = () => {
         />
       </div>
       <button type="submit">Update Course</button>
-    </form>
+    </form> */}
 
 
 

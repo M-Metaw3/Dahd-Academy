@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Container } from 'react-bootstrap'
 import actions from '../../actions/actions'
 import { useState } from 'react';
@@ -8,7 +8,7 @@ function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [registration, setregistration] = useState({name:'', email:'',password:''});
+ 
 const handleSubmitloggin=(event) => {
   event.preventDefault();
 
@@ -18,7 +18,9 @@ const handleSubmitloggin=(event) => {
 
 
 }
-
+useEffect(() => {
+console.log( localStorage.getItem("token"))
+}, []);
 
   return (
     <>

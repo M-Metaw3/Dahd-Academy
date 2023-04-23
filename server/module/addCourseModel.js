@@ -23,6 +23,7 @@ const addCourseModel = mongoose.Schema({
         trim: true,
         required: [true, 'the link youtube is required field']
     },
+    
     image: {
         type: String,
         trim: true,
