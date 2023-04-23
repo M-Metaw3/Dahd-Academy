@@ -75,18 +75,36 @@ function Addvideo() {
       });
   }
 
-  useEffect(() => {
-    // Fetch the video data when the component mounts
-    axios.get('http://localhost:5000/video/getVideo')
-      .then(response => {
-          setVideo(response.data.body.getVideo)
+  // useEffect(async () => {
+  //   // Fetch the video data when the component mounts
+  //       const headers = { Range: 'bytes=0-' };
+
+  // await  axios.get('http://localhost:5000/video/getVideo',{ headers, responseType: 'blob' })
+  //     .then(response => {
+  //         setVideo(response.data.body.getVideo)
+  //         console.log(response);
           
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    }, []);
-    console.log(video);
+  //       })
+  //       .catch(error => {
+  //           console.log(error);
+  //       });
+  //   }, []);
+    // console.log(done);
+      useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const headers = { Range: 'bytes=0-' };
+        const response = await axios.get('http://localhost:5000/video/getVideo', { headers, responseType: 'blob' });
+        const videoUrl = URL.createObjectURL(response.data);
+        const videoId = response.headers['video-id'];
+ 
+        setVideo(videoUrl);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchVideo();
+  }, []);
 
   return (
     <div className="container mt-5">
@@ -110,7 +128,12 @@ function Addvideo() {
       </form>
     
      <div>
-  {
+       <div>
+       <video width={500} controls>
+         {video && <source src={video} type="video/mp4" />}
+      </video>
+     </div>
+  {/* {
    video? video.map((el)=>(
        <>
             <h1>{el.id}</h1>
@@ -119,7 +142,7 @@ function Addvideo() {
               </>
         
     ))
- :"no videose" }
+ :"no videose" } */}
       </div>
     </div>
   );

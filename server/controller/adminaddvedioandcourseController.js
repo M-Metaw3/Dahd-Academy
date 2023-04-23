@@ -198,11 +198,12 @@ static addvideo =async (req,res) => {
 
 
 static getallvideo = async (req, res) => {
-    console.log("getallvideo");
+  
     try {
       const getVideo = await videomodel.addVideose.find();
-      const videoPath = path.join(__dirname, `../images/37.Node JS API _  #37 - Pagination.mp4`);
-//   console.log(videoPath.size)
+ 
+      const videoPath = path.join(__dirname, `../images/${getVideo[0].video}`);
+
   const range = req.headers.range;
   const videoSize = fs.statSync(videoPath).size;
   const CHUNK_SIZE = 10 ** 6; // 1MB
@@ -219,10 +220,13 @@ static getallvideo = async (req, res) => {
     'Content-Type': 'video/mp4',
     'Access-Control-Allow-Origin': '*',
   };
+  // const videoId = getVideo[0]._id; // Get the ID of the video
+  // res.setHeader('Video-ID', videoId); // Set the Video-ID header
+  // res.writeHead(206, headers);
+ 
   res.writeHead(206, headers);
-      const videoStream = fs.createReadStream(videoPath, { start, end });
-    videoStream.pipe(res);
-
+  const videoStream = fs.createReadStream(videoPath, { start, end });
+  videoStream.pipe(res);
 
     } catch (error) {
       response(res, 400, "error occured", error);
