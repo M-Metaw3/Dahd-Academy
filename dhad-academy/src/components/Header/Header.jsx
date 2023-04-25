@@ -1,13 +1,71 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Navbar, Container, Nav, NavDropdown, Offcanvas } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-
+import { Modal, Row, Col } from "react-bootstrap";
 import './header.css';
+import Login from '../My Profile/login/Login';
+import Register from '../My Profile/Register/Register';
 
 
 function Header() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
+    <nav className=" d-none d-xl-block navbar navbar-expand top-nav px-xl-5 ">
+    <div className='container-fluid '>
+    <ul className="navbar-nav gap-4 ">
+    <li className="fw-lighter ">
+    <i className="fa-solid fa-phone"></i>
+        +20 100 763 3800
+    </li>
+    <div className="vr"></div>
+    <li className="fw-lighter ">
+    <i className="fa-solid fa-envelope"></i>
+    Info@dhadacademy.com      
+    </li>
+    </ul>
+    <ul className="navbar-nav justify-content-end pe-3  gap-4">
+    <li className="fw-lighter ">
+    <i className="fa-solid fa-language"></i>
+    Languages
+    </li>
+    <div className="vr"></div>
+
+    <li className='fw-lighter' onClick={handleShow}>
+    <i className="fa-regular fa-user"></i>
+    My Profile
+    </li>
+    
+
+    </ul>
+
+      <Modal show={show} fullscreen={true} onHide={handleClose}>
+        <Modal.Header closeButton className=' text-left border-0 bg-modal'>
+        </Modal.Header>
+        <Modal.Body className='bg-modal'>
+        <Container>
+            <Row sm={1} lg={2} className=' d-flex align-items-center'> 
+            <Col> 
+                <Login/>
+            </Col>
+            <Col className='bord' >
+                <Register />    
+            </Col>
+            </Row>
+            </Container>
+        </Modal.Body>
+        {/* <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer> */}
+      </Modal>
+  </div>
+</nav>
+
     <Navbar expand={'xl'} className="header px-xl-5">
       <Container fluid>
         <Navbar.Brand href="#home">

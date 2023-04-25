@@ -12,15 +12,14 @@ import {
 } from 'cdbreact';
 import { Container } from 'react-bootstrap';
 
-
 function Sidebar() {
     return (
         <>
-            <div style={{ display: 'flex' }}>
-                <CDBSidebar textColor="black" className='sidebar vh-100'>
+            <div className='d-flex'>
+                <CDBSidebar className='sidebar position-sticky top-0 vh-100 '>
                     <CDBSidebarHeader prefix={<CDBIcon icon="bars" size="lg" />}>
                         <Container className=' d-flex align-items-center'>
-                        <img className='' width="80%" src={require("../../assets/images/logo.png")} alt="logo" />
+                        <img width="80%" src={require("../../assets/images/logo.png")} alt="logo" />
                         </Container>
                     </CDBSidebarHeader>
 
@@ -49,21 +48,10 @@ function Sidebar() {
                                     Contact
                                 </CDBSidebarMenuItem>
                                 </NavLink>
-
-                                <NavLink exact="true" to="/login" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon="fa-solid fa-book">
-                                    Login
-                                </CDBSidebarMenuItem>
-                            </NavLink>
-                            <NavLink exact="true" to="/register" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon="fa-solid fa-book">
-                                Register
-                                </CDBSidebarMenuItem>
-                            </NavLink>
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
 
-                    <CDBSidebarFooter style={{ textAlign: 'center' }}>
+                    <CDBSidebarFooter className=' text-center '>
                         <div
                             style={{
                                 padding: '20px 5px',
@@ -74,7 +62,7 @@ function Sidebar() {
                     </CDBSidebarFooter>
                 </CDBSidebar>
 
-                <div style={{ overflow: 'scroll initial' }} className='p-5 vh-100'>
+                <div className=' w-70 px-4 overflow-scroll'>
                     <Outlet />
                 </div>
             </div>

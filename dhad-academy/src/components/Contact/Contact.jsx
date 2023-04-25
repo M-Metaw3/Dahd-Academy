@@ -26,8 +26,8 @@ function Contact() {
                   <input type="text" id="name" className="form-control" />
                 </div>
                 <div className="col-6 form-group pb-3">
-                  <label className="form-label" htmlFor="phone">Phone Number</label>
-                  <input type="tel" id="phone" className="form-control" />
+                  <label className="form-label" htmlFor="email">Email</label>
+                  <input type="email" id="email" className="form-control" />
                 </div>
 
                 <div className="col-12 form-group pb-3">
@@ -47,7 +47,7 @@ function Contact() {
 
           </div>
 
-          <div className='col-12 col-lg-3 ps-lg-3 row'>
+          <div className='col-12 col-lg-3 ps-lg-1 row'>
             <div className='col-6 col-lg-12'>
               <h5>Phone Numbers</h5>
               <div className='hr w-100'></div>

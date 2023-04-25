@@ -1,3 +1,23 @@
+.top-nav{
+  background-color: rgba(var(--secondry-color-rgb),25%);
+}
+.top-nav li{
+  cursor: pointer;
+}
+.bg-modal{
+  background-color: var(--bg-color);
+}
+.bord{
+  border-left: 1px solid rgba(var(--secondry-color-rgb), 30%);
+}
+
+@media (max-width: 992px) {
+  .bord {
+      border: none;
+      border-top: 1px solid rgba(var(--secondry-color-rgb), 30%);
+  }
+}
+
 .header {
   background-color: var(--bg-color);
 }
@@ -5,6 +25,10 @@
 outline: none !important;
 /* color: blue !important; */
 border: none !important;
+
+}
+.navbar-toggler:focus{
+  box-shadow: none !important;
 }
 .nav-links a{
   color:var(--secondry-color);
@@ -16,5 +40,8 @@ border: none !important;
   background-color: transparent;
 }
 .offcanvas{
-  background-color: var(--white) !important;
+  background-color: var(--bg-color) !important;
+}
+.dropdown-menu{
+  background-color: var(--bg-color) !important;
 }
