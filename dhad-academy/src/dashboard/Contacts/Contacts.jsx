@@ -13,10 +13,7 @@ function Contacts() {
       dispatch(actions.getALLcontact())
   }, [dispatch]);
 
-
-
 console.log(selector2);
-
 
 
   return (

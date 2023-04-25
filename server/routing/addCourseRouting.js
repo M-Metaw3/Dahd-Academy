@@ -3,6 +3,7 @@ const admin = require('../controller/adminaddvedioandcourseController')
 const multer = require('multer')
 const path =require('path')
 const fs = require('fs')
+const auth=require("../midleware/authentication");
 
 
 var storage = multer.diskStorage({
@@ -17,7 +18,7 @@ var storage = multer.diskStorage({
   
   var upload = multer({ storage: storage }).single('image');
 
-router.post('/addCourse',upload,admin.addCourse)
+router.post('/addCourse', auth.isAdmin, upload,admin.addCourse)
 router.get('/getCourse',admin.getallCourse)
 router.patch('/updateCourse/:id',upload,admin.updateCourse)
 router.delete('/deleteCourse/:id',admin.deleteCourse)

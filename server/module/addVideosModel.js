@@ -31,7 +31,7 @@ function validateAddvideo (obj){
 const schema = joi.object({
 title : joi.string().trim().min(3).max(200).required(),
 description :joi.string().trim().min(3).required(),
-// video :joi.string().trim().min(5).max(1000).required(),
+
 });
 return schema.validate(obj);
 

@@ -1,5 +1,6 @@
 import React from 'react'
-import actions from '../../../actions/actions'
+import { Container } from 'react-bootstrap'
+import actions from '../../actions/actions'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 function Login() {
@@ -21,8 +22,8 @@ const handleSubmitloggin=(event) => {
 
   return (
     <>
-        <div className='py-5'>
-        <div className='w-50 m-auto'>
+        <Container className='py-5'>
+        <div className='w-25 m-auto'>
         <h4 className='pb-3'>Login</h4>
     <form className=''  onSubmit={handleSubmitloggin}>
               <div className='row'>
@@ -45,7 +46,7 @@ const handleSubmitloggin=(event) => {
             </form>
         </div>
 
-    </div>
+    </Container>
         
     </>
   )

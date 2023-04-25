@@ -58,10 +58,12 @@ const getALLcontact = ()=>async(dispatch)=>{
         
         await api.loginapi(body) .then((response) => response.json())
      .then((data) => {
-       console.log(data);
+       localStorage.setItem("token",JSON.stringify( data))
+    
+       console.log(data.statuscode==400)
      })
       } catch (error) {
-        
+        console.log(error)
       }
         // const {body} = data
 
@@ -84,7 +86,63 @@ const getALLcontact = ()=>async(dispatch)=>{
 
 
 
+      const addblogAction = (body)=>async(dispatch)=>{
+
+        console.log(body)
+        try {
+          
+          await api.addblogapi(body) .then((response) => response.json())
+       .then((data) => {
+         
+   
+console.log(data)
+        if(data.body){
+          dispatch({type:'add blod successefully',payload:data})
+        }
+        if(data.error)
+        dispatch({type:'error' ,payload:data.error})
+       }).catch((error)=>  dispatch({type:'error' ,payload:error.message}))
+        } catch (error) {
+          
+        }
+   
+        }
 
 
 
-export default {getALLcontact,registrationaction,loginaction};
+
+
+
+
+
+
+
+
+
+
+        const getallblogs = ()=>async(dispatch)=>{
+
+        
+          try {
+            
+            await api.getallplogs() .then((response) => response.json())
+         .then((data) => {
+           
+     
+
+          if(data.body){
+            dispatch({type:'getallblogs',payload:data.body})
+          }
+          if(data.error)
+          dispatch({type:'error' ,payload:data.error})
+         }).catch((error)=>  dispatch({type:'error' ,payload:error.message}))
+          } catch (error) {
+            
+          }
+     
+          }
+  
+
+
+
+export default {getALLcontact,registrationaction,loginaction,addblogAction,getallblogs};

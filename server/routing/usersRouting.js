@@ -31,6 +31,19 @@ router.post('/', (req, res,next) => {
   });
 },users.userRegistration);
 router.post('/login',users.userLogin)
+router.put('/:id',(req, res,next) => {
+
+  upload(req, res, (err) => {
+    if (err) {
+      res.status(400).json({ message: 'Error uploading image' });
+    } else {
+    next();
+    }
+  });
+},users.updateUser);
+router.get('/',users.getallusers)
+router.delete('/:id', users.deleteUser);
+
 
 
 

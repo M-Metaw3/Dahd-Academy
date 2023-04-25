@@ -38,11 +38,11 @@ static addCourse =async (req,res) => {
 
 //////////////////////////////////////////////////////////
 static getallCourse =async (req,res) => {
-console.log("getallCourse")
-try {
+    try {
+    console.log("getallCourse")
 
 const getCourse= await coursemodel.addCourse.find();
-
+console.log(getCourse)
 response(res,200,"get all posts successfully",{getCourse},"") 
 
     
@@ -79,54 +79,13 @@ response(res,400,"error occured",'',error)
         
     }
     
-    
-            
+             
     }
-
-
-
-
-
-
 
 try {
 
-
-
-
-
-
-
-
-
  
 const updateCourse= await coursemodel.addCourse.findByIdAndUpdate(id,{title:title,description:description,link:link,image:req.file.originalname},{new:true});
-
-// if(req.file){
-//     try {
-
-//         const getCourse= await coursemodel.addCourse.findById({_id:id});
-// console.log(getCourse.image)
-//     await   fs.unlink(path.join(__dirname,`../images/${getCourse.image}`), (err => {
-//             if (err) console.log(err);
-//             else {
-//               console.log("Deleted file: example_file.txt");
-//             }
-//           }));
-
-
-        
-//     } catch (error) {
-// response(res,400,"error occured",'',error) 
-        
-//     }
-    
-    
-            
-    // }
-
-
-
 
 response(res,201,"course updated successfully",{updateCourse},"") 
 
@@ -152,12 +111,12 @@ console.log("deleteCourse")
         await   fs.unlink(path.join(__dirname,`../images/${deletecourse.image}`), (err => {
             if (err) console.log(err);
             else {
-              console.log("Deleted file: example_file.txt");
+              
+                return response(res,200,"course deleted successfully",{deletecourse},"") 
             }
           }));
 
 
- response(res,200,"course deleted successfully",{deletecourse},"") 
 
         
     } catch (error) {
@@ -191,36 +150,103 @@ static addvideo =async (req,res) => {
 
     response(res,201,"video  uploaded  successfully",{postvideo},"") 
  } catch (error) {
-    response(res,400,"course created successfully","",error)
+    response(res,400,"video uploaded  ","",error)
  }
 
   
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-static getallvideo =async (req,res) => {
+// static getallvideo =async (req,res) => {
 
 
 
 
-    console.log("getallvideo")
-    try {
+//     console.log("getallvideo")
+//     try {
     
-    const getVideo= await videomodel.addVideose.find();
+//     const getVideo= await videomodel.addVideose.find();
+// console.log(getVideo)
+// // ${getVideo[0].video}
+//         // const { filename } = req.params;
+//         const videoPath =  path.join(__dirname,`../images/37.Node JS API _  #37 - Pagination.mp4`);
+//         console.log(videoPath)
+
+//         const videoStream = fs.createReadStream(videoPath);
+//         res.setHeader('Content-Type', 'video/mp4');
+//         videoStream.pipe(response);
+ 
     
-    response(res,200,"get all posts successfully",{getVideo},"") 
+//     response(res,200,"get all posts successfully",{getVideo},"") 
     
         
-    } catch (error) {
+//     } catch (error) {
     
-    response(res,400,"error occured",error) 
+//     response(res,400,"error occured",error) 
     
         
-    }
+//     }
 
 
   
-}
+// }
+
+
+
+
+
+
+
+static getallvideo = async (req, res) => {
+  
+    try {
+      const getVideo = await videomodel.addVideose.find();
+ 
+      const videoPath = path.join(__dirname, `../images/${getVideo[0].video}`);
+
+  const range = req.headers.range;
+  const videoSize = fs.statSync(videoPath).size;
+  const CHUNK_SIZE = 10 ** 6; // 1MB
+
+  const parts = range.replace(/bytes=/, '').split('-');
+  const start = parseInt(parts[0], 10);
+  const end = parts[1] ? parseInt(parts[1], 10) : videoSize - 1;
+  const contentLength = end - start + 1;
+
+  const headers = {
+    'Content-Range': `bytes ${start}-${end}/${videoSize}`,
+    'Accept-Ranges': 'bytes',
+    'Content-Length': contentLength,
+    'Content-Type': 'video/mp4',
+    'Access-Control-Allow-Origin': '*',
+  };
+  // const videoId = getVideo[0]._id; // Get the ID of the video
+  // res.setHeader('Video-ID', videoId); // Set the Video-ID header
+  // res.writeHead(206, headers);
+ 
+  res.writeHead(206, headers);
+  const videoStream = fs.createReadStream(videoPath, { start, end });
+  videoStream.pipe(res);
+
+    } catch (error) {
+      response(res, 400, "error occured", error);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////
 static updatevideo =async (req,res) => {
 
