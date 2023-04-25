@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 
 function Addvideo() {
 
@@ -17,17 +18,17 @@ function Addvideo() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-  
+
     if (!file) {
       setError('Please select a file to upload.');
       return;
     }
-  
+
     const formData = new FormData();
     formData.append('video', file);
     formData.append('title', title);
     formData.append('description', description);
-  
+
     const config = {
       onUploadProgress: progressEvent => {
         const percentCompleted = Math.round(
@@ -36,7 +37,7 @@ function Addvideo() {
         setProgress(percentCompleted);
       }
     };
-  
+
     if (videoId) {
       // If we have a video ID, update the existing video
       await axios.put(`http://localhost:5000/video/updateVideo/${videoId}`, formData, config)
@@ -60,8 +61,8 @@ function Addvideo() {
   }
 
   async function handleDelete(id) {
- 
-  
+
+
     await axios.delete(`http://localhost:5000/video/deleteVideo/${id}`)
       .then(response => {
         console.log(response);
@@ -83,21 +84,21 @@ function Addvideo() {
   //     .then(response => {
   //         setVideo(response.data.body.getVideo)
   //         console.log(response);
-          
+
   //       })
   //       .catch(error => {
   //           console.log(error);
   //       });
   //   }, []);
-    // console.log(done);
-      useEffect(() => {
+  // console.log(done);
+  useEffect(() => {
     const fetchVideo = async () => {
       try {
         const headers = { Range: 'bytes=0-' };
         const response = await axios.get('http://localhost:5000/video/getVideo', { headers, responseType: 'blob' });
         const videoUrl = URL.createObjectURL(response.data);
         const videoId = response.headers['video-id'];
- 
+
         setVideo(videoUrl);
       } catch (error) {
         console.error(error);
@@ -107,33 +108,39 @@ function Addvideo() {
   }, []);
 
   return (
-    <div className="container mt-5">
-      <form onSubmit={handleSubmit}>
-        {error && <div className="alert alert-danger">{error}</div>}
-        <div className="form-group">
-          <label htmlFor="title">Title:</label>
-          <input type="text" className="form-control" id="title" name="title" value={title} onChange={(e) => settitle(e.target.value)} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="description">Description:</label>
-          <textarea className="form-control" id="description" name="description" value={description} onChange={(e) => setdescription(e.target.value)} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="video">Video file:</label>
-          <input type="file" className="form-control-file" id="video" onChange={(e) => setFile(e.target.files[0])} />
-        </div>
-        <button type="submit" className="btn btn-primary">{videoId ? 'Update' : 'Upload'}</button>
-        <progress value={progress} max="100" />
-        {url && <video src={url} controls className="mt-3" />}
-      </form>
-    
-     <div>
-       <div>
-       <video width={500} controls>
-         {video && <source src={video} type="video/mp4" />}
-      </video>
-     </div>
-  {/* {
+    <>
+      <Container className="py-5">
+        <div className='w-50 m-auto'>
+          <form onSubmit={handleSubmit}>
+            <div className='row'>
+              {error && <div className="alert alert-danger">{error}</div>}
+              <div className="form-group col-12 pb-2">
+                <label htmlFor="title">Title:</label>
+                <input type="text" className="form-control" id="title" name="title" value={title} onChange={(e) => settitle(e.target.value)} />
+              </div>
+              <div className="form-group col-12 pb-2">
+                <label htmlFor="description">Description:</label>
+                <textarea className="form-control" id="description" name="description" value={description} onChange={(e) => setdescription(e.target.value)} />
+              </div>
+              <div className="form-group col-12 pb-2">
+                <label htmlFor="video">Video file:</label>
+                <input type="file" className="form-control-file" id="video" onChange={(e) => setFile(e.target.files[0])} />
+              </div>
+              <div className="form-group col-12 pb-2">
+                <button type="submit" className="w-100 btn-submit btn px-5">{videoId ? 'Update' : 'Upload'}</button>
+              </div>
+              <progress value={progress} max="100" />
+              {url && <video src={url} controls className="mt-3" />}
+            </div>
+          </form>
+
+          <div>
+            <div>
+              <video width={500} controls>
+                {video && <source src={video} type="video/mp4" />}
+              </video>
+            </div>
+            {/* {
    video? video.map((el)=>(
        <>
             <h1>{el.id}</h1>
@@ -143,8 +150,12 @@ function Addvideo() {
         
     ))
  :"no videose" } */}
-      </div>
-    </div>
+          </div>
+        </div>
+      </Container>
+    </>
+
+
   );
 }
 

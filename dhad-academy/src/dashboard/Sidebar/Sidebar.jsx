@@ -11,10 +11,12 @@ import {
     CDBIcon,
 } from 'cdbreact';
 import { Container } from 'react-bootstrap';
+import RoutesDashboard from '../Routes/RoutesDashboard';
 
 function Sidebar() {
     return (
-        <>
+
+<>
             <div className='d-flex'>
                 <CDBSidebar className='sidebar position-sticky top-0 vh-100 '>
                     <CDBSidebarHeader prefix={<CDBIcon icon="bars" size="lg" />}>
@@ -27,37 +29,37 @@ function Sidebar() {
                         <CDBSidebarMenu>
                        
                         <NavLink exact="true" to="admin/addvideo" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon={"fa-solid fa-user"}>
+                                <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-user"}>
                                     Add video
                                 </CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact="true" to="admin/instructors" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon={"fa-solid fa-user"}>
+                                <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-user"}>
                                   instructor
                                 </CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact="true" to="/Instractors" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon={"fa-solid fa-user"}>
+                                <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-user"}>
                                     Instractors
                                 </CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact="true" to="/Courses" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon="fa-solid fa-book">
+                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
                                     Courses
                                 </CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact="true" to="addCourses" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon="fa-solid fa-book">
-                                add    Courses
+                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
+                                add Courses
                                 </CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact="true" to="Blogs" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon="fa-solid fa-book">
+                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
                                     Blogs
                                 </CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact="true" to="admin/allcourses" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem icon="fa-solid fa-book">
+                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
                                     allcourses
                                 </CDBSidebarMenuItem>
                             </NavLink>
@@ -84,7 +86,7 @@ function Sidebar() {
                     </CDBSidebarFooter>
                 </CDBSidebar>
 
-                <div className=' w-70 px-4 overflow-scroll'>
+                <div className=' w-100 px-4 overflow-scroll'>
                     <Outlet />
                 </div>
             </div>

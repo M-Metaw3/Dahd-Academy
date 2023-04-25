@@ -1,12 +1,14 @@
 import React from 'react'
 import Sidebar from '../Sidebar/Sidebar'
-
+import RoutesDashboard from '../Routes/RoutesDashboard'
 
 function Admin() {
   return (
     <>
-    <Sidebar></Sidebar>
-      
+    <Sidebar>
+    </Sidebar>
+    <RoutesDashboard/>
+
     </>
   )
 }

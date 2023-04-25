@@ -50,7 +50,7 @@ useEffect(() => {
   return (
     <>
     <Container className='py-5'>
-        <div className='w-25 m-auto'>
+        <div className='w-50 m-auto'>
         <h4 className='pb-3'>BLOGS</h4>
     <form className='' onSubmit={handleSubmitBlog} encType="multipart/form-data">
               <div className='row'>
@@ -72,7 +72,7 @@ useEffect(() => {
                 <div className="form-group col-12 pb-2">
 
                 <label htmlFor="image">Image:</label>
-      <input type="file" id="image"  onChange={handleImageChange} accept="image/*" required />
+      <input type="file" className="form-control-file" id="image"  onChange={handleImageChange} accept="image/*" required />
       </div>
 <img src={Show} alt="" />
               <div className="pt-4 col-12">

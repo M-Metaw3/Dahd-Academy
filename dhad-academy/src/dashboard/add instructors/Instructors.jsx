@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Container } from 'react-bootstrap';
 
 const Instructors = () => {
   const [users, setUsers] = useState([]);
@@ -138,38 +139,45 @@ setImg(null)
   };
 
   return (
-    <div>
-      <h2>Create User</h2>
+    <Container className='py-5'>
+    <div className='w-50 m-auto'>
+            <h2>Create User</h2>
       <form onSubmit={handleCreateUser}>
-        <div>
-          <label>Username:</label>
-          <input type="text" value={usernam} onChange={handleUsernamChange} />
+      <div className='row'>
+                <div className="col-12 form-group ">
+                <label>Username:</label>
+          <input className="form-control" type="text" value={usernam} onChange={handleUsernamChange} />
         </div>
-        <div>
+        <div className="col-12 form-group ">
           <label>Email:</label>
-          <input type="email" value={email} onChange={handleEmailChange} />
+          <input className="form-control" type="email" value={email} onChange={handleEmailChange} />
         </div>
-        <div>
+        <div className="col-12 form-group ">
           <label>Password:</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          <input className="form-control" type="password" value={password} onChange={handlePasswordChange} />
         </div>
-        <div>
+        <div className="col-12 form-group ">
           <label>Role:</label>
-          <select value={isAdmin} onChange={handleIsAdminChange}>
+          <select className="form-select form-select-lg" value={isAdmin} onChange={handleIsAdminChange}>
             <option value="user">User</option>
             <option value="instructor">Instructor</option>
             <option value="Admin">Admin</option>
           </select>
         </div>
-        <div>
-          <img src={img} width={200} />
+        <div className="col-12 form-group">
           <label>Image:</label>
-          <input type="file" onChange={handleImageChange} />
+          <input className="form-control-file" type="file" onChange={handleImageChange} />
+          <img src={img} width={200} />
+
         </div>
         {uploadProgress > 0 && (
   <progress value={uploadProgress} max="100" />
 )}
-        <button type="submit">Create</button>
+              <div className="pt-4 col-12">
+
+        <button type="submit" className='w-100 btn-submit btn px-5'>Create</button>
+        </div>
+      </div>
       </form>
 
       <h2>Users</h2>
@@ -238,6 +246,7 @@ setImg(null)
         </div>
       )}
     </div>
+    </Container>
   );
 };
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 // import "animate.css";
 import './coursescss.css'
+import { Container } from "react-bootstrap";
 const AddCourses = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -30,8 +31,13 @@ const AddCourses = () => {
   };
 
   return (
+    <>
+    <Container className='py-5'>
+        <div className='w-50 m-auto'>
     <form onSubmit={handleSubmit} className="animate__animated animate__fadeIn">
-      <div className="form-group">
+    <div className='row'>
+
+    <div className="col-12 form-group pb-1">
         <label htmlFor="title">Title</label>
         <input
           type="text"
@@ -41,7 +47,7 @@ const AddCourses = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
-      <div className="form-group">
+      <div className="col-12 form-group pb-2">
         <label htmlFor="description">Description</label>
         <textarea
           id="description"
@@ -50,7 +56,7 @@ const AddCourses = () => {
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
       </div>
-      <div className="form-group">
+      <div className="col-12 form-group pb-1">
         <label htmlFor="link">Link</label>
         <input
           type="text"
@@ -60,7 +66,7 @@ const AddCourses = () => {
           onChange={(e) => setLink(e.target.value)}
         />
       </div>
-      <div className="form-group">
+      <div className="col-12 form-group pb-1">
         <label htmlFor="image">Image</label>
         <input
           type="file"
@@ -73,8 +79,15 @@ const AddCourses = () => {
       <div>
         {uploadProgress > 0 && <progress value={uploadProgress} max="100" />}
       </div>
-      <button type="submit" className="btn btn-primary">Add Course</button>
+      <div className="pt-4 col-12">
+      <button type="submit" className="btn w-100 btn-submit px-5">Add Course</button>
+      </div>
+    </div>
     </form>
+    </div>
+    </Container>
+    </>
+
   );
 };
 
