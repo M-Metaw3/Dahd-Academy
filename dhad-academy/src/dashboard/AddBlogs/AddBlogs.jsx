@@ -27,7 +27,7 @@ useEffect(() => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append('image1', image);
     formData.append('description', description);
     formData.append('details', details);
     formData.append('title', title);
