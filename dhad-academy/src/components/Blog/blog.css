@@ -20,3 +20,6 @@
     border-radius:  20px !important;
 
 }
+.card a ,.card i{
+    color: var(--secondry-color) !important; 
+}

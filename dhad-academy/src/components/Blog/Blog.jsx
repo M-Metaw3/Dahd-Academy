@@ -43,8 +43,8 @@ function Blog() {
                                 <h6 className="card-text">
                                     New batch graduation ceremony
                                 </h6>
-                                <NavLink to={"/blog/1"} className='text-decoration-none text-dark'>
-                                    Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i>
+                                <NavLink to={"/blog/1"} className='text-decoration-none '>
+                                    Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i>
                                 </NavLink>
                             </div>
                         </div>
@@ -57,7 +57,7 @@ function Blog() {
                                 <h6 className="card-text">
                                     New batch graduation ceremony
                                 </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
+                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ function Blog() {
                                 <h6 className="card-text">
                                     New batch graduation ceremony
                                 </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
+                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ function Blog() {
                                 <h6 className="card-text">
                                     New batch graduation ceremony
                                 </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
+                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ function Blog() {
                                 <h6 className="card-text">
                                     New batch graduation ceremony
                                 </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
+                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ function Blog() {
                                 <h6 className="card-text">
                                     New batch graduation ceremony
                                 </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
+                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
                             </div>
                         </div>
                     </div>

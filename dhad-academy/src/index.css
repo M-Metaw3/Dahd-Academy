@@ -21,5 +21,8 @@
 .white{
   color: var(--white);
 }
+.card{
+  color: var(--secondry-color) !important;
+}
 
 

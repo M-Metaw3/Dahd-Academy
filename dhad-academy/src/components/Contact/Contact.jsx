@@ -140,7 +140,7 @@ function Contact() {
         <h3>Contact us</h3>
         <div className="hr"></div>
         <div className="row d-flex justify-content-between">
-          <div className="col-12 col-lg-8 pe-lg-3">
+          <div className="col-12 col-lg-7 pe-lg-3">
             <p>
               You can contact us any way that is convenient for you. We are available 24/7 via email. You can also use a quick contact form below or visit our academy personally.
             </p>
@@ -153,8 +153,8 @@ function Contact() {
                   <input type="text" id="name" className="form-control" name="name" value={formData.name} onChange={handleChange} />
                 </div>
                 <div className="col-6 form-group pb-3">
-                  <label className="form-label" htmlFor="phone">
-                    Phone Number
+                  <label className="form-label" htmlFor="email">
+                  Email 
                   </label>
                   <input type="tel" id="phone" className="form-control" name="phone" value={formData.phonenumber} onChange={(e)=>setFormData({...formData,phonenumber:e.target.value})} />
                 </div>
@@ -181,8 +181,8 @@ function Contact() {
             </form>
           </div>
 
-          <div className="col-12 col-lg-3 ps-lg-3 row">
-            <div className="col-6 col-lg-12">
+          <div className="col-12 col-lg-4  row d-flex justify-content-between">
+          <div className='col-12 col-md-5 col-lg-12 '>
               <h5>Phone Numbers</h5>
               <div className="hr w-100"></div>
               <p>
@@ -194,19 +194,19 @@ function Contact() {
               <p>
                 <i className="fa-solid fa-phone"></i>(+2) 0110 040 6408
               </p>
-               <p><img src={require("../../assets/images/Vector.png")}  alt="" /></p>
+               {/* <p><img src={require("../../assets/images/Vector.png")}  alt="" /></p> */}
              </div>
-             <div className='col-6 col-lg-12'>
+             <div className='col-12 col-md-5 col-lg-12  '>
                <h5 >Emails</h5>
                <div className='hr w-100'></div>
                <p><i className="fa-regular fa-envelope"></i>Info@dhadacademy.com</p>
              </div>
-            <div className='col-6 col-lg-12'>
+             <div className='col-12 col-md-5 col-lg-12 '>
               <h5>Address</h5>
               <div className='hr w-100'></div>
                <p><i className="fa-solid fa-location-dot"></i>Ibn Al-Roumi St, Seventh District, Nasr City, Cairo</p>
             </div>
-            <div className='col-6 col-lg-12'>
+            <div className='col-12 col-md-5 col-lg-12  '>
               <h5 >Working Hours</h5>
                <div className='hr w-100'></div>
                <p><i className="fa-regular fa-clock"></i>10:00 AM - 06:00 PM</p>

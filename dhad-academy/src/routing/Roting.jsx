@@ -30,7 +30,7 @@ const Roting = () => {
         <Route path="/about" element={<About/>} />
         {/* <Route path="/courses" element={<Courses/>} /> */}
         <Route path="/courses/:name" element={<Courses/>} />
-        <Route path="/courses/:id" element={<CourseDetails/>} />
+        <Route path="/course/:name" element={<CourseDetails/>} />
         <Route path="/services" element={<Services/>} />
         <Route path="/instructors" element={<Teachers/>} />
         <Route path="/contact" element={<Contact/>} />
@@ -44,10 +44,6 @@ const Roting = () => {
         <Route path='admin/updatecourses' element={<CourseUpdate/>} />
         <Route path='admin/addvideo' element={<Addvideo/>} />
         <Route path='admin/instructors' element={<Instructor/>} />
-
-
-
-   
         
         <Route path="/admin" element={<Contacts/>} />
 

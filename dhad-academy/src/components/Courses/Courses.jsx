@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import CommonSection from '../Common-section/CommonSection';
-import services from "../../assets/images/services.png"
+import courses from "../../assets/images/courses.png"
 import { Container } from 'react-bootstrap';
 import { NavLink, useParams } from 'react-router-dom';
 
@@ -13,84 +13,52 @@ function Courses() {
   console.log(name);
   return (
     <>
-      <CommonSection title={name} img={`${services}`} />
+      <CommonSection title={name} img={`${courses}`} />
       <Container className='py-5'>
       <div className="row d-flex justify-content-center">
                 <div className="col-10 col-md-6 col-lg-4 pb-5">
-                    <div className="card rounded-20">
-                    <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
+                <NavLink to={"/course/Arabic for non-native speakers"} className="text-decoration-none">
+                    <div className="card rounded-3">
+                    <img src={require("../../assets/images/course.png")} className="rounded-img-top " alt="..." />
                             <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <NavLink to={"/blog/1"} className='text-decoration-none text-dark'>
-                                Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i>
-                                </NavLink>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                    <div className="card rounded-20">
-                    <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                    <div className="card rounded-20">
-                    <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                    <div className="card rounded-20">
-                        <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                    <div className="card rounded-20">
-                    <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                    <div className="card rounded-20">
-                    <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>49 Hours</p>
+                                <h6 className="card-text">Arabic for non-native speakers  </h6>
+                                <span>$83</span>
+                                <p className=' d-inline px-3 text-decoration-line-through'>$183</p>
 
+                            </div>
+                    </div>
+                </NavLink>
+                    </div>
+                    <div className="col-10 col-md-6 col-lg-4 pb-5">
+                <NavLink to={"/course/Arabic for non-native speakers"} className="text-decoration-none">
+                    <div className="card rounded-3">
+                    <img src={require("../../assets/images/course.png")} className="rounded-img-top " alt="..." />
+                            <div className="card-body">
+                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>49 Hours</p>
+                                <h6 className="card-text">Arabic for non-native speakers  </h6>
+                                <span>$83</span>
+                                <p className=' d-inline px-3 text-decoration-line-through'>$183</p>
+
+                            </div>
+                    </div>
+                </NavLink>
+                    </div>
+                    <div className="col-10 col-md-6 col-lg-4 pb-5">
+                <NavLink to={"/course/Arabic for non-native speakers"} className="text-decoration-none">
+                    <div className="card rounded-3">
+                    <img src={require("../../assets/images/course.png")} className="rounded-img-top " alt="..." />
+                            <div className="card-body">
+                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>49 Hours</p>
+                                <h6 className="card-text">Arabic for non-native speakers  </h6>
+                                <span>$83</span>
+                                <p className=' d-inline px-3 text-decoration-line-through'>$183</p>
+
+                            </div>
+                    </div>
+                </NavLink>
+                    </div>
+                  
                 </div>
       </Container>
     </>
