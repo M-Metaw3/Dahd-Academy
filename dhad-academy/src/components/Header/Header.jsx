@@ -7,12 +7,13 @@ import Login from '../My Profile/login/Login';
 import Register from '../My Profile/Register/Register';
 import { useTranslation, Trans } from 'react-i18next';
 
-
 function Header() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [ t, i18n]=useTranslation();  
   return (
     <>
     <nav className=" d-none d-xl-block navbar navbar-expand top-nav px-xl-5 ">
@@ -29,44 +30,35 @@ function Header() {
     </li>
     </ul>
     <ul className="navbar-nav justify-content-end pe-3  gap-4">
-    <li className="fw-lighter ">
+    <li className="fw-lighter" onClick={()=>{
+      i18n.changeLanguage('ar');
+    }}>
     <i className="fa-solid fa-language"></i>
     Languages
     </li>
-{/* <div className="dropdown">
-    <a className="dropdown-toggle" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-    </a>
-
-    <ul className="dropdown-menu" aria-labelledby="Dropdown">
-        <li>
-            <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English <i class="fa fa-check text-success ms-2"></i></a>
-        </li>
-        <li><hr class="dropdown-divider" /></li>
-        <li>
-            <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
-        </li>  
-    </ul>
-</div> */}
-
-
-
+    {/* <NavDropdown
+                title="Languages"
+                id={`offcanvasNavbarDropdown-expand-xl`}
+              >
+                <NavDropdown.Item  className={({ isActive }) => (isActive ? 'active' : '')}>Arabic</NavDropdown.Item>
+                <NavDropdown.Item  className={({ isActive }) => (isActive ? 'active' : '')}>English</NavDropdown.Item>
+              </NavDropdown> */}
     <div className="vr"></div>
 
-    <li className='fw-lighter' onClick={handleShow}>
-    {/* <li className='fw-lighter'> */}
-      {/* <NavLink to={"/myprofile"}> */}
+    {/* <li className='fw-lighter' onClick={handleShow}> */}
+    <li className='fw-lighter'>
+      <NavLink to={"/myprofile"} className=" text-decoration-none">
       <i className="fa-regular fa-user"></i>
       My Profile
-      {/* </NavLink> */}
+      </NavLink>
     </li>
-    
-
+    <li className='fw-lighter'>
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      Logout
+    </li>
     </ul>
 
-      <Modal show={show} fullscreen={true} onHide={handleClose}>
+      {/* <Modal show={show} fullscreen={true} onHide={handleClose}>
         <Modal.Header closeButton className=' text-left border-0 bg-modal'>
         </Modal.Header>
         <Modal.Body className='bg-modal'>
@@ -81,12 +73,12 @@ function Header() {
             </Row>
             </Container>
         </Modal.Body>
-        {/* <Modal.Footer>
+        <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-        </Modal.Footer> */}
-      </Modal>
+        </Modal.Footer>
+      </Modal> */}
   </div>
 </nav>
 
@@ -144,9 +136,9 @@ function Header() {
               >
                 <NavDropdown.Item as={NavLink} to="/courses/Arabic" className={({ isActive }) => (isActive ? 'active' : '')}>Arabic</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/courses/Quran and readings" className={({ isActive }) => (isActive ? 'active' : '')}>Quran and readings</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/courses/Calligraphy" className={({ isActive }) => (isActive ? 'active' : '')}>Calligraphy</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/courses/Islamic studies" className={({ isActive }) => (isActive ? 'active' : '')}>Islamic studies</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/courses/Qualifying courses" className={({ isActive }) => (isActive ? 'active' : '')}>Qualifying courses</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses/Crafts and Skills" className={({ isActive }) => (isActive ? 'active' : '')}>Crafts and Skills</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/courses/Field tourism" className={({ isActive }) => (isActive ? 'active' : '')}>Field tourism</NavDropdown.Item>
               </NavDropdown>
               <NavLink

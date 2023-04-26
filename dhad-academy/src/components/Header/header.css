@@ -30,11 +30,13 @@ border: none !important;
 .navbar-toggler:focus{
   box-shadow: none !important;
 }
-.nav-links a{
+.nav-links a,nav a{
   color:var(--secondry-color);
   text-decoration: none;
 }
-
+nav a:hover{
+  color:var(--secondry-color);
+}
 .nav-links a.active ,.nav-links a:hover {
   color: var(--primary-color);
   background-color: transparent;
@@ -45,3 +47,4 @@ border: none !important;
 .dropdown-menu{
   background-color: var(--bg-color) !important;
 }
+

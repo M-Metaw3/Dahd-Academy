@@ -66,13 +66,13 @@ function Footer() {
                       <a href="/courses/Quran and readings">Quran and readings</a>
                     </li>
                     <li className='mb-2'>
-                      <a href="/courses/Calligraphy">Calligraphy</a>
-                    </li>
-                    <li className='mb-2'>
                       <a href="/courses/Islamic studies">Islamic studies</a>
                     </li>
                     <li className='mb-2'>
                       <a href="/courses/Qualifying courses">Qualifying courses</a>
+                    </li>
+                    <li className='mb-2'>
+                      <a href="/courses/Crafts and Skills">Crafts and Skills</a>
                     </li>
                     <li className='mb-2'>
                       <a href="/courses/Field tourism">Field tourism</a>
