@@ -60,22 +60,22 @@ function Footer() {
 
                   <ul className="list-unstyled">
                     <li className='mb-2'>
-                      <a href="#!" >Arabic</a>
+                      <a href="/courses/Arabic" >Arabic</a>
                     </li>
                     <li className='mb-2'>
-                      <a href="#!">Quran and readings</a>
+                      <a href="/courses/Quran and readings">Quran and readings</a>
                     </li>
                     <li className='mb-2'>
-                      <a href="#!">Calligraphy</a>
+                      <a href="/courses/Calligraphy">Calligraphy</a>
                     </li>
                     <li className='mb-2'>
-                      <a href="#!">Islamic studies</a>
+                      <a href="/courses/Islamic studies">Islamic studies</a>
                     </li>
                     <li className='mb-2'>
-                      <a href="#!">Qualifying courses</a>
+                      <a href="/courses/Qualifying courses">Qualifying courses</a>
                     </li>
                     <li className='mb-2'>
-                      <a href="#!">Field tourism</a>
+                      <a href="/courses/Field tourism">Field tourism</a>
                     </li>
 
                   </ul>

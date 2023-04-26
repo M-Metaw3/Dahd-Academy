@@ -10,7 +10,6 @@ function Courses() {
   }, []);
   const {name}=useParams();
    
-  console.log(name);
   return (
     <>
       <CommonSection title={name} img={`${courses}`} />

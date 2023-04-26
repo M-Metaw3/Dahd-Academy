@@ -118,9 +118,12 @@ function Header() {
                 title="Courses"
                 id={`offcanvasNavbarDropdown-expand-xl`}
               >
-                <NavDropdown.Item as={NavLink} to="/courses" className={({ isActive }) => (isActive ? 'active' : '')}>course1</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/courses" className={({ isActive }) => (isActive ? 'active' : '')}>course2</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/courses" className={({ isActive }) => (isActive ? 'active' : '')}>course3</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses/Arabic" className={({ isActive }) => (isActive ? 'active' : '')}>Arabic</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses/Quran and readings" className={({ isActive }) => (isActive ? 'active' : '')}>Quran and readings</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses/Calligraphy" className={({ isActive }) => (isActive ? 'active' : '')}>Calligraphy</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses/Islamic studies" className={({ isActive }) => (isActive ? 'active' : '')}>Islamic studies</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses/Qualifying courses" className={({ isActive }) => (isActive ? 'active' : '')}>Qualifying courses</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/courses/Field tourism" className={({ isActive }) => (isActive ? 'active' : '')}>Field tourism</NavDropdown.Item>
               </NavDropdown>
               <NavLink
                 to="/blog"
@@ -143,13 +146,12 @@ function Header() {
                 </NavLink>
 
 
-
-                <NavLink
+                {/* <NavLink
                 to="/test"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Test
-                </NavLink>
+                </NavLink> */}
                 <NavLink
                 to="/admin"
                 className={({ isActive }) => (isActive ? 'active' : '')}
