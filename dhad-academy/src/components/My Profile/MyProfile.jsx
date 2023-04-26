@@ -7,7 +7,7 @@ function MyProfile() {
   return (
     <>
     <Container>
-            <Row sm={1} lg={2} className=' d-flex align-items-center'> 
+            <Row xs={1} lg={2} className=' d-flex align-items-center'> 
             <Col> 
                 <Login/>
             </Col>
