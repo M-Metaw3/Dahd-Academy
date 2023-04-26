@@ -4,11 +4,11 @@ import thunk from "redux-thunk"
 
 import teacher from "./teachersReducer.js";
 import addblog from "./addBlogReducer.js";
-import users from "./usersReducers.js";
+// import users from "./usersReducers.js";
 
 
 
-  const reducers =combineReducers({teacher,addblog,users})
+  const reducers =combineReducers({teacher,addblog})
 const store = createStore( reducers, applyMiddleware(compose(thunk)),      
 )
  
