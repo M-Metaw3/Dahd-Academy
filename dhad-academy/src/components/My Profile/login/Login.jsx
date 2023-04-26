@@ -5,6 +5,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 function Login(props) {
   const dispatch = useDispatch()  
+  const nav = useNavigate()
+
+    const loginSucceful = useSelector((state)=>state.users)
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +18,7 @@ const handleSubmitloggin=(event) => {
   const loginbody={email,password}
   console.log(loginbody);
   dispatch(actions.loginaction(loginbody))
+  nav('/')
 
 
 }
@@ -38,6 +42,7 @@ const handleSubmitloggin=(event) => {
             
               <div className="pt-4 col-12">
                 <button type="submit" className="w-100 btn-submit btn px-5">Login</button>
+                <p>{loginSucceful.loginfail?loginSucceful.loginfail:''}</p>
               </div>
               </div>
 

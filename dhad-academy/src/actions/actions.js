@@ -1,4 +1,6 @@
 import * as api from "../api/api"
+import React from 'react'
+import { redirect, useNavigate } from 'react-router-dom';
 
 
 const getALLcontact = ()=>async(dispatch)=>{
@@ -32,6 +34,13 @@ const getALLcontact = ()=>async(dispatch)=>{
         await api.registration(body) .then((response) => response.json())
      .then((data) => {
        console.log(data);
+       if (data.statuscode==201) {
+        dispatch({type:'registrationSuccess',payload:data.message})
+       }
+       if (data.statuscode==400) {
+        console.log(data)
+        dispatch({type:'registrationfail',payload:data.error})
+       }
      })
       } catch (error) {
         
@@ -55,11 +64,26 @@ const getALLcontact = ()=>async(dispatch)=>{
 
     
       try {
+  // const nav = useNavigate()
         
         await api.loginapi(body) .then((response) => response.json())
      .then((data) => {
-       localStorage.setItem("token",JSON.stringify( data))
+      console.log(data.body)
+      if(data.statuscode==400){
+        
+           dispatch({type:'loginfaild',payload:data.message})
+      }
+      if(data.statuscode==200){
+  redirect('/')
+        
+        dispatch({type:'loginsuccefully',payload:data.message})
+        localStorage.setItem("token",JSON.stringify( data.body))  
+
+   }
     
+      
+
+          
        console.log(data.statuscode==400)
      })
       } catch (error) {
