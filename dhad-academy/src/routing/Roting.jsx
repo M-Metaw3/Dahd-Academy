@@ -22,7 +22,7 @@ import MyProfile from '../components/My Profile/MyProfile';
 
 const Roting = () => {
 const users = JSON.parse(localStorage.getItem("token"))
-console.log(users.isAdmin=="user")
+
 
     return (
         <>      
@@ -40,7 +40,7 @@ console.log(users.isAdmin=="user")
         <Route path="/contact" element={<Contact/>} />
         <Route path="/blog" element={<Blog/>} />
         <Route path="/blog/:id" element={<BlogDetails/>} />
-        <Route path="/admin" element={<Admin/>} >
+        {users.isAdmin=="Admin"?   <Route path="/admin" element={<Admin/>} >
         <Route path='/admin/contacts' element={<Contacts/>} />
         <Route path='/admin/Blogs' element={<AddBlogs/>} />
         <Route path='/admin/addCourses' element={<AddCourses/>} />
@@ -53,7 +53,7 @@ console.log(users.isAdmin=="user")
 
         </Route>:
         <Route path="/test" element={<Test/>} />
-      }
+    }
 
       </Routes>
     

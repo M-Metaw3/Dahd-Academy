@@ -5,10 +5,13 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 function Login(props) {
   const dispatch = useDispatch()  
-  const nav = useNavigate()
+
 
     const loginSucceful = useSelector((state)=>state.users)
-
+    // if(loginSucceful.login ){
+    //   props.handleClose();
+  
+    // }
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // const [registration, setregistration] = useState({name:'', email:'',password:''});
@@ -18,7 +21,7 @@ const handleSubmitloggin=(event) => {
   const loginbody={email,password}
   console.log(loginbody);
   dispatch(actions.loginaction(loginbody))
-  nav('/')
+
 
 
 }
