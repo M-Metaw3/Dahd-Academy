@@ -19,7 +19,7 @@
 // const {phone} = require('phone');
 
 
-
+// console.log( phone('+20 01082057733').isValid);
 
 
 
@@ -144,46 +144,46 @@
 //   console.log('Server started on port 3000');
 // })
 
-const express = require('express');
-const path = require('path');
-const app = express();
-const fs = require('fs')
-const cors = require('cors');
+// const express = require('express');
+// const path = require('path');
+// const app = express();
+// const fs = require('fs')
+// const cors = require('cors');
 
-// Set up a route to serve the video file
-app.get('/video', (req, res) => {
-  const videoPath ="D:\\githup\\dahd\\dhad-academy\\server\\images\\197 Section Intro.mp4"
-  const range = req.headers.range;
-  const videoSize = fs.statSync(videoPath).size;
-  const CHUNK_SIZE = 10 ** 6; // 1MB
+// // Set up a route to serve the video file
+// app.get('/video', (req, res) => {
+//   const videoPath ="D:\\githup\\dahd\\dhad-academy\\server\\images\\197 Section Intro.mp4"
+//   const range = req.headers.range;
+//   const videoSize = fs.statSync(videoPath).size;
+//   const CHUNK_SIZE = 10 ** 6; // 1MB
 
-  if (range) {
-    const parts = range.replace(/bytes=/, '').split('-');
-    const start = parseInt(parts[0], 10);
-    const end = parts[1] ? parseInt(parts[1], 10) : videoSize - 1;
-    const contentLength = end - start + 1;
-    const headers = {
-      'Content-Range': `bytes ${start}-${end}/${videoSize}`,
-      'Accept-Ranges': 'bytes',
-      'Content-Length': contentLength,
-      'Content-Type': 'video/mp4',
-      'Access-Control-Allow-Origin': '*',
-    };
-    res.writeHead(206, headers);
-    const videoStream = fs.createReadStream(videoPath, { start, end });
-    videoStream.pipe(res);
-  } else {
-    const headers = {
-      'Content-Length': videoSize,
-      'Content-Type': 'video/mp4',
-      'Access-Control-Allow-Origin': 'example.com',
-    };
-    res.writeHead(200, headers);
-    const videoStream = fs.createReadStream(videoPath);
-    videoStream.pipe(res);
-  }
-});
+//   if (range) {
+//     const parts = range.replace(/bytes=/, '').split('-');
+//     const start = parseInt(parts[0], 10);
+//     const end = parts[1] ? parseInt(parts[1], 10) : videoSize - 1;
+//     const contentLength = end - start + 1;
+//     const headers = {
+//       'Content-Range': `bytes ${start}-${end}/${videoSize}`,
+//       'Accept-Ranges': 'bytes',
+//       'Content-Length': contentLength,
+//       'Content-Type': 'video/mp4',
+//       'Access-Control-Allow-Origin': '*',
+//     };
+//     res.writeHead(206, headers);
+//     const videoStream = fs.createReadStream(videoPath, { start, end });
+//     videoStream.pipe(res);
+//   } else {
+//     const headers = {
+//       'Content-Length': videoSize,
+//       'Content-Type': 'video/mp4',
+//       'Access-Control-Allow-Origin': 'example.com',
+//     };
+//     res.writeHead(200, headers);
+//     const videoStream = fs.createReadStream(videoPath);
+//     videoStream.pipe(res);
+//   }
+// });
 
-app.listen(5000, () => {
-  console.log('Server running on port 5000');
-});
+// app.listen(5000, () => {
+//   console.log('Server running on port 5000');
+// });

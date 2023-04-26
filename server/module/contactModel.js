@@ -17,8 +17,7 @@ const contact = mongoose.Schema({
         type: String,
         required:[true,"the phonenumber is required field"],
         trim: true,
-        minLength:11,
-        maxLength:15,
+      
         lowercase: true
     },
     subject: {
@@ -42,10 +41,10 @@ const contact = mongoose.Schema({
 function validatecontact(obj){
 
 const schema = joi.object({
-name : joi.string().trim().min(3).max(200).required(),
-subject : joi.string().trim().min(30).max(500).required(),
-message : joi.string().trim().min(30).max(500).required(),
-phonenumber :joi.string().trim().min(11).required(),
+name : joi.string().trim().min(3).required(),
+subject : joi.string().trim().min(10).max(500).required(),
+message : joi.string().trim().min(10).max(500).required(),
+phonenumber :joi.string().trim().required(),
 
 });
 return schema.validate(obj);

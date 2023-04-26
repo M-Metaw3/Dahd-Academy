@@ -36,15 +36,15 @@ static getblog = async(req, res) => {
 
 
 
-
+console.log("done")
         const {title,description,details} = req.body;
-   
-// console.log(req.files.image1.path)
-        // const imagePath = req.file.path;
+  //  console.log(req.file.base)
+// console.logreq.files.image1.path
+//         const imagePath = req.files.image1.path
 
-        // const filePath = imagePath;
+//         const filePath = imagePath;
 
-const fileName = path.basename(filePath);
+const fileName = path.basename(req.file.base);
 
              const postBlog= await new blogmodel.addBlog(
      {image:fileName,title:title,description:description,details:details }
