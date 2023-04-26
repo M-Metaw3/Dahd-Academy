@@ -81,7 +81,8 @@ const Instructors = () => {
       setIsAdmin('user');
       setImage('null');
       setUploadProgress(0);
-      setImg(null)
+          setUploadProgress(null);
+          setImg(null)
 
     } catch (error) {
       console.log('Error creating user:', error);

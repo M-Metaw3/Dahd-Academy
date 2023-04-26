@@ -123,9 +123,12 @@ function Contact() {
 
       const data = await response.json();
       console.log(data);
+setFormData({name:"",phonenumber:"",subject:"",message:""})
+
     } catch (error) {
       console.error(error);
     }
+
   };
 
   const handleChange = (event) => {
