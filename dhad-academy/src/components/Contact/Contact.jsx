@@ -156,7 +156,7 @@ function Contact() {
                   <label className="form-label" htmlFor="email">
                   Email 
                   </label>
-                  <input type="tel" id="phone" className="form-control" name="phone" value={formData.phonenumber} onChange={(e)=>setFormData({...formData,phonenumber:e.target.value})} />
+                  <input type="email  " id="phone" className="form-control" name="phone" value={formData.phonenumber} onChange={(e)=>setFormData({...formData,phonenumber:e.target.value})} />
                 </div>
 
                 <div className="col-12 form-group pb-3">
