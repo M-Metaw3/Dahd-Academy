@@ -5,6 +5,7 @@ import { Modal, Row, Col } from "react-bootstrap";
 import './header.css';
 import Login from '../My Profile/login/Login';
 import Register from '../My Profile/Register/Register';
+import { useTranslation, Trans } from 'react-i18next';
 
 
 function Header() {
@@ -32,11 +33,34 @@ function Header() {
     <i className="fa-solid fa-language"></i>
     Languages
     </li>
+{/* <div className="dropdown">
+    <a className="dropdown-toggle" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+    </a>
+
+    <ul className="dropdown-menu" aria-labelledby="Dropdown">
+        <li>
+            <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English <i class="fa fa-check text-success ms-2"></i></a>
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+            <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
+        </li>  
+    </ul>
+</div> */}
+
+
+
     <div className="vr"></div>
 
     <li className='fw-lighter' onClick={handleShow}>
-    <i className="fa-regular fa-user"></i>
-    My Profile
+    {/* <li className='fw-lighter'> */}
+      {/* <NavLink to={"/myprofile"}> */}
+      <i className="fa-regular fa-user"></i>
+      My Profile
+      {/* </NavLink> */}
     </li>
     
 
@@ -49,7 +73,7 @@ function Header() {
         <Container>
             <Row sm={1} lg={2} className=' d-flex align-items-center'> 
             <Col> 
-                <Login/>
+                <Login handleClose={handleClose}/>
             </Col>
             <Col className='bord' >
                 <Register />    

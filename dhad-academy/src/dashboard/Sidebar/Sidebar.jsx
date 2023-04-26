@@ -86,7 +86,7 @@ function Sidebar() {
                     </CDBSidebarFooter>
                 </CDBSidebar>
 
-                <div className=' w-100 px-4 overflow-scroll'>
+                <div className=' w-100 p-4 overflow-scroll'>
                     <Outlet />
                 </div>
             </div>

@@ -18,6 +18,7 @@ import CourseUpdate from '../dashboard/courses/CourseUpdate';
 import Addvideo from '../dashboard/addvideotowebsite/Addvideo';
 import Instructor from '../dashboard/add instructors/Instructors';
 import CourseDetails from '../components/Courses/CourseDetails';
+import MyProfile from '../components/My Profile/MyProfile';
 
 const Roting = () => {
     return (
@@ -36,6 +37,7 @@ const Roting = () => {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/blog" element={<Blog/>} />
         <Route path="/blog/:id" element={<BlogDetails/>} />
+        <Route path="/myprofile" element={<MyProfile/>} />
         <Route path="/admin" element={<Admin/>} >
         <Route path='/admin/contacts' element={<Contacts/>} />
         <Route path='/admin/Blogs' element={<AddBlogs/>} />

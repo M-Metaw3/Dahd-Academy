@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 import actions from '../../../actions/actions'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-function Login() {
+function Login(props) {
   const dispatch = useDispatch()  
 
   const [email, setEmail] = useState('');
@@ -11,15 +11,13 @@ function Login() {
   // const [registration, setregistration] = useState({name:'', email:'',password:''});
 const handleSubmitloggin=(event) => {
   event.preventDefault();
-
+  props.handleClose();
   const loginbody={email,password}
   console.log(loginbody);
   dispatch(actions.loginaction(loginbody))
 
 
 }
-
-
   return (
     <>
         <Container className='py-5'>

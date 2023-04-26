@@ -19,8 +19,6 @@ console.log(selector2);
   return (
     <>
  
-
-
  <div>
       {selector2.length>0?selector2.map(post => (
         <div key={post._id}>
