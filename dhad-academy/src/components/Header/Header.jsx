@@ -9,7 +9,8 @@ import { useTranslation, Trans } from 'react-i18next';
 
 function Header() {
   const [show, setShow] = useState(false);
-
+  const users = JSON.parse(localStorage.getItem("token"))
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -168,12 +169,12 @@ function Header() {
               >
                 Test
                 </NavLink> */}
-                <NavLink
+       {users.isAdmin=="Admin"?         <NavLink
                 to="/admin"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Admin
-                </NavLink>
+                </NavLink>:""}
 
             </Nav>
 

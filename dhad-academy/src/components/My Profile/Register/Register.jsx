@@ -3,6 +3,8 @@ import actions from '../../../actions/actions'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 function Register() {
+  const loginSucceful = useSelector((state)=>state.users)
+  
   const dispatch = useDispatch()  
   const [Show,setShowImage] =useState(null);
   const [name, setName] = useState('');
@@ -11,6 +13,8 @@ function Register() {
   const [conpassword, setconPassword] = useState('');
   const [image, setImage] = useState(null);
   const handleSubmit = async (event) => {
+    
+
     event.preventDefault();
  if(   password!=conpassword ){
   console.log("object");
@@ -65,6 +69,9 @@ function Register() {
 <img src={Show} alt="" />
               <div className="pt-4 col-12">
                 <button type="submit" className="w-100 btn-submit btn px-5">Register</button>
+                <p>{loginSucceful.registrationfail?loginSucceful.registrationfail:""}</p>
+                <p>{loginSucceful.registration?loginSucceful.registration:""}</p>
+
               </div>
               </div>
 

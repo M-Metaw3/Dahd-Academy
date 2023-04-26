@@ -21,6 +21,9 @@ import CourseDetails from '../components/Courses/CourseDetails';
 import MyProfile from '../components/My Profile/MyProfile';
 
 const Roting = () => {
+const users = JSON.parse(localStorage.getItem("token"))
+console.log(users.isAdmin=="user")
+
     return (
         <>      
       <Routes>
@@ -37,7 +40,6 @@ const Roting = () => {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/blog" element={<Blog/>} />
         <Route path="/blog/:id" element={<BlogDetails/>} />
-        <Route path="/myprofile" element={<MyProfile/>} />
         <Route path="/admin" element={<Admin/>} >
         <Route path='/admin/contacts' element={<Contacts/>} />
         <Route path='/admin/Blogs' element={<AddBlogs/>} />
@@ -49,7 +51,9 @@ const Roting = () => {
         
         <Route path="/admin" element={<Contacts/>} />
 
-        </Route>
+        </Route>:
+        <Route path="/test" element={<Test/>} />
+      }
 
       </Routes>
     
