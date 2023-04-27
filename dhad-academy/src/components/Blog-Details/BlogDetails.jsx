@@ -55,7 +55,7 @@ function BlogDetails() {
                             <input type="text" className=" form-control" id="inputPassword2" />
                             </div>
                             <div className=' col-2'>
-                            <button type="submit" className=" btn-submit btn px-5"> post</button>
+                            <button type="submit" className=" btn-submit btn px-5">post</button>
 
                             </div>
                         </form>

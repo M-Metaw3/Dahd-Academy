@@ -76,11 +76,7 @@ function Sidebar() {
                     </CDBSidebarContent>
 
                     <CDBSidebarFooter className=' text-center '>
-                        <div
-                            style={{
-                                padding: '20px 5px',
-                            }}
-                        >
+                        <div className=' px-2 py-3'>
                             Logout
                         </div>
                     </CDBSidebarFooter>

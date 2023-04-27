@@ -4,7 +4,7 @@ import actions from '../../../actions/actions'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-function Login(props) {
+function Login() {
   const dispatch = useDispatch()  
 
 
@@ -18,7 +18,6 @@ function Login(props) {
   // const [registration, setregistration] = useState({name:'', email:'',password:''});
 const handleSubmitloggin=(event) => {
   event.preventDefault();
-  props.handleClose();
   const loginbody={email,password}
   console.log(loginbody);
   dispatch(actions.loginaction(loginbody))

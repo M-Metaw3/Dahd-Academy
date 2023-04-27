@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import actions from '../../actions/actions';
 import  { useEffect, useState } from 'react';
 import moment from "moment"
+import { Container } from 'react-bootstrap';
 
 function Contacts() {
 
@@ -18,8 +19,24 @@ console.log(selector2);
 
   return (
     <>
+ <Container className='py-5 w-75' >
+ {selector2.length>0?selector2.map(post => (
+
+    <div key={post._id}  className=" card m-1 m-lg-4 ">
+            <div className="card-body d-flex row align-items-center">
+            <p>{moment(post.createdAt).fromNow()}</p>
+          <h2>{post.name}</h2>
+          <p>{post.phonenumber}</p>
+          <p>subject: {post.message}</p>
+          <p>message: {post.subject}</p>
+
+            </div>
+          </div>
+             )):<div>no message</div>}
  
- <div>
+
+    </Container>
+ {/* <div>
       {selector2.length>0?selector2.map(post => (
         <div key={post._id}>
           <p>{moment(post.createdAt).fromNow()}</p>
@@ -32,7 +49,7 @@ console.log(selector2);
         
         </div>
       )):<div>no message</div>}
-    </div>
+    </div> */}
   
 
     

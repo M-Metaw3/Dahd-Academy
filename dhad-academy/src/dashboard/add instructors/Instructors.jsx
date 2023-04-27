@@ -79,7 +79,7 @@ const Instructors = () => {
       setEmail('');
       setPassword('');
       setIsAdmin('user');
-      setImage('null');
+      setImage(null);
       setUploadProgress(0);
           setUploadProgress(null);
           setImg(null)
@@ -140,6 +140,7 @@ setImg(null)
   };
 
   return (
+    <>
     <Container className='py-5'>
     <div className='w-50 m-auto'>
             <h2>Create User</h2>
@@ -169,20 +170,18 @@ setImg(null)
           <label>Image:</label>
           <input className="form-control-file" type="file" onChange={handleImageChange} />
           <img src={img} width={200} />
-
         </div>
         {uploadProgress > 0 && (
-  <progress value={uploadProgress} max="100" />
-)}
+          <progress value={uploadProgress} max="100" />
+        )}
               <div className="pt-4 col-12">
-
         <button type="submit" className='w-100 btn-submit btn px-5'>Create</button>
         </div>
       </div>
       </form>
 
       <h2>Users</h2>
-      <table>
+      {/* <table>
         <thead>
           <tr>
             <th>ID</th>
@@ -208,7 +207,7 @@ setImg(null)
             </tr>
           )):''}
         </tbody>
-      </table>
+      </table> */}
 
       {selectedUser && (
         <div>
@@ -247,7 +246,37 @@ setImg(null)
         </div>
       )}
     </div>
+    
     </Container>
+    <Container className='py-5'>
+    {users?users.map((user) => (
+
+    <div className="card m-1 m-lg-4">
+            <div className="card-body d-flex row align-items-center">
+              <div className='col-1 text-center'>
+                {/* <i className=" w-50 fa-regular fa-circle-user fa-2xl"></i> */}
+                <img src={`http://localhost:5000/${user.image}`} alt="img" className=' rounded-circle' width={70} height={70} />
+              </div>
+
+              <div className='col-5 d-flex flex-column'>
+                <span>{user.usernam}</span>
+                <span>{user.email}</span>
+              </div>
+              <div className='col-2 text-center border-end border-start'>
+              <span>{user.isAdmin}</span>
+              </div>
+
+              <div className='col-4 d-flex justify-content-evenly'>
+              <button onClick={() => handleSelectUser(user)} className='btn border-0 text-decoration-underline fs-5' >Edit</button>
+              <button onClick={() => handleDeleteUser(user._id)} className='btn border-0 text-decoration-underline fs-5'>Delete</button>
+              </div>
+            </div>
+          </div>
+       )):''} 
+
+    </Container>
+    </>
+    
   );
 };
 
