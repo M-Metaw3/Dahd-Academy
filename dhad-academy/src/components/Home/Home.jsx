@@ -47,7 +47,7 @@ const Home = () => {
     //     dispatch({type:"getAllTeacher"})
     //   }, []);
 
-    console.log(selector2.teachers);
+   
     return (
         <>
             <section className="position-relative text-center">

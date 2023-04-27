@@ -26,6 +26,7 @@ static getblog = async(req, res) => {
   static postblog = async(req, res) => {
 
 
+    console.log("done")
     try {
 
         const {error}= blogmodel.validateaddBlog(req.body)
@@ -36,15 +37,16 @@ static getblog = async(req, res) => {
 
 
 
-console.log("done")
         const {title,description,details} = req.body;
+        console.log(req.file)
   //  console.log(req.file.base)
 // console.logreq.files.image1.path
-//         const imagePath = req.files.image1.path
+        const imagePath = req.file.path
 
-//         const filePath = imagePath;
+        const filePath = imagePath;
 
-const fileName = path.basename(req.file.base);
+const fileName = path.basename(filePath);
+console.log(fileName)
 
              const postBlog= await new blogmodel.addBlog(
      {image:fileName,title:title,description:description,details:details }
@@ -76,13 +78,14 @@ const fileName = path.basename(req.file.base);
         if(!deleteblog){
           return response(res,400,"blog not found to deleted") 
         }
+       if(deleteblog.image){
         await   fs.unlink(path.join(__dirname,`../images/${deleteblog.image}`), (err => {
             if (err)  return response(res,400,"error occured when try to delete file","",err) ;
             else {
                 
-              return  response(res,200,"blog deleted successfully",{deleteVideo},"") 
+              return  response(res,200,"blog deleted successfully",{deleteblog},"") 
             }
-        }));
+        }))};
         
     } catch (error) {
         return response(res,400,"error occured",error) 

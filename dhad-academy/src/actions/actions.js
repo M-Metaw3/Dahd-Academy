@@ -115,17 +115,18 @@ const getALLcontact = ()=>async(dispatch)=>{
         console.log(body)
         try {
           
-          await api.addblogapi(body) .then((response) => response.json())
-       .then((data) => {
+          await api.addblogapi(body) .then((response) => console.log(response))
+//        .then((data) => {
          
    
-console.log(data)
-        if(data.body){
-          dispatch({type:'add blod successefully',payload:data})
-        }
-        if(data.error)
-        dispatch({type:'error' ,payload:data.error})
-       }).catch((error)=>  dispatch({type:'error' ,payload:error.message}))
+// console.log(data)
+//         if(data.body){
+//           dispatch({type:'add blod successefully',payload:data})
+//         }
+//         if(data.error)
+//         dispatch({type:'error' ,payload:data.error})
+//        }
+.catch((error)=>  dispatch({type:'error' ,payload:error.message}))
         } catch (error) {
           
         }
