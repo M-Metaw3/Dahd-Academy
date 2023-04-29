@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import  i18n  from 'i18next';
 import { useNavigate } from 'react-router-dom';
 
-function Login(props) {
+function Login() {
   const dispatch = useDispatch()  
 
 
@@ -25,7 +25,7 @@ const handleSubmitloggin=(event) => {
   const loginbody={email,password}
   console.log(loginbody);
   dispatch(actions.loginaction(loginbody))
-  props.handleClose();
+  // props.handleClose();
 
   // nav("/home")
 

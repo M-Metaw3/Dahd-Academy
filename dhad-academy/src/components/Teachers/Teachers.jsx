@@ -1,37 +1,47 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CommonSection from '../Common-section/CommonSection';
 import teachers from "../../assets/images/teachers.png"
 import { Col, Container, Row } from 'react-bootstrap';
 import Instructor from '../Instructor/Instructor';
 import instructor from "../../assets/images/image 5.png"
 import "./teachers.css";
+import axios from 'axios';
+import {apihttp} from "../../api/api"
 function Teachers() {
     useEffect(() => {
         document.title ="Teachers";  
       }, []);
+      const [instructors, setInstructors] = useState([]);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    try {
+      const response = await axios.get(`${apihttp}userRegistration`,   {   headers: {
+        // 'Content-Type': 'multipart/form-data',
+        // "Authorization": `Bearer ${token.token}`,
+
+      }});
+      setInstructors(response.data.body);
+      
+    } catch (error) {
+      console.log('Error getting users:', error);
+    }
+  };
   return (
     <>
       <CommonSection title="INSTRUCTORS" img={`${teachers}`} />
       <Container className='py-5'>
         <Row xs={2} lg={3} className=''>
-          <Col>
-            <Instructor name="nada" img={`${instructor}`} position="Instructor" />
+        {instructors?instructors.map((instructor) => (
+            
+          <Col key={instructor._id}>
+            <Instructor name={instructor.usernam} img={`${apihttp}${instructor.image}`} position={instructor.isAdmin} />
           </Col>
-          <Col>
-            <Instructor name="nada" img={`${instructor}`} position="Instructor" />
-          </Col>
-          <Col>
-            <Instructor name="nada" img={`${instructor}`} position="Instructor" />
-          </Col>
-          <Col>
-            <Instructor name="nada" img={`${instructor}`} position="Instructor" />
-          </Col>
-          <Col>
-            <Instructor name="nada" img={`${instructor}`} position="Instructor" />
-          </Col>
-          <Col>
-            <Instructor name="nada" img={`${instructor}`} position="Instructor" />
-          </Col>
+             )):''} 
+
         </Row>
 
       </Container>

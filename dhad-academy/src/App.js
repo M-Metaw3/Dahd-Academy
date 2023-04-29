@@ -3,7 +3,6 @@ import { Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Roting from './routing/Roting';
-import RoutesDashboard from './dashboard/Routes/RoutesDashboard';
 
 import { useEffect,useState  } from "react";
 
@@ -22,11 +21,15 @@ const token = JSON.parse(localStorage.getItem("token"))
 
 console.log(token)
   return (
+    <>
   <div className="App">
   <Header/>
   <Roting/>
   <Footer/>
     </div>
+    
+    </>
+  
   );
 }
 

@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import CommonSection from '../Common-section/CommonSection';
 import blog from "../../assets/images/blog.png"
 import { Container } from 'react-bootstrap';
-// import ReactPaginate from 'react-paginate';
-import Pagination from 'react-bootstrap/Pagination'
-// import Pagination from "react-pagination-js";
-// import "react-pagination-js/dist/styles.css"; 
+import { apihttp } from "../../api/api"
+
 import "./blog.css"
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 
 function Blog() {
@@ -28,100 +27,45 @@ function Blog() {
     };
 
 
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+      fetchBlogs();
+    }, []);
+  
+    const fetchBlogs = async () => {
+      const { data } = await axios.get(`${apihttp}blog`);
+      setBlogs(data.body);
+    };
 
 
     return (
         <>
             <CommonSection title="BLOG" img={`${blog}`} />
             <Container className='py-5'>
-                <div className="row d-flex justify-content-center">
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
+                <div className="row d-flex  justify-content-center justify-content-md-start">
+                {blogs.map((blog) => (
+
+                    <div className="col-10 col-sm-7 col-md-6 col-lg-4 pb-5">
                         <div className="card rounded-20">
-                            <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
+                            
+                            <img src={`${apihttp}${blog.image}`} className="rounded-img-top" height={"320"} alt="..." />
                             <div className="card-body">
                                 <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <NavLink to={"/blog/1"} className='text-decoration-none '>
+                                <h6 className="card-text">{blog.title} </h6>
+                                <NavLink to={`/blog/${blog.id}`} className='text-decoration-none '>
                                     Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i>
                                 </NavLink>
                             </div>
                         </div>
+
                     </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                        <div className="card rounded-20">
-                            <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                        <div className="card rounded-20">
-                            <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                        <div className="card rounded-20">
-                            <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                        <div className="card rounded-20">
-                            <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                        <div className="card rounded-20">
-                            <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none'>Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                              ))}
+                                       
 
                 </div>
 
                 <div className='d-flex justify-content-center align-items-center'>
-                    {/* <p
-              className={isActive ? "active-circle d-flex justify-content-center align-items-center pagination-circle" :"d-flex justify-content-center align-items-center pagination-circle" }
-              onClick={handleClick}>1</p>
-                <p 
-              className={isActive ? "active-circle d-flex justify-content-center align-items-center pagination-circle" :"d-flex justify-content-center align-items-center pagination-circle" }
-              onClick={handleClick} >2</p>
-                <p
-              className={isActive ? "active-circle d-flex justify-content-center align-items-center pagination-circle" :" d-flex justify-content-center align-items-center pagination-circle" }
-              onClick={handleClick} >3</p> */}
                     {list.map((item, index) => {
                         return (
                             <p
@@ -129,7 +73,6 @@ function Blog() {
                                 onClick={() => handleClick(index)}
                                 className="d-flex justify-content-center align-items-center pagination-circle"
                             >
-
                                 {item}
                             </p>
                         )

@@ -6,18 +6,19 @@ import './header.css';
 import Login from '../My Profile/login/Login';
 import Register from '../My Profile/Register/Register';
 import { useTranslation, Trans } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { i18n } from 'i18next';
+import i18n  from 'i18next';
 import i18next from 'i18next';
 
 function Header() {
   const [show, setShow] = useState(false);
   const users = JSON.parse(localStorage.getItem("token"))
-  const nav = useNavigate()
 
   // const isAdmin = props.user?.isAdmin ?? false;  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [ t, i18n]=useTranslation();  
+
   return (
     <>
     <nav className=" d-none d-xl-block navbar navbar-expand top-nav px-xl-5 ">
@@ -49,14 +50,17 @@ function Header() {
               </NavDropdown> */}
     <div className="vr"></div>
 
-    <li className='fw-lighter' onClick={handleShow}>
-    {/* <li className='fw-lighter'> */}
-      {/* <NavLink to={"/myprofile"}> */}
+    {/* <li className='fw-lighter' onClick={handleShow}> */}
+    <li className='fw-lighter'>
+      <NavLink to={"/myprofile"} className=" text-decoration-none">
       <i className="fa-regular fa-user"></i>
       My Profile
-      {/* </NavLink> */}
+      </NavLink>
     </li>
-    
+    <li className='fw-lighter'>
+      <i className="fa-solid fa-arrow-right-from-bracket"></i>
+      Logout
+    </li>
 
     </ul>
 

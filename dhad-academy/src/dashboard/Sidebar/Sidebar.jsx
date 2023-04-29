@@ -35,14 +35,10 @@ function Sidebar() {
                             </NavLink>
                             <NavLink exact="true" to="admin/instructors" activeclassname="activeClicked">
                                 <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-user"}>
-                                  instructor
+                                  Users
                                 </CDBSidebarMenuItem>
                             </NavLink>
-                            <NavLink exact="true" to="/Instractors" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-user"}>
-                                    Instractors
-                                </CDBSidebarMenuItem>
-                            </NavLink>
+                           
                             <NavLink exact="true" to="/Courses" activeclassname="activeClicked">
                                 <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
                                     Courses

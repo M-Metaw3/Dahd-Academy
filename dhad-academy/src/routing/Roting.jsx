@@ -16,7 +16,7 @@ import AddCourses from '../dashboard/courses/AddCourses';
 import CourseList from '../dashboard/courses/CourseList';
 import CourseUpdate from '../dashboard/courses/CourseUpdate';
 import Addvideo from '../dashboard/addvideotowebsite/Addvideo';
-import Instructor from '../dashboard/add instructors/Instructors';
+import Instructor from '../dashboard/Instructors/Instructors';
 import CourseDetails from '../components/Courses/CourseDetails';
 import MyProfile from '../components/My Profile/MyProfile';
 
@@ -42,6 +42,8 @@ const users = JSON.parse(localStorage.getItem("token"))
         <Route path="/contact" element={<Contact/>} />
         <Route path="/blog" element={<Blog/>} />
         <Route path="/blog/:id" element={<BlogDetails/>} />
+        <Route path="/myprofile" element={<MyProfile/>} />
+
         {users.isAdmin=="Admin"?   <Route path="/admin" element={<Admin/>} >
         <Route path='/admin/contacts' element={<Contacts/>} />
         <Route path='/admin/Blogs' element={<AddBlogs/>} />
@@ -51,7 +53,7 @@ const users = JSON.parse(localStorage.getItem("token"))
         <Route path='admin/addvideo' element={<Addvideo/>} />
         <Route path='admin/instructors' element={<Instructor/>} />
         
-        <Route path="/admin" element={<Contacts/>} />
+        <Route path="/admin" element={<Instructor/>} />
 
         </Route>:
         <Route path="/blog" element={<Test/>} />
