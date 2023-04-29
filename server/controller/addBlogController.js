@@ -10,12 +10,28 @@ class Blog {
 
 static getblog = async(req, res) => {
     try {
+      
  const getallblog=  await       blogmodel.addBlog.find().populate('comment')
             .sort({ createdAt: -1 })
         return    response(res,200,"get All Blogs succefully",getallblog)
 
       } catch (error) {
         return  response(res,400,"get All Blogs failed",'',error.message)
+          
+      }
+      
+ 
+  };
+  static getoneblog = async(req, res) => {
+const id = req.params.id
+
+    try {
+ const getallblog=  await blogmodel.addBlog.findById({_id:id}).populate('comment')
+            .sort({ createdAt: -1 })
+        return    response(res,200,"get  Blog succefully",getallblog)
+
+      } catch (error) {
+        return  response(res,400,"get  Blogs failed",'',error.message)
           
       }
       
@@ -129,7 +145,7 @@ console.log(fileName)
 
 static comment = async(req, res) => {
 
-
+console.log(req.body)
   try {
 
       const {error}= commentmodel.validateaddcomment(req.body)
@@ -143,12 +159,13 @@ static comment = async(req, res) => {
 
       const {text} = req.body;
       const {id} = req.params;
+      console.log(req.user)
 
  
 
     
            const comment= await new commentmodel.addcomment(
-   {text:text ,blogId:id,userid:"643e19fff47d4fc23774dc19",username:"metawea"}
+   {text:text ,blogId:id,userid:req.user.id,username:req.user.usernam,image:req.user.image}
 
            )
            

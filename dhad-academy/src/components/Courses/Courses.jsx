@@ -9,6 +9,7 @@ function Courses() {
     document.title ="Courses";  
   }, []);
   const {name}=useParams();
+//   console.log(name);
    
   return (
     <>

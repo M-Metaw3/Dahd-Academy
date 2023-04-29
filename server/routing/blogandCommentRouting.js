@@ -53,8 +53,10 @@ var upload = multer({ storage: storage }).single('image');
 router.post('/addblog', upload
 ,blog.postblog);
 
-router.post('/comment/:id', blog.comment);
+router.post('/comment/:id',auth.isUser, blog.comment);
 router.get('/', blog.getblog);
+router.get('/:id', blog.getoneblog);
+
 router.delete('/:id', blog.deleteplog);
 
 
