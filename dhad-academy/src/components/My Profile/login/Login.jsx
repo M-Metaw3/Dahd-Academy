@@ -3,8 +3,10 @@ import { Container } from 'react-bootstrap'
 import actions from '../../../actions/actions'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import  i18n  from 'i18next';
 import { useNavigate } from 'react-router-dom';
-function Login() {
+
+function Login(props) {
   const dispatch = useDispatch()  
 
 
@@ -13,6 +15,8 @@ function Login() {
     //   props.handleClose();
   
     // }
+  const nav = useNavigate()
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // const [registration, setregistration] = useState({name:'', email:'',password:''});
@@ -21,7 +25,9 @@ const handleSubmitloggin=(event) => {
   const loginbody={email,password}
   console.log(loginbody);
   dispatch(actions.loginaction(loginbody))
+  props.handleClose();
 
+  // nav("/home")
 
 
 }

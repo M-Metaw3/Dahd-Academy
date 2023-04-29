@@ -49,24 +49,12 @@ var upload = multer({ storage: storage }).single('image');
 // ]);
 
 // Example route that uploads two images
-router.post('/addblog', 
-// (req, res, next) => {
-//   upload(req, res, function (err) {
-//     if (err instanceof multer.MulterError) {
-//       // A Multer error occurred when uploading.
-//     return  res.status(400).json({ message: 'File upload error' });
-//     } else if (err) {
-//       // An unknown error occurred when uploading.
-//       return res.status(500).json({ message: 'Server error' });
-//     } else {
-//       // Everything went fine.
-//       next();
-//     }
-//   });
-// }
-upload,blog.postblog);
+router.post('/addblog', upload
+,blog.postblog);
 
 router.post('/comment/:id', blog.comment);
 router.get('/', blog.getblog);
+router.delete('/:id', blog.deleteplog);
+
 
 module.exports = router;

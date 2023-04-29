@@ -54,7 +54,7 @@ response(res,400,"error occured",error)
 static getContactMessages =async(req,res)=>{
 
 
-    console.log("getContactMessages")
+  
     try {
 
         const getContact= await contactmodel.contactModel.find();

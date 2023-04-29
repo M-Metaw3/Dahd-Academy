@@ -102,6 +102,8 @@ return   response(res,200,"loggin successfully",{...other,token},"")
     static getallusers =async (req,res) => {
 
 try {
+  console.log(req.headers.authorization)
+  console.log("donw")
    const users= await userModel.User.find().select({password:0})
 
    return response(res,200,"users get succefully",users)
