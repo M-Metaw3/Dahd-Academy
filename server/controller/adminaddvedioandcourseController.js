@@ -363,6 +363,8 @@ static getallvideo = async (req, res) => {
   
     try {
       const getVideo = await videomodel.addVideose.find();
+     
+      
  
       const videoPath = path.join(__dirname, `../images/${getVideo[0].video}`);
 
@@ -392,6 +394,54 @@ static getallvideo = async (req, res) => {
     }
   };
 
+
+
+
+// static getAllVideo = async (req, res) => {
+//   try {
+//     const getVideoPath = (videoName) => {
+//       return path.join(__dirname, `../images/${videoName}`);
+//     };
+    
+//     const getRange = (rangeHeader, videoSize) => {
+//       const CHUNK_SIZE = 10 ** 6; // 1MB
+//       const parts = rangeHeader.replace(/bytes=/, '').split('-');
+//       const start = parseInt(parts[0], 10);
+//       const end = parts[1] ? parseInt(parts[1], 10) : videoSize - 1;
+//       const contentLength = end - start + 1;
+//       return { start, end, contentLength };
+//     };
+//     const getVideo = await videomodel.addVideose.find();
+//     const videoPath = getVideoPath(getVideo[0].video);
+//     const rangeHeader = req.headers.range;
+//     const videoSize = fs.statSync(videoPath).size;
+
+//     if (rangeHeader) {
+//       const { start, end, contentLength } = getRange(rangeHeader, videoSize);
+//       const headers = {
+//         'Content-Range': `bytes ${start}-${end}/${videoSize}`,
+//         'Accept-Ranges': 'bytes',
+//         'Content-Length': contentLength,
+//         'Content-Type': 'video/mp4',
+//         'Access-Control-Allow-Origin': '*',
+//       };
+//       res.writeHead(206, headers);
+//       const videoStream = fs.createReadStream(videoPath, { start, end });
+//       videoStream.pipe(res);
+//     } else {
+//       const headers = {
+//         'Content-Length': videoSize,
+//         'Content-Type': 'video/mp4',
+//         'Access-Control-Allow-Origin': '*',
+//       };
+//       res.writeHead(200, headers);
+//       const videoStream = fs.createReadStream(videoPath);
+//       videoStream.pipe(res);
+//     }
+//   } catch (error) {
+//     response(res, 400, "error occured", error);
+//   }
+// };
 
 
 

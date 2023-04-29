@@ -2307,3 +2307,46 @@
 //       )}
 //     </div>
 //   );
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+// const Test = () => {
+//   const [startByte, setStartByte] = useState(0);
+//   const [endByte, setEndByte] = useState(1000000);
+//   const [videoUrl, setVideoUrl] = useState('');
+
+//   const handleNextPage = () => {
+//     setStartByte(endByte + 1);
+//     setEndByte(endByte + 1000000);
+//   };
+
+//   const fetchVideo = async () => {
+//     try {
+//       const headers = { Range: `bytes=${startByte}-${endByte}` };
+//       const response = await axios.get('http://localhost:5000/video/getVideo', { headers, responseType: 'blob' });
+//       const videoUrl = URL.createObjectURL(response.data);
+//       setVideoUrl(videoUrl);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchVideo();
+//   }, [startByte, endByte]);
+
+//   return (
+//     <div>
+//       <video controls>
+//         <source src={videoUrl} type="video/mp4" />
+//       </video>
+//       <button onClick={handleNextPage}>Next Page</button>
+//     </div>
+//   );
+// };
+
+// export default Test;
