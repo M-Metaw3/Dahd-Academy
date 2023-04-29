@@ -22,6 +22,12 @@ const commentModel = mongoose.Schema({
         trim: true,
       
     },
+    image: {
+        type: String,
+     
+        trim: true,
+      
+    },
     username: {
         type: String,
         trim: true,
