@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap'
 import actions from '../../../actions/actions'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import  i18n  from 'i18next';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {

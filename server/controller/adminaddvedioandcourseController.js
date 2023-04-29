@@ -11,82 +11,204 @@ class admainController {
 
 
 static addCourse =async (req,res) => {
-    console.log("addCourse")
-    console.log(req.body)
-   const {title,description,link}=req.body
-   const {error}= coursemodel.validateaddcourse(req.body)
-   if (error) { 
-    return   response(res,400,"Invalid Data Please Enter Valide Data","",error.details[0].message)
- }
- if (!req.file) { 
-    return   response(res,400,'',"please uploade an image")
- }
 
 
- try {
+console.log(req.body)
+console.log('req.body')
 
-    const postCourse= await new coursemodel.addCourse({title:title,description:description,link:link,image:req.file.originalname})
 
-    await postCourse.save();
 
-    response(res,201,"course created successfully",{postCourse},"") 
- } catch (error) {
-    response(res,400,"course created successfully","",error)
- }
+
+
+
+
+    try {
+        const { error } = coursemodel.validateaddcourse(req.body);
+        if (error) {
+          return res.status(400).send(error.details[0].message);
+        }
+        const imagePath = req.file.path
+
+        const filePath = imagePath;
+
+const fileName = path.basename(filePath);
+    
+        const course = new coursemodel.addCourse({
+          title: req.body.title,
+          lessons: req.body.lessons || [],
+          image: req.file ? fileName : '',
+          courseName: req.body.courseName,
+          coursesDepartment: req.body.coursesDepartment,
+          price: req.body.price,
+          hours: req.body.hours,
+        });
+    
+        await course.save();
+    
+        res.send(course);
+      } catch (error) {
+        console.error(error.message);
+        res.status(500).send(error.message);
+      }
+
+
+
+
+
+
+
+
+
+//     console.log("addCourse")
+//     console.log(req.body)
+//    const {title,description,link}=req.body
+//    const {error}= coursemodel.validateaddcourse(req.body)
+//    if (error) { 
+//     return   response(res,400,"Invalid Data Please Enter Valide Data","",error.details[0].message)
+//  }
+//  if (!req.file) { 
+//     return   response(res,400,'',"please uploade an image")
+//  }
+
+
+//  try {
+
+//     const postCourse= await new coursemodel.addCourse({title:title,description:description,link:link,image:req.file.originalname})
+
+//     await postCourse.save();
+
+//     response(res,201,"course created successfully",{postCourse},"") 
+//  } catch (error) {
+//     response(res,400,"course created successfully","",error)
+//  }
 
 }
 
 //////////////////////////////////////////////////////////
 static getallCourse =async (req,res) => {
+
+
+
+
+
+
+console.log("getallCourse")
+
+
     try {
-    console.log("getallCourse")
+        const courses = await coursemodel.addCourse.find();
+        res.send(courses);
+      } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+      }
+    
+//     try {
+//     console.log("getallCourse")
 
-const getCourse= await coursemodel.addCourse.find();
-console.log(getCourse)
-response(res,200,"get all posts successfully",{getCourse},"") 
+// const getCourse= await coursemodel.addCourse.find();
+// console.log(getCourse)
+// response(res,200,"get all posts successfully",{getCourse},"") 
 
     
-} catch (error) {
+// } catch (error) {
 
-response(res,400,"error occured",error) 
+// response(res,400,"error occured",error) 
 
     
-}
+// }
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 static updateCourse =async (req,res) => {
+
+
+
+    // try {
+    //     const { error } = validateaddcourse(req.body);
+    //     if (error) {
+    //       return res.status(400).send(error.details[0].message);
+    //     }
+    
+    //     const course = await addCourse.findById(req.params.id);
+    //     if (!course) {
+    //       return res.status(404).send('Course not found');
+    //     }
+    
+    //     course.title = req.body.title;
+    //     course.lessons = req.body.lessons || course.lessons;
+    //     course.image = req.file ? req.file.filename : course.image;
+    //     course.courseName = req.body.courseName;
+    //     course.coursesDepartment = req.body.coursesDepartment;
+    //     course.price = req.body.price;
+    //     course.hours = req.body.hours;
+    
+    //     await course.save();
+    
+    //     res.send(course);
+    //   } catch (error) {
+    //     console.error(error.message);
+    //     if (error.kind === 'ObjectId') {
+    //       return res.status(404).send('Course not found');
+    //     }
+    //     res.status(500).send('Server Error');
+    //   }
+
+
+
+
+
+
+
+
+
+
+
+
   console.log("updateCourse")
 
 const {id} = req.params
-const {title,description,link}=req.body
-    if(req.file){
-    try {
+console.log(req.body)
 
+const title = req.body.title;
+const courseName = req.body.courseName;
+const coursesDepartment = req.body.coursesDepartment;
+const price = req.body.price;
+const hours = req.body.hours;
+
+if(req.file){
+    try {
+        
         const getCourse= await coursemodel.addCourse.findById({_id:id});
-console.log(getCourse.image)
-       fs.unlink(path.join(__dirname,`../images/startup-g3174bf914_1920.jpg`), (err => {
+
+        console.log(getCourse.image)
+       fs.unlink(path.join(__dirname,`../images/${getCourse.image}`), (err => {
             if (err) console.log(err);
             else {
-              console.log("Deleted file: example_file.txt");
+                console.log("Deleted file: example_file.txt");
             }
-          }));
+        }));
+      
 
 
         
     } catch (error) {
-response(res,400,"error occured",'',error) 
+response(res,400,"error occured",'',error.message) 
         
     }
+    const imagePath = req.file.path   
+    const filePath = imagePath;
+    const fileName = path.basename(filePath);
+    const image =  fileName ;
     
-             
+    const updateCourse= await coursemodel.addCourse.findByIdAndUpdate(id,{title:title,lessons:lessons,image:image,courseName:courseName,coursesDepartment:coursesDepartment,price:price,hours:hours},{new:true});         
     }
 
 try {
+    const lessons = req.body.lessons;
 
- 
-const updateCourse= await coursemodel.addCourse.findByIdAndUpdate(id,{title:title,description:description,link:link,image:req.file.originalname},{new:true});
-
+const updateCourse= await coursemodel.addCourse.findByIdAndUpdate(id,{title:title,lessons:lessons,courseName:courseName,coursesDepartment:coursesDepartment,price:price,hours:hours},{new:true});
+console.log(updateCourse)
 response(res,201,"course updated successfully",{updateCourse},"") 
 
     
@@ -115,9 +237,6 @@ console.log("deleteCourse")
                 return response(res,200,"course deleted successfully",{deletecourse},"") 
             }
           }));
-
-
-
         
     } catch (error) {
 response(res,400,"error occured",error) 
@@ -126,6 +245,70 @@ response(res,400,"error occured",error)
   
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
+static addlesson=async (req, res) => {
+    try {
+
+        console.log("addlesson")
+      const course = await coursemodel.addCourse.findById(req.params.id);
+      if (!course) {
+        return res.status(404).send('Course not found');
+      }
+  console.log(course)
+      const lesson = {
+        name: req.body.name,
+        pdf: req.file ? req.file.filename : '',
+        video: req.body.video,
+        meeting: req.body.meeting,
+      };
+  
+      course.lessons.push(lesson);
+  
+      await course.save();
+  
+      return response(res,200,"lesson added successfully",{course},"") 
+      
+    } catch (error) {
+      console.error(error.message);
+      if (error.kind === 'ObjectId') {
+        return res.status(404).send('Course not found');
+      }
+      res.status(500).send('Server Error');
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -157,41 +340,6 @@ static addvideo =async (req,res) => {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-// static getallvideo =async (req,res) => {
-
-
-
-
-//     console.log("getallvideo")
-//     try {
-    
-//     const getVideo= await videomodel.addVideose.find();
-// console.log(getVideo)
-// // ${getVideo[0].video}
-//         // const { filename } = req.params;
-//         const videoPath =  path.join(__dirname,`../images/37.Node JS API _  #37 - Pagination.mp4`);
-//         console.log(videoPath)
-
-//         const videoStream = fs.createReadStream(videoPath);
-//         res.setHeader('Content-Type', 'video/mp4');
-//         videoStream.pipe(response);
- 
-    
-//     response(res,200,"get all posts successfully",{getVideo},"") 
-    
-        
-//     } catch (error) {
-    
-//     response(res,400,"error occured",error) 
-    
-        
-//     }
-
-
-  
-// }
-
-
 
 
 
@@ -220,10 +368,7 @@ static getallvideo = async (req, res) => {
     'Content-Type': 'video/mp4',
     'Access-Control-Allow-Origin': '*',
   };
-  // const videoId = getVideo[0]._id; // Get the ID of the video
-  // res.setHeader('Video-ID', videoId); // Set the Video-ID header
-  // res.writeHead(206, headers);
- 
+
   res.writeHead(206, headers);
   const videoStream = fs.createReadStream(videoPath, { start, end });
   videoStream.pipe(res);

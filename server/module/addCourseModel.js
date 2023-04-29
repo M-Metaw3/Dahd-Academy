@@ -3,44 +3,78 @@ const validator = require('validator')
 const joi = require('joi')
 var jwt = require('jsonwebtoken');
 
-const addCourseModel = mongoose.Schema({
-    title: {
-        type:String,
-        required:[true,"enter your name please"],
-        trim: true,
-        minLength:10,
-        maxLength:200,
-        
-    },
-    description: {
-        type: String,
-        required:[true,"the discription is required field"],
-        trim: true,
-        lowercase: true
-    },
-    link: {
-        type: String,
-        trim: true,
-        required: [true, 'the link youtube is required field']
-    },
-    
-    image: {
+
+const lessonSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  pdf: {
+    type: String,
+    required: true,
+  },
+  video: {
+    type: String,
+    required: true,
+  },
+  meeting: {
+    type: String,
+    required: true,
+  },
+});
+
+const courseSchema = new mongoose.Schema({
+    title : {
+    type: String,
+    required: true,
+  },
+
+
+  lessons: [lessonSchema],
+
+ image: {
         type: String,
         trim: true,
         default:''
     },
-
-
-},{timestamps:true})
+ courseName: {
+        type: String,
+        required:[true,"the courseName is required field"],
+        trim: true,
+        lowercase: true
+    },
+    coursesDepartment: {
+        type: String,
+        enum:['arabic', 'quran and readings','islamic studies','qualifying courses','crafts and Skills','field tourism'],
+        required:[true,"the coursedepartment is required field"],
+        trim: true,
+        lowercase: true
+    },
+    price: {
+        type: String,
+        required:[true,"the price is required field"],
+        trim: true,
+        lowercase: true
+    },
+    hours: {
+        type: String,
+        required:[true,"the price is required field"],
+        trim: true,
+        lowercase: true
+    },
+    
+},{timestamps:true});
 
 
 function validateaddcourse (obj){
 
 const schema = joi.object({
-title : joi.string().trim().min(10).max(200).required(),
-description :joi.string().trim().min(15).required(),
-link :joi.string().trim().min(15).required(),
-// image :joi.string().trim().required(),
+    coursesDepartment : joi.string().trim().required(),
+courseName :joi.string().trim().min(15).required(),
+title :joi.string().trim().required(),
+price :joi.string().trim().required(),
+hours :joi.string().trim().required(),
+
 
 });
 return schema.validate(obj);
@@ -49,11 +83,5 @@ return schema.validate(obj);
 
 
 
-
-
-
-
-
-
-const addCourse = mongoose.model('addCourse', addCourseModel)
+const addCourse = mongoose.model('addCourse', courseSchema)
 module.exports = {addCourse,validateaddcourse}

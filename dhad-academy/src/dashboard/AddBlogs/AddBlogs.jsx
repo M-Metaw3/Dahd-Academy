@@ -109,6 +109,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from "moment"
@@ -260,7 +274,6 @@ const AddBlogs = () => {
       {blogs.map((blog) => (
         <div className="card mb-3" key={blog._id}>
           <p>{moment(blog.createdAt).fromNow()}</p>
-          <p>{blog.createdAt}</p>
           <div className="card-body">
             <h5 className="card-title">title : {blog.title}</h5>
             <p className="card-text">Description : {blog.description}</p>
@@ -287,23 +300,6 @@ const AddBlogs = () => {
 };
 
 export default AddBlogs;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

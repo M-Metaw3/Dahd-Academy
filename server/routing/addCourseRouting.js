@@ -49,21 +49,22 @@ const auth=require("../midleware/authentication");
 //       next();
 //     }
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.join(__dirname,'../images'))
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname)
-    },
-}
-  );
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname,'../images'));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
   
   var upload = multer({ storage: storage }).single('image');
 
-router.post('/addCourse', auth.isAdmin, upload,admin.addCourse)
+router.post('/addCourse', upload,admin.addCourse)
+router.post('/:id/lessons', upload,admin.addlesson)
+
 router.get('/getCourse',admin.getallCourse)
-router.patch('/updateCourse/:id',upload,admin.updateCourse)
+router.put('/updateCourse/:id',upload,admin.updateCourse)
 router.delete('/deleteCourse/:id',admin.deleteCourse)
 
 

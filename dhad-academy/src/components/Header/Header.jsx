@@ -6,8 +6,9 @@ import './header.css';
 import Login from '../My Profile/login/Login';
 import Register from '../My Profile/Register/Register';
 import { useTranslation, Trans } from 'react-i18next';
-import i18n  from 'i18next';
-import i18next from 'i18next';
+import { useNavigate } from 'react-router-dom';
+import  i18n  from 'i18next';
+// import i18next from 'i18next';
 
 function Header() {
   const [show, setShow] = useState(false);
@@ -33,14 +34,14 @@ function Header() {
     <i className="fa-solid fa-envelope"></i>
     Info@dhadacademy.com      
     </li>
-    </ul>
+    {/* </ul>
     <ul className="navbar-nav justify-content-end pe-3  gap-4">
     <li className="fw-lighter" onClick={()=>{
       i18n.changeLanguage('ar');
     }}>
     <i className="fa-solid fa-language"></i>
     Languages
-    </li>
+    </li> */}
     {/* <NavDropdown
                 title="Languages"
                 id={`offcanvasNavbarDropdown-expand-xl`}
@@ -174,12 +175,12 @@ function Header() {
               >
                 Test
                 </NavLink> 
-       {users?         <NavLink
+            <NavLink
                 to="/admin"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Admin
-                </NavLink>:""}
+                </NavLink>
 
             </Nav>
 

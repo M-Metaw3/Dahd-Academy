@@ -44,7 +44,7 @@ const users = JSON.parse(localStorage.getItem("token"))
         <Route path="/blog/:id" element={<BlogDetails/>} />
         <Route path="/myprofile" element={<MyProfile/>} />
 
-        {users.isAdmin=="Admin"?   <Route path="/admin" element={<Admin/>} >
+          <Route path="/admin" element={<Admin/>} >
         <Route path='/admin/contacts' element={<Contacts/>} />
         <Route path='/admin/Blogs' element={<AddBlogs/>} />
         <Route path='/admin/addCourses' element={<AddCourses/>} />
@@ -55,9 +55,9 @@ const users = JSON.parse(localStorage.getItem("token"))
         
         <Route path="/admin" element={<Instructor/>} />
 
-        </Route>:
-        <Route path="/blog" element={<Test/>} />
-    }
+        </Route>
+  
+    
 
       </Routes>
     
