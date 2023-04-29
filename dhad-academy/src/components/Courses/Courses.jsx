@@ -1,18 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CommonSection from '../Common-section/CommonSection';
-import courses from "../../assets/images/courses.png"
+import course from "../../assets/images/courses.png"
 import { Container } from 'react-bootstrap';
 import { NavLink, useParams } from 'react-router-dom';
+import axios from "axios";
 
 function Courses() {
   useEffect(() => {
     document.title ="Courses";  
   }, []);
   const {name}=useParams();
-   
+
+  
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/course/getCourse");
+        setCourses(res.data.body.getCourse);
+        console.log(res.data.body.getCourse)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  
   return (
     <>
-      <CommonSection title={name} img={`${courses}`} />
+      <CommonSection title={name} img={`${course}`} />
       <Container className='py-5'>
       <div className="row d-flex justify-content-center">
                 <div className="col-10 col-md-6 col-lg-4 pb-5">

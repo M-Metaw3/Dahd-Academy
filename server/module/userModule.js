@@ -85,8 +85,6 @@ function validateLogin (obj){
 
 
 
-
-
 const User = mongoose.model('User', userSchema)
 module.exports = {User, validateRegistration,validateLogin}
 // 

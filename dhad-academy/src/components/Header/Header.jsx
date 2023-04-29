@@ -7,38 +7,43 @@ import Login from '../My Profile/login/Login';
 import Register from '../My Profile/Register/Register';
 import { useTranslation, Trans } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import  i18n  from 'i18next';
+import i18n from 'i18next';
 // import i18next from 'i18next';
 
 function Header() {
   const [show, setShow] = useState(false);
-  const users = JSON.parse(localStorage.getItem("token"))?JSON.parse(localStorage.getItem("token")):null
-  const nav =useNavigate()
-const hadelerLogout= () => {
-  console.log("object");
-  localStorage.removeItem("token")
-  nav('/')
-}
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const users = JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : null
+  const nav = useNavigate()
+  const hadelerLogout = () => {
+    console.log("object");
+    localStorage.removeItem("token")
+    nav('/')
+  }
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+  const [menuOpen, setMenuOpen] = useState(false)
+  const toggleMenu = () => {
+    setMenuOpen(true)
+  }
 
-  const [ t, i18n]=useTranslation();  
+  const CloseOffcanvas = () => setMenuOpen(false)
+  const [t, i18n] = useTranslation();
 
   return (
     <>
-    <nav className=" d-none d-xl-block navbar navbar-expand top-nav px-xl-5 ">
-    <div className='container-fluid '>
-    <ul className="navbar-nav gap-4 ">
-    <li className="fw-lighter ">
-    <i className="fa-solid fa-phone"></i>
-        +20 100 763 3800
-    </li>
-    <div className="vr"></div>
-    <li className="fw-lighter ">
-    <i className="fa-solid fa-envelope"></i>
-    Info@dhadacademy.com      
-    </li>
-    {/* </ul>
+      <nav className=" d-none d-xl-block navbar navbar-expand top-nav px-xl-5 ">
+        <div className='container-fluid '>
+          <ul className="navbar-nav gap-4 ">
+            <li className="fw-lighter ">
+              <i className="fa-solid fa-phone"></i>
+              +20 100 763 3800
+            </li>
+            <div className="vr"></div>
+            <li className="fw-lighter ">
+              <i className="fa-solid fa-envelope"></i>
+              Info@dhadacademy.com
+            </li>
+            {/* </ul>
     <ul className="navbar-nav justify-content-end pe-3  gap-4">
     <li className="fw-lighter" onClick={()=>{
       i18n.changeLanguage('ar');
@@ -46,30 +51,30 @@ const hadelerLogout= () => {
     <i className="fa-solid fa-language"></i>
     Languages
     </li> */}
-    {/* <NavDropdown
+            {/* <NavDropdown
                 title="Languages"
                 id={`offcanvasNavbarDropdown-expand-xl`}
               >
                 <NavDropdown.Item  className={({ isActive }) => (isActive ? 'active' : '')}>Arabic</NavDropdown.Item>
                 <NavDropdown.Item  className={({ isActive }) => (isActive ? 'active' : '')}>English</NavDropdown.Item>
               </NavDropdown> */}
-    <div className="vr"></div>
+            <div className="vr"></div>
 
-    {/* <li className='fw-lighter' onClick={handleShow}> */}
-    {!users ? <li className='fw-lighter'>
-      <NavLink to={"/myprofile"} className=" text-decoration-none">
-      <i className="fa-regular fa-user"></i>
-      My Profile
-      </NavLink>
-    </li>:
-    <li onClick={hadelerLogout} className='fw-lighter'>
-      <i className="fa-solid fa-arrow-right-from-bracket"></i>
-      Logout
-    </li>}
+            {/* <li className='fw-lighter' onClick={handleShow}> */}
+            {!users ? <li className='fw-lighter'>
+              <NavLink to={"/myprofile"} className=" text-decoration-none">
+                <i className="fa-regular fa-user"></i>
+                My Profile
+              </NavLink>
+            </li> :
+              <li onClick={hadelerLogout} className='fw-lighter'>
+                <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                Logout
+              </li>}
 
-    </ul>
+          </ul>
 
-      {/* <Modal show={show} fullscreen={true} onHide={handleClose}>
+          {/* <Modal show={show} fullscreen={true} onHide={handleClose}>
         <Modal.Header closeButton className=' text-left border-0 bg-modal'>
         </Modal.Header>
         <Modal.Body className='bg-modal'>
@@ -90,27 +95,31 @@ const hadelerLogout= () => {
           </Button>
         </Modal.Footer>
       </Modal> */}
-  </div>
-</nav>
+        </div>
+      </nav>
 
-    <Navbar expand={'xl'} className="header px-xl-5">
-      <Container fluid>
-        <Navbar.Brand href="#home">
-          <img
-            src={require("../../assets/images/logo.png")}
-            height="45"
-            className="d-inline-block align-top"
-            alt="logo"
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-xl`}  className='toggle-btn' />
-        <Navbar.Offcanvas
-          id={`offcanvasNavbar-expand-xl`}
-          aria-labelledby={`offcanvasNavbarLabel-expand-xl`}
-          placement="start"
-        >
-          <Offcanvas.Header closeButton className='justify-content-end'>
-            {/* <Offcanvas.Title id={`offcanvasNavbarLabel-expand-xl`}>
+      <Navbar expand={'xl'} className="header px-xl-5" collapseOnSelect  >
+        <Container fluid>
+          <Navbar.Brand href="#home">
+            <img
+              src={require("../../assets/images/logo.png")}
+              height="45"
+              className="d-inline-block align-top"
+              alt="logo"
+            />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-xl`} onClick={toggleMenu}
+            aria-labelledby="offcanvasNavbarLabel" className='toggle-btn' />
+          <Navbar.Offcanvas
+            id={`offcanvasNavbar-expand-xl`}
+            aria-labelledby={`offcanvasNavbarLabel-expand-xl`}
+            placement="start"
+            restoreFocus={false}
+            show={menuOpen}
+            onHide={CloseOffcanvas}
+          >
+            <Offcanvas.Header closeButton className='justify-content-end'>
+              {/* <Offcanvas.Title id={`offcanvasNavbarLabel-expand-xl`}>
                               <img
                                   src={require("../../assets/images/logo.png")}
                                   height="60"
@@ -118,82 +127,88 @@ const hadelerLogout= () => {
                                   alt="logo"
                               />
                           </Offcanvas.Title> */}
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className="justify-content-end flex-grow-1 pe-3 align-items-xl-center gap-3 nav-links">
-              <NavLink
-                to="/home"
-                className={({ isActive }) => (isActive ? 'active' : '')}
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Nav className="justify-content-end flex-grow-1 pe-3 align-items-xl-center gap-3 nav-links">
+                <NavLink
+                  to="/home"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  onClick={CloseOffcanvas}
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  onClick={CloseOffcanvas}
+                >
+                  About
+                </NavLink>
+                <NavLink
+                  to="/services"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  onClick={CloseOffcanvas}
+                >
+                  Services
+                </NavLink>
+                <NavDropdown
+                  title="Courses"
+                  id={`offcanvasNavbarDropdown-expand-xl`}
+                >
+                  <NavDropdown.Item as={NavLink} to="/courses/Arabic" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Arabic</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Quran and readings" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Quran and readings</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Islamic studies" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Islamic studies</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Qualifying courses" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Qualifying courses</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Crafts and Skills" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Crafts and Skills</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Field tourism" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Field tourism</NavDropdown.Item>
+                </NavDropdown>
+                <NavLink
+                  to="/blog"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  onClick={CloseOffcanvas}
+                >
+                  Blog
+                </NavLink>
+                <NavLink
+                  to="/instructors"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  onClick={CloseOffcanvas}
+                >
+                  Instructors
+                </NavLink>
 
-              >
-                Home
-              </NavLink>
-              <NavLink
-                to="/about"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-
-              >
-                About
-              </NavLink>
-              <NavLink
-                to="/services"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Services
-              </NavLink>
-              <NavDropdown
-                title="Courses"
-                id={`offcanvasNavbarDropdown-expand-xl`}
-              >
-                <NavDropdown.Item as={NavLink} to="/courses/Arabic" className={({ isActive }) => (isActive ? 'active' : '')}>Arabic</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/courses/Quran and readings" className={({ isActive }) => (isActive ? 'active' : '')}>Quran and readings</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/courses/Islamic studies" className={({ isActive }) => (isActive ? 'active' : '')}>Islamic studies</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/courses/Qualifying courses" className={({ isActive }) => (isActive ? 'active' : '')}>Qualifying courses</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/courses/Crafts and Skills" className={({ isActive }) => (isActive ? 'active' : '')}>Crafts and Skills</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/courses/Field tourism" className={({ isActive }) => (isActive ? 'active' : '')}>Field tourism</NavDropdown.Item>
-              </NavDropdown>
-              <NavLink
-                to="/blog"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Blog
-              </NavLink>
-              <NavLink
-                to="/instructors"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Instructors
-              </NavLink>
-             
-              <NavLink
-                to="/contact"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Contacts
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  onClick={CloseOffcanvas}
+                >
+                  Contacts
                 </NavLink>
 
 
-               <NavLink
-                to="/test"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Test
-                </NavLink> 
-                {users && users.isAdmin=='Admin'?  <NavLink
-                to="/admin"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Admin
-                </NavLink>:''}
+                <NavLink
+                  to="/test"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  onClick={CloseOffcanvas}
+                >
+                  Test
+                </NavLink>
+                {users && users.isAdmin == 'Admin' ? <NavLink
+                  to="/admin"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                  onClick={CloseOffcanvas}
+                >
+                  Admin
+                </NavLink> : ''}
 
-            </Nav>
+              </Nav>
 
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
-      </Container>
-    </Navbar>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+        </Container>
+      </Navbar>
 
-  </>  )
+    </>)
 }
 
 export default Header;

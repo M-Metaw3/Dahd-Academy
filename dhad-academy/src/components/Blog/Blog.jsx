@@ -38,7 +38,6 @@ function Blog() {
       setBlogs(data.body);
     };
 
-
     return (
         <>
             <CommonSection title="BLOG" img={`${blog}`} />
@@ -53,7 +52,7 @@ function Blog() {
                             <div className="card-body">
                                 <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
                                 <h6 className="card-text">{blog.title} </h6>
-                                <NavLink to={`/blog/${blog.id}`} className='text-decoration-none '>
+                                <NavLink to={`/blog/${blog}`} className='text-decoration-none '>
                                     Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i>
                                 </NavLink>
                             </div>

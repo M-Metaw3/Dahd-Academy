@@ -56,9 +56,9 @@ const Home = () => {
                 {/* <a href='http://localhost:5000/197 Section Intro.mp4' download>Click to download</a> */}
                 <img src={bg} alt="" className='w-100' height={450} />
                 <div className='position-absolute top-50 start-50 translate-middle text-center row w-75 m-auto d-flex justify-content-center align-items-center'>
-                <img src={require("../../assets/images/big logo.png")} alt="" className=' col-4'/>
-                <div className='col-1'></div>
-                <h3 className="text-light text-uppercase col-6">A journey of a thousand miles begins with a single step.</h3>
+                <img src={require("../../assets/images/big logo.png")} alt="" className='col-6 col-md-4 mb-3 mb-md-0'/>
+                <div className='col-md-1 col-12'></div>
+                <h3 className="text-light text-uppercase col-md-6 col-12">A journey of a thousand miles begins with a single step.</h3>
                 </div>
 
             </section>
