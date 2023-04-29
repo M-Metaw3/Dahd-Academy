@@ -12,9 +12,13 @@ import  i18n  from 'i18next';
 
 function Header() {
   const [show, setShow] = useState(false);
-  const users = JSON.parse(localStorage.getItem("token"))
-
-  // const isAdmin = props.user?.isAdmin ?? false;  
+  const users = JSON.parse(localStorage.getItem("token"))?JSON.parse(localStorage.getItem("token")):null
+  const nav =useNavigate()
+const hadelerLogout= () => {
+  console.log("object");
+  localStorage.removeItem("token")
+  nav('/')
+}
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -52,16 +56,16 @@ function Header() {
     <div className="vr"></div>
 
     {/* <li className='fw-lighter' onClick={handleShow}> */}
-    <li className='fw-lighter'>
+    {!users ? <li className='fw-lighter'>
       <NavLink to={"/myprofile"} className=" text-decoration-none">
       <i className="fa-regular fa-user"></i>
       My Profile
       </NavLink>
-    </li>
-    <li className='fw-lighter'>
+    </li>:
+    <li onClick={hadelerLogout} className='fw-lighter'>
       <i className="fa-solid fa-arrow-right-from-bracket"></i>
       Logout
-    </li>
+    </li>}
 
     </ul>
 
@@ -175,12 +179,12 @@ function Header() {
               >
                 Test
                 </NavLink> 
-            <NavLink
+                {users && users.isAdmin=='Admin'?  <NavLink
                 to="/admin"
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Admin
-                </NavLink>
+                </NavLink>:''}
 
             </Nav>
 

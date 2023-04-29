@@ -190,50 +190,50 @@
 
 
 ////////////
-// const express = require('express');
-// const multer = require('multer');
-// const { addCourse, validateaddcourse } = require('./courseSchema');
-// const { ObjectId } = require('mongodb');
-// const { GridFsStorage } = require('multer-gridfs-storage');
-// const mongoose = require('mongoose');
-// const path = require('path');
-// const crypto = require('crypto');
-// const { Grid } = require('gridfs-stream');
-// const { lessonSchema } = require('./courseSchema');
+const express = require('express');
+const multer = require('multer');
+const { addCourse, validateaddcourse } = require('./courseSchema');
+const { ObjectId } = require('mongodb');
+const { GridFsStorage } = require('multer-gridfs-storage');
+const mongoose = require('mongoose');
+const path = require('path');
+const crypto = require('crypto');
+const { Grid } = require('gridfs-stream');
+const { lessonSchema } = require('./courseSchema');
 
-// const router = express.Router();
+const router = express.Router();
 
-// // Set up GridFS storage engine
-// const storage = new GridFsStorage({
-//   url: process.env.MONGODB_URI,
-//   file: (req, file) => {
-//     return new Promise((resolve, reject) => {
-//       crypto.randomBytes(16, (err, buf) => {
-//         if (err) {
-//           return reject(err);
-//         }
-//         const filename = buf.toString('hex') + path.extname(file.originalname);
-//         const fileInfo = {
-//           filename: filename,
-//           bucketName: 'uploads'
-//         };
-//         resolve(fileInfo);
-//       });
-//     });
-//   }
-// });
+// Set up GridFS storage engine
+const storage = new GridFsStorage({
+  url: process.env.MONGODB_URI,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString('hex') + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: 'uploads'
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
 
-// const upload = multer({ storage });
+const upload = multer({ storage });
 
-// // Set up MongoDB connection
-// const conn = mongoose.createConnection(process.env.MONGODB_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true,
-//   useFindAndModify: false
-// });
+// Set up MongoDB connection
+const conn = mongoose.createConnection(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+});
 
-// let gfs;
+let gfs;
 
 // conn.once('open', () => {
 //   // Init stream
@@ -241,239 +241,239 @@
 //   gfs.collection('uploads');
 // });
 
-// // Create a new course
-// router.post('/', upload.single('image'), async (req, res) => {
-//   try {
-//     const { error } = validateaddcourse(req.body);
-//     if (error) {
-//       return res.status(400).send(error.details[0].message);
-//     }
+// Create a new course
+router.post('/', upload.single('image'), async (req, res) => {
+  try {
+    const { error } = validateaddcourse(req.body);
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
 
-//     const course = new addCourse({
-//       title: req.body.title,
-//       lessons: req.body.lessons || [],
-//       image: req.file ? req.file.filename : '',
-//       courseName: req.body.courseName,
-//       coursesDepartment: req.body.coursesDepartment,
-//       price: req.body.price,
-//       hours: req.body.hours,
-//     });
+    const course = new addCourse({
+      title: req.body.title,
+      lessons: req.body.lessons || [],
+      image: req.file ? req.file.filename : '',
+      courseName: req.body.courseName,
+      coursesDepartment: req.body.coursesDepartment,
+      price: req.body.price,
+      hours: req.body.hours,
+    });
 
-//     await course.save();
+    await course.save();
 
-//     res.send(course);
-//   } catch (error) {
-//     console.error(error.message);
-//     res.status(500).send('Server Error');
-//   }
-// });
+    res.send(course);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
-// // Get all courses
-// router.get('/', async (req, res) => {
-//   try {
-//     const courses = await addCourse.find();
-//     res.send(courses);
-//   } catch (error) {
-//     console.error(error.message);
-//     res.status(500).send('Server Error');
-//   }
-// });
+// Get all courses
+router.get('/', async (req, res) => {
+  try {
+    const courses = await addCourse.find();
+    res.send(courses);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
-// // Get a course by ID
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const course = await addCourse.findById(req.params.id);
-//     if (!course) {
-//       return res.status(404).send('Course not found');
-//     }
-//     res.send(course);
-//   } catch (error) {
-//     console.error(error.message);
-//     if (error.kind === 'ObjectId') {
-//       return res.status(404).send('Course not found');
-//     }
-//     res.status(500).send('Server Error');
-//   }
-// });
+// Get a course by ID
+router.get('/:id', async (req, res) => {
+  try {
+    const course = await addCourse.findById(req.params.id);
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
+    res.send(course);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).send('Course not found');
+    }
+    res.status(500).send('Server Error');
+  }
+});
 
-// // Update a course by ID
-// router.put('/:id', upload.single('image'), async (req, res) => {
-//   try {
-//     const { error } = validateaddcourse(req.body);
-//     if (error) {
-//       return res.status(400).send(error.details[0].message);
-//     }
+// Update a course by ID
+router.put('/:id', upload.single('image'), async (req, res) => {
+  try {
+    const { error } = validateaddcourse(req.body);
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
 
-//     const course = await addCourse.findById(req.params.id);
-//     if (!course) {
-//       return res.status(404).send('Course not found');
-//     }
+    const course = await addCourse.findById(req.params.id);
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
 
-//     course.title = req.body.title;
-//     course.lessons = req.body.lessons || course.lessons;
-//     course.image = req.file ? req.file.filename : course.image;
-//     course.courseName = req.body.courseName;
-//     course.coursesDepartment = req.body.coursesDepartment;
-//     course.price = req.body.price;
-//     course.hours = req.body.hours;
+    course.title = req.body.title;
+    course.lessons = req.body.lessons || course.lessons;
+    course.image = req.file ? req.file.filename : course.image;
+    course.courseName = req.body.courseName;
+    course.coursesDepartment = req.body.coursesDepartment;
+    course.price = req.body.price;
+    course.hours = req.body.hours;
 
-//     await course.save();
+    await course.save();
 
-//     res.send(course);
-//   } catch (error) {
-//     console.error(error.message);
-//     if (error.kind === 'ObjectId') {
-//       return res.status(404).send('Course not found');
-//     }
-//     res.status(500).send('Server Error');
-//   }
-// });
+    res.send(course);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).send('Course not found');
+    }
+    res.status(500).send('Server Error');
+  }
+});
 
-// // Delete a course by ID
-// router.delete('/:id', async (req, res) => {
-//   try {
-//     const course = await addCourse.findById(req.params.id);
-//     if (!course) {
-//       return res.status(404).send('Course not found');
-//     }
+// Delete a course by ID
+router.delete('/:id', async (req, res) => {
+  try {
+    const course = await addCourse.findById(req.params.id);
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
 
-//     await addCourse.findByIdAndRemove(req.params.id);
+    await addCourse.findByIdAndRemove(req.params.id);
 
-//     res.send('Course deleted successfully');
-//   } catch (error) {
-//     console.error(error.message);
-//     if (error.kind === 'ObjectId') {
-//       return res.status(404).send('Course not found');
-//     }
-//     res.status(500).send('Server Error');
-//   }
-// });
+    res.send('Course deleted successfully');
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).send('Course not found');
+    }
+    res.status(500).send('Server Error');
+  }
+});
 
-// // Add a new lesson to a course
-// router.post('/:id/lessons', upload.single('pdf'), async (req, res) => {
-//   try {
-//     const course = await addCourse.findById(req.params.id);
-//     if (!course) {
-//       return res.status(404).send('Course not found');
-//     }
+// Add a new lesson to a course
+router.post('/:id/lessons', upload.single('pdf'), async (req, res) => {
+  try {
+    const course = await addCourse.findById(req.params.id);
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
 
-//     const lesson = {
-//       name: req.body.name,
-//       pdf: req.file ? req.file.filename : '',
-//       video: req.body.video,
-//       meeting: req.body.meeting,
-//     };
+    const lesson = {
+      name: req.body.name,
+      pdf: req.file ? req.file.filename : '',
+      video: req.body.video,
+      meeting: req.body.meeting,
+    };
 
-//     course.lessons.push(lesson);
+    course.lessons.push(lesson);
 
-//     await course.save();
+    await course.save();
 
-//     res.send(course);
-//   } catch (error) {
-//     console.error(error.message);
-//     if (error.kind === 'ObjectId') {
-//       return res.status(404).send('Course not found');
-//     }
-//     res.status(500).send('Server Error');
-//   }
-// });
+    res.send(course);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).send('Course not found');
+    }
+    res.status(500).send('Server Error');
+  }
+});
 
-// // Get all lessons for a course
-// router.get('/:id/lessons', async (req, res) => {
-//   try {
-//     const course = await addCourse.findById(req.params.id);
-//     if (!course) {
-//       return res.status(404).send('Course not found');
-//     }
+// Get all lessons for a course
+router.get('/:id/lessons', async (req, res) => {
+  try {
+    const course = await addCourse.findById(req.params.id);
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
 
-//     res.send(course.lessons);
-//   } catch (error) {
-//     console.error(error.message);
-//     if (error.kind === 'ObjectId') {
-//       return res.status(404).send('Course not found');
-//     }
-//     res.status(500).send('Server Error');
-//   }
-// });
+    res.send(course.lessons);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).send('Course not found');
+    }
+    res.status(500).send('Server Error');
+  }
+});
 
-// // Get a lesson by ID for a course
-// router.get('/:courseId/lessons/:lessonId', async (req, res) => {
-//   try {
-//     const course = await addCourse.findById(req.params.courseId);
-//     if (!course) {
-//       return res.status(404).send('Course not found');
-//     }
+// Get a lesson by ID for a course
+router.get('/:courseId/lessons/:lessonId', async (req, res) => {
+  try {
+    const course = await addCourse.findById(req.params.courseId);
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
 
-//     const lesson = course.lessons.id(req.params.lessonId);
-//     if (!lesson) {
-//       return res.status(404).send('Lesson not found');
-//     }
+    const lesson = course.lessons.(req.params.lessonId);
+    if (!lesson) {
+      return res.status(404).send('Lesson not found');
+    }
 
-//     res.send(lesson);
-//   } catch (error) {
-//     console.error(error.message);
-//     if (error.kind === 'ObjectId') {
-//       return res.status(404).send('Course or lesson not found');
-//     }
-//     res.status(500).send('Server Error');
-//   }
-// });
+    res.send(lesson);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).send('Course or lesson not found');
+    }
+    res.status(500).send('Server Error');
+  }
+});
 
-// // Update a lesson by ID for a course
-// router.put('/:courseId/lessons/:lessonId', upload.single('pdf'), async (req, res) => {
-//   try {
-//     const course = await addCourse.findById(req.params.courseId);
-//     if (!course) {
-//       return res.status(404).send('Course not found');
-//     }
+// Update a lesson by ID for a course
+router.put('/:courseId/lessons/:lessonId', upload.single('pdf'), async (req, res) => {
+  try {
+    const course = await addCourse.findById(req.params.courseId);
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
 
-//     const lesson = course.lessons.id(req.params.lessonId);
-//     if (!lesson) {
-//       return res.status(404).send('Lesson not found');
-//     }
+    const lesson = course.lessons.id(req.params.lessonId);
+    if (!lesson) {
+      return res.status(404).send('Lesson not found');
+    }
 
-//     lesson.name = req.body.name || lesson.name;
-//     lesson.pdf = req.file ? req.file.filename : lesson.pdf;
-//     lesson.video = req.body.video || lesson.video;
-//     lesson.meeting = req.body.meeting || lesson.meeting;
+    lesson.name = req.body.name || lesson.name;
+    lesson.pdf = req.file ? req.file.filename : lesson.pdf;
+    lesson.video = req.body.video || lesson.video;
+    lesson.meeting = req.body.meeting || lesson.meeting;
 
-//     await course.save();
+    await course.save();
 
-//     res.send(course);
-//   } catch (error) {
-//     console.error(error.message);
-//     if (error.kind === 'ObjectId') {
-//       return res.status(404).send('Course or lesson not found');
-//     }
-//     res.status(500).send('Server Error');
-//   }
-// });
+    res.send(course);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).send('Course or lesson not found');
+    }
+    res.status(500).send('Server Error');
+  }
+});
 
-// // Delete a lesson by ID for a course
-// router.delete('/:courseId/lessons/:lessonId', async (req, res) => {
-//   try {
-//     const course = await addCourse.findById(req.params.courseId);
-//     if (!course) {
-//       return res.status(404).send('Course not found');
-//     }
+// Delete a lesson by ID for a course
+router.delete('/:courseId/lessons/:lessonId', async (req, res) => {
+  try {
+    const course = await addCourse.findById(req.params.courseId);
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
 
-//     const lesson = course.lessons.id(req.params.lessonId);
-//     if (!lesson) {
-//       return res.status(404).send('Lesson not found');
-//     }
+    const lesson = course.lessons.id(req.params.lessonId);
+    if (!lesson) {
+      return res.status(404).send('Lesson not found');
+    }
 
-//     lesson.remove();
+    lesson.remove();
 
-//     await course.save();
+    await course.save();
 
-//     res.send(course);
-//   } catch (error) {
-//     console.error(error.message);
-//     if (error.kind === 'ObjectId') {
-//       return res.status(404).send('Course or lesson not found');
-//     }
-//     res.status(500).send('Server Error');
-//   }
-// });
+    res.send(course);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return res.status(404).send('Course or lesson not found');
+    }
+    res.status(500).send('Server Error');
+  }
+});
 
-// module.exports = router;
+module.exports = router;

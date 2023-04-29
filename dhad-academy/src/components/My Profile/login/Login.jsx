@@ -4,32 +4,63 @@ import actions from '../../../actions/actions'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {apihttp} from '../../../api/api'
 
 function Login() {
   const dispatch = useDispatch()  
 
 
     const loginSucceful = useSelector((state)=>state.users)
-    // if(loginSucceful.login ){
-    //   props.handleClose();
-  
-    // }
+
   const nav = useNavigate()
 
   const [email, setEmail] = useState('');
+  const [error, seterror] = useState(null);
+
   const [password, setPassword] = useState('');
   // const [registration, setregistration] = useState({name:'', email:'',password:''});
-const handleSubmitloggin=(event) => {
+  // dispatch(actions.loginaction(loginbody))
+  // props.handleClose();
+const handleSubmitloggin= async(event) => {
   event.preventDefault();
   const loginbody={email,password}
   console.log(loginbody);
-  dispatch(actions.loginaction(loginbody))
-  // props.handleClose();
+  await fetch(
+    apihttp+'userRegistration/login',
+    {
+      method: "post",
+      headers: {
+ 
+        "Content-Type": " application/json",
 
-  // nav("/home")
+      },
+      body: JSON.stringify(loginbody),
+
+    }
+  ).then((response) => response.json()).then((data) => {
+    console.log(data)
+    if(data.statuscode==200){
+      localStorage.setItem("token",JSON.stringify( data.body))  
+
+      nav("/home")
+      seterror('')
+
+    }
+    if(data.statuscode==400){
+        seterror(data.message)
+    }
+  }
+    ).catch(el=>  seterror("an error occured please try again later"))
+  
+  
+  
+  
+  }
+  
 
 
-}
+
+
   return (
     <>
         <Container className='py-5'>
@@ -50,7 +81,7 @@ const handleSubmitloggin=(event) => {
             
               <div className="pt-4 col-12">
                 <button type="submit" className="w-100 btn-submit btn px-5">Login</button>
-                <p>{loginSucceful.loginfail?loginSucceful.loginfail:''}</p>
+                <p>{error?error:''}</p>
               </div>
               </div>
 

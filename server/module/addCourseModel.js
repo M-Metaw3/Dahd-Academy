@@ -21,6 +21,10 @@ const lessonSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  course_id:{type:String,
+    trim: true,
+    lowercase: true
+  }
 });
 
 const courseSchema = new mongoose.Schema({
@@ -62,6 +66,7 @@ const courseSchema = new mongoose.Schema({
         trim: true,
         lowercase: true
     },
+
     
 },{timestamps:true});
 

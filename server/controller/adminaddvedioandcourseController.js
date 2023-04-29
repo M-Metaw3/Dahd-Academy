@@ -226,10 +226,18 @@ static deleteCourse =async (req,res) => {
 console.log("deleteCourse")
     const _id = req.params.id
 
+
+
+
+    
+
     try {
         const deletecourse = await coursemodel.addCourse.findByIdAndDelete(_id);
-
-
+deletecourse.lessons.map((lesson)=>{
+       fs.unlink(path.join(__dirname,`../images/${lesson.pdf }`), (err => {
+        if (err) console.log(err)}));
+})
+       
         await   fs.unlink(path.join(__dirname,`../images/${deletecourse.image}`), (err => {
             if (err) console.log(err);
             else {
@@ -260,13 +268,15 @@ static addlesson=async (req, res) => {
         pdf: req.file ? req.file.filename : '',
         video: req.body.video,
         meeting: req.body.meeting,
+        course_id: req.params.id,
+
       };
   
       course.lessons.push(lesson);
   
       await course.save();
   
-      return response(res,200,"lesson added successfully",{course},"") 
+      return response(res,200,"lesson added successfully",course,"") 
       
     } catch (error) {
       console.error(error.message);
@@ -277,40 +287,44 @@ static addlesson=async (req, res) => {
     }
   }
 
+static deletelessons =async (req, res) => {
+    console.log("deletelessons")
+    try {
+      const course = await coursemodel.addCourse.findById(req.params.courseId);
+      if (!course) {
+        return res.status(404).send('Course not found');
+      }
+  
+      const lesson = course.lessons.id(req.params.lessonId);
+ 
 
+      // Convert lesson to a Mongoose document
+      // Find the index of the lesson in the lessons array
+      const lessonIndex = course.lessons.findIndex(lesson => lesson._id.toString() == req.params.lessonId);
+   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      if (!lesson) {
+        return res.status(404).send('Lesson not found');
+      }
+       course.lessons.splice(lessonIndex, 1);
+      await course.save();
+      await   fs.unlink(path.join(__dirname,`../images/${lesson.pdf}`), (err => {
+        if (err) console.log(err);
+        else {
+          
+            return response(res,200,"lessons deleted successfully",{course},"") 
+        }
+      }));
+  
+      
+    } catch (error) {
+      console.error(error.message);
+      if (error.kind === 'ObjectId') {
+        return res.status(404).send('Course or lesson not found');
+      }
+      res.status(500).send('Server Error');
+    }
+  }
 
 static addvideo =async (req,res) => {
 

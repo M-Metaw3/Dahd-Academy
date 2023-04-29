@@ -39,6 +39,7 @@ const getALLcontact = ()=>async(dispatch)=>{
        }
        if (data.statuscode==400) {
         console.log(data)
+        
         dispatch({type:'registrationfail',payload:data.error})
        }
      })
@@ -60,35 +61,35 @@ const getALLcontact = ()=>async(dispatch)=>{
 
 
       
-    const loginaction = (body)=>async(dispatch)=>{
+  //   const loginaction = (body)=>async(dispatch)=>{
 
     
-      try {
-  // const nav = useNavigate()
+  //     try {
+  // // const nav = useNavigate()
         
-        await api.loginapi(body) .then((response) => response.json())
-     .then((data) => {
-      console.log(data.body)
-      if(data.statuscode==400){
+  //       await api.loginapi(body) .then((response) => response.json())
+  //    .then((data) => {
+  //     console.log(data.body)
+  //     if(data.statuscode==400){
         
-           dispatch({type:'loginfaild',payload:data.message})
-      }
-      if(data.statuscode==200){
-  redirect('/')
+  //          dispatch({type:'loginfaild',payload:data.message})
+  //     }
+  //     if(data.statuscode==200){
+  // redirect('/')
         
-        dispatch({type:'loginsuccefully',payload:data.message})
-        localStorage.setItem("token",JSON.stringify( data.body))  
+  //       dispatch({type:'loginsuccefully',payload:data.message})
+  //       localStorage.setItem("token",JSON.stringify( data.body))  
 
-   }
+  //  }
     
       
 
           
-       console.log(data.statuscode==400)
-     })
-      } catch (error) {
-        console.log(error)
-      }
+  //      console.log(data.statuscode==400)
+  //    })
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
         // const {body} = data
 
         // if(body.getContact){
@@ -100,7 +101,7 @@ const getALLcontact = ()=>async(dispatch)=>{
         // }
         
       
-      }
+      // }
 
 
 
@@ -170,4 +171,4 @@ const getALLcontact = ()=>async(dispatch)=>{
 
 
 
-export default {getALLcontact,registrationaction,loginaction,addblogAction,getallblogs};
+export default {getALLcontact,registrationaction,addblogAction,getallblogs};

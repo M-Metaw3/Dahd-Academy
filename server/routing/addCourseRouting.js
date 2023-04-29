@@ -62,6 +62,7 @@ const storage = multer.diskStorage({
 
 router.post('/addCourse', upload,admin.addCourse)
 router.post('/:id/lessons', upload,admin.addlesson)
+router.delete('/:courseId/lessons/:lessonId',admin.deletelessons)
 
 router.get('/getCourse',admin.getallCourse)
 router.put('/updateCourse/:id',upload,admin.updateCourse)

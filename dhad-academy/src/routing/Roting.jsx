@@ -23,7 +23,9 @@ import MyProfile from '../components/My Profile/MyProfile';
 const Roting = () => {
 // const users = JSON.parse(localStorage.getItem("token"))
 
-const users = JSON.parse(localStorage.getItem("token"))
+// const users = JSON.parse(localStorage.getItem("token"))
+const users = JSON.parse(localStorage.getItem("token"))?JSON.parse(localStorage.getItem("token")):null
+
 
 
     return (
@@ -42,9 +44,11 @@ const users = JSON.parse(localStorage.getItem("token"))
         <Route path="/contact" element={<Contact/>} />
         <Route path="/blog" element={<Blog/>} />
         <Route path="/blog/:id" element={<BlogDetails/>} />
-        <Route path="/myprofile" element={<MyProfile/>} />
+      {!users?  <Route path="/myprofile" element={<MyProfile/>} />:
+        <Route path="/myprofile" element={<Home/>} />
+      }
 
-          <Route path="/admin" element={<Admin/>} >
+     {users && users.isAdmin=='Admin'?     <Route path="/admin" element={<Admin/>} >
         <Route path='/admin/contacts' element={<Contacts/>} />
         <Route path='/admin/Blogs' element={<AddBlogs/>} />
         <Route path='/admin/addCourses' element={<AddCourses/>} />
@@ -55,7 +59,9 @@ const users = JSON.parse(localStorage.getItem("token"))
         
         <Route path="/admin" element={<Instructor/>} />
 
-        </Route>
+        </Route>:
+        <Route path="/admin" element={<Home/>} />
+    }
   
     
 
