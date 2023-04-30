@@ -124,12 +124,15 @@ function Addvideo() {
               </div>
               <div className="form-group col-12 pb-2">
                 <label htmlFor="video">Video file:</label>
-                <input type="file" className="form-control-file" id="video" onChange={(e) => setFile(e.target.files[0])} />
+                <input type="file" className="form-control" id="video" onChange={(e) => setFile(e.target.files[0])} />
               </div>
               <div className="form-group col-12 pb-2">
                 <button type="submit" className="w-100 btn-submit btn px-5">{videoId ? 'Update' : 'Upload'}</button>
               </div>
-              <progress value={progress} max="100" />
+              {progress > 0 && (
+  <progress value={progress} max="100" />
+)}
+
               {url && <video src={url} controls className="mt-3" />}
             </div>
           </form>

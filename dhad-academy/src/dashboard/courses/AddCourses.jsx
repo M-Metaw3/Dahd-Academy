@@ -488,24 +488,25 @@ const AddCourses = () => {
               
             </div>
           )}
+                    <Container className='py-2 row'>
+
         <ListGroup className='col-12 m-auto'>
         {courses &&
           courses.map((course) => (
-            <ListGroup.Item key={course._id}>
-              <div className="d-flex justify-content-between">
+            <ListGroup.Item key={course._id} className='my-2'>
+              <div className="">
                 <div>
-                  <p>title : {course.title}</p>
+                <p className=' fw-bold'>title: <span className=' fw-normal'> {course.title}</span></p>
 
-                  <p>lessons : {course.lessons ? course.lessons.length : 0}</p>
+                <p className=' fw-bold'>lessons: <span className=' fw-normal'> {course.lessons ? course.lessons.length : 0}</span> </p>
 
-                  <p>courseName : {course.courseName}</p>
-                  <p>coursesDepartment : {course.coursesDepartment}</p>
-                  <p>price : {course.price}</p>
-                  <p>hours : {course.hours}</p>
-
-                  <img src={`http://localhost:5000/${course.image}`} width={200} />
+                <p className=' fw-bold'>courseName: <span className=' fw-normal'> {course.courseName}</span></p>
+                <p className=' fw-bold'>coursesDepartment: <span className=' fw-normal'> {course.coursesDepartment}</span></p>
+                <p className=' fw-bold'>price: <span className=' fw-normal'> {course.price}</span></p>
+                <p className=' fw-bold'>hours: <span className=' fw-normal'> {course.hours}</span></p>
+                  <img src={`http://localhost:5000/${course.image}`} width={"30%"} />
                 </div>
-                <div>
+                <div className=' text-center py-3'>
                   <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseEdit(course)}>
                     Edit
                   </Button>{' '}
@@ -513,38 +514,44 @@ const AddCourses = () => {
                     Delete
                   </Button>
                   <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleaddlessons(course)}>
-                    add lesson
+                    Add lesson
                   </Button>
                 </div>
               </div>
-              <ul>
-                {course.lessons &&
-                  course.lessons.map((lesson) => (
-                    <li key={lesson._id}>
-                      <div className="d-flex justify-content-between">
-                        <div>{lesson.name}</div>
-                        <a href={`http://localhost:5000/${lesson.pdf}`}>pdf</a>
-                        <a href={lesson.video}>video</a>
-                        <a href={lesson.video}>meeting</a>
+              {course.lessons.length?
+              <div className='py-4'>
+                <h4>Lessons</h4>
+                  <ol >
+              {
+                course.lessons.map((lesson) => (
+                  <li key={lesson._id}>
+                    <div className="d-flex justify-content-between">
+                      <div>{lesson.name}</div>
+                      <a href={`http://localhost:5000/${lesson.pdf}`}>pdf</a>
+                      <a href={lesson.video}>video</a>
+                      <a href={lesson.video}>meeting</a>
 
-
-                        <div>{lesson.name}</div>
-
-                        <div>
-                          {/* <Button variant="info" onClick={() => handleLessonEdit(lesson)}>
-                            Edit
-                          </Button>{' '} */}
-                          <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleLessonDelete(lesson)}>
-                            Delete
-                          </Button>
-                        </div>
+                      <div>
+                        {/* <Button variant="info" onClick={() => handleLessonEdit(lesson)}>
+                          Edit
+                        </Button>{' '} */}
+                        <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleLessonDelete(lesson)}>
+                          Delete
+                        </Button>
                       </div>
-                    </li>
-                  ))}
-              </ul>
+                    </div>
+                  </li>
+                ))}
+            </ol>
+              </div>
+              :""
+            
+}
+              
             </ListGroup.Item>
           ))}
       </ListGroup>
+      </Container>
       </Container>
 }
         
