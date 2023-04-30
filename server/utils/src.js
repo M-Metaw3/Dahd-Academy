@@ -10,19 +10,19 @@ const app = express();
 const xss = require('xss-clean');
 
 // Set up xss-clean middleware
-app.use(xss());
-// Set up security middleware
-// app.use(helmet());
-helmet({
-    crossOriginResourcePolicy: false,
-  })
-app.use(express.static('public'));
-app.use(
-  rateLimit({
-    windowMs: 10 * 60 * 1000, // 10 minutes
-    max: 300, // limit each IP to 100 requests per windowMs
-  })
-);
+// app.use(xss());
+// // Set up security middleware
+// // app.use(helmet());
+// helmet({
+//     crossOriginResourcePolicy: false,
+//   })
+// app.use(express.static('public'));
+// app.use(
+//   rateLimit({
+//     windowMs: 10 * 60 * 1000, // 10 minutes
+//     max: 300, // limit each IP to 100 requests per windowMs
+//   })
+// );
 app.use(mongoSanitize());
 
 // Set up body parser middleware

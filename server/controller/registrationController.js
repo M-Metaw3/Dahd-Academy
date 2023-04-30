@@ -93,13 +93,21 @@ return   response(res,200,"loggin successfully",{...other,token},"")
 
 
     static getallusers =async (req,res) => {
+const category =req.query.category
+   console.log(category)
+     
+
 
 try {
-  console.log(req.headers.authorization)
+  // console.log(req.headers.authorization)
   console.log("donw")
+if(category=='all'||category==''){
    const users= await userModel.User.find().select({password:0})
-
    return response(res,200,"users get succefully",users)
+}
+const users= await userModel.User.find({isAdmin:category}).select({password:0})
+console.log(users)
+return response(res,200,"users get succefully",users)
 } catch (error) {
    
 }
