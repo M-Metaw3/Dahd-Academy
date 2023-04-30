@@ -147,18 +147,25 @@ setImg(null)
       console.log('Error deleting user:', error);
     }
   };
-  const [showAdd, setShowAdd] = useState(false);
-  const Add = () => setShowAdd(true);
-  const All = () => setShowAdd(false);
 
+  const [showAdd, setShowAdd] = useState(false);
+  const [category, setCategory] = useState("all");
+
+  const Add = () => setShowAdd(true);
+  const sellectCategory = (category) =>{
+     setShowAdd(false);
+     setCategory(category)
+     console.log(category)
+  }
+  
   return (
     <>
     <h3>Users</h3>
      <div className='py-2 instructors'>
-     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={All}>All</button>
-     <button className='btn mx-1' onClick={All}>Instructors</button>
-     <button className='btn mx-1' onClick={All}>Users</button>
-     <button className='btn mx-1' onClick={All}>Admins</button>
+     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={()=>sellectCategory("all")}>All</button>
+     <button className='btn mx-1' onClick={()=>sellectCategory("Instructors")}>Instructors</button>
+     <button className='btn mx-1' onClick={()=>sellectCategory("Users")}>Users</button>
+     <button className='btn mx-1' onClick={()=>sellectCategory("Admins")}>Admins</button>
      <button className={`btn mx-1 ${showAdd ? "active":"" }`} onClick={Add}>Add</button>
      </div>
 
