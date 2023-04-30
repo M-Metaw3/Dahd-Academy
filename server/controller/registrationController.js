@@ -108,13 +108,6 @@ try {
     }
     
 
-
-
-
-    
-
-
-
     
     static updateUser = async (req, res) => {
       const { id } = req.params;
@@ -150,7 +143,6 @@ try {
               });
             }
           });
-    
           const updateuser = await userModel.User.findByIdAndUpdate(
             { _id: id },
             { usernam: usernam, email: email, image: fileName, isAdmin: isAdmin },
@@ -163,8 +155,6 @@ try {
             { new: true }
           ).select({ password: 0 });
         }
-    
-    
       } catch (error) {
         res.status(500).json({ message: 'Error updating user', error });
       }
