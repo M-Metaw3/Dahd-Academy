@@ -19,7 +19,6 @@ function BlogDetails() {
   const fetchBlogs = async () => {
     const { data } = await axios.get(`http://localhost:5000/blog/${id}`);
     setBlogs(data.body);
-    console.log(data.body.comment);
 console.log(blogs);
 console.log(data,"DATAAAAAAAAAAAAAAA");
 
@@ -33,7 +32,7 @@ console.log(data,"DATAAAAAAAAAAAAAAA");
 
 if(users){
     try {
-   const comments =     await axios.post(`http://localhost:5000/blog/comment/${id}`, {text}, {
+   const comments = await axios.post(`http://localhost:5000/blog/comment/${id}`, {text}, {
           headers: {
             // 'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${users.token}`,
@@ -50,6 +49,7 @@ nav('/myprofile')
       }
  
   }
+//   console.log(blogs.updatedAt.split("T")[0])
 
     return (
         <>
@@ -57,38 +57,33 @@ nav('/myprofile')
             <Container className=' py-5'>
                 <Row className='d-flex justify-content-between'>
                     <Col sm="12" md="9">
-                        <h3>New batch graduation ceremony</h3>
+                        <h3>{blogs.title}</h3>
                     </Col>
                     <Col sm="12" md="3" className=' text-md-end'>
-                        <p>January 10, 2022</p>
+                        <p>{(blogs.updatedAt)}</p>
                     </Col>
                     <Col >
-                        <p>
-                            Vestibulum posuere arcu lobortis mattis. elit. amet non facilisis nec quis augue. id consequat. quis finibus rutrum suscipit, rhoncus Cras Suspendisse id mattis tristique tristique Pellentesque quis eleifend in eros nibh. orci, mattis nec malesuada tempor lacus. efficitur, ultricies. nibh nec Pellentesque feugiat convallis. efficitur et tempor Curabitur ut odio. dictum efficitur tempor pulvinar, Integer at fringilla tincidunt egestas eleifend non, pulvinar pulvinar eu eget efficitur eu a, ligula. enim egestas mattis egestas posuere amet, sodales ornare, bibendum ipsum sagittis. lacus in vestibulum. dolor molestie Donec Suspendisse aliquet rhoncus massa, eu mauris, interdum Vivamus risus nisl. cursus dapibus. pharetra in massa. nec egestas vulputate nibh interdum accumsan mauris, lacus. rhoncus habitasse consectetur aliquet nunc. eu vulputate lacus congue neque efficitur. nunc nibh, ac. auctor, Curabitur mauris.
-                        </p>
+                        <p>{blogs.description}</p>
                     </Col>
                 </Row>
                 <hr className=' my-3' />
                 <h5 className=' mt-4 fw-normal'>Comment</h5>
                 <div className='hr'></div>
-                <Row className=' d-flex justify-content-center mt-4'>
-                 
-                    <Col xs={11} className='p-2'>
-                        {blogs && blogs.comment ?blogs.comment.map((comment)=>(
-<div>
+                <Row className=' d-flex justify-content-center mt-4 align-items-start'>
+                {blogs && blogs.comment ?blogs.comment.map((comment)=>(
+<>
+  
                     <Col xs={1} className=' text-center p-2'>
-                      
-                        <img width={50} src={`http://localhost:5000/${comment.image}`} alt="" srcset="" />
-                        
+                        <img width={70} height={70} className=' rounded-circle ' src={`http://localhost:5000/${comment.image}`} alt="" srcset="" />
                     </Col>
-                            <h5>{comment.username}</h5>
-                            <h5>{comment.username}</h5>
+                    <Col xs={11} className='p-2'>
 
-
+                            <h5>{comment.username}</h5>
                             <p>{comment.text}</p>
-                            </div>
-                        )):"" }
                     </Col>
+                    </>
+       )):"" }
+
 
                 </Row>
                 <h5 className=' mt-4 fw-normal'>Write Comment</h5>

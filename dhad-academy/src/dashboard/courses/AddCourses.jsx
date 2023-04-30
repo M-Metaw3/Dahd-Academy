@@ -495,6 +495,9 @@ const AddCourses = () => {
           courses.map((course) => (
             <ListGroup.Item key={course._id} className='my-2'>
               <div className="">
+              <div className="py-3 d-flex justify-content-center">
+                <img src={`http://localhost:5000/${course.image}`} width={"30%"} height={200} />
+                </div>
                 <div>
                 <p className=' fw-bold'>title: <span className=' fw-normal'> {course.title}</span></p>
 
@@ -504,7 +507,7 @@ const AddCourses = () => {
                 <p className=' fw-bold'>coursesDepartment: <span className=' fw-normal'> {course.coursesDepartment}</span></p>
                 <p className=' fw-bold'>price: <span className=' fw-normal'> {course.price}</span></p>
                 <p className=' fw-bold'>hours: <span className=' fw-normal'> {course.hours}</span></p>
-                  <img src={`http://localhost:5000/${course.image}`} width={"30%"} />
+                
                 </div>
                 <div className=' text-center py-3'>
                   <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseEdit(course)}>

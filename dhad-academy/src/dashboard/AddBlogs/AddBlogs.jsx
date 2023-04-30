@@ -167,7 +167,7 @@ const AddBlogs = () => {
           <div className="card-body">
             
           <p>{moment(blog.createdAt).fromNow()}</p>
-          <div className="pt-3 d-flex justify-content-center">
+          <div className="py-3 d-flex justify-content-center">
             <img
               src={`http://localhost:5000/${blog.image}`}
               alt={blog.title}
