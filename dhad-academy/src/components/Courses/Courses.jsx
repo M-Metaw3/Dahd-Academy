@@ -11,12 +11,12 @@ function Courses() {
   }, []);
   const {name}=useParams();
 
-  
+  console.log(name);
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/course/getCourse");
+        const res = await axios.get(`http://localhost:5000/course/getCourse?coursedepartment=${name}`);
         setCourses(res.data);
         console.log(res.data);
       } catch (error) {
@@ -24,7 +24,7 @@ function Courses() {
       }
     };
     fetchData();
-  }, []);
+  }, [name]);
   
   return (
     <>
