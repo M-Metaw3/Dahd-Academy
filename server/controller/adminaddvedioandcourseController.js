@@ -193,7 +193,7 @@ response(res,400,"error occured",'',error.message)
     const fileName = path.basename(filePath);
     const image =  fileName ;
     
-    const updateCourse= await coursemodel.addCourse.findByIdAndUpdate(id,{title:title,lessons:lessons,image:image,courseName:courseName,coursesDepartment:coursesDepartment,price:price,hours:hours},{new:true});         
+    const updateCourse= await coursemodel.addCourse.findByIdAndUpdate(id,{title:title,image:image,courseName:courseName,coursesDepartment:coursesDepartment,price:price,hours:hours},{new:true});         
     }
 
 try {

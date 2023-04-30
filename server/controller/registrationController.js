@@ -110,44 +110,68 @@ try {
 
 
 
-    static  updateUser = async (req, res) => {
-      const { id } = req.params;
-      console.log(id)
-      // console.log(req.file)
 
+    
+
+
+
+    
+    static updateUser = async (req, res) => {
+      const { id } = req.params;
+      console.log(id);
+    
       const { usernam, email, password, isAdmin } = req.body;
     
       try {
-        const user = await userModel.User.findById({_id:id})
-
+        const user = await userModel.User.findById({ _id: id });
+    
         if (!user) {
           return res.status(404).json({ message: `User with ID ${id} not found` });
         }
     
-
         if (req.file) {
-      await   fs.unlink(path.join(__dirname,`../images/${user.image}`), (err => {
-            if (err) console.log(err);
-            else {
-              console.log("Deleted file: example_file.txt");
-              const imagePath = req.file.path;
-              const filePath = imagePath;
-              const fileName = path.basename(filePath);
+          const imagePath = req.file.path;
+          const filePath = imagePath;
+          const fileName = path.basename(filePath);
+    
+          // Check if file exists in file system before deleting
+          fs.access(path.join(__dirname, `../images/${user.image}`), fs.constants.F_OK,async (err) => {
+            if (err) {
+              const updateuser = await userModel.User.findByIdAndUpdate(
+                { _id: id },
+                { usernam: usernam, email: email, isAdmin: isAdmin },
+                { new: true }
+                );
+                response(res, 201, 'User updated successfully', { updateuser }, '');
+            } else {
+              fs.unlink(path.join(__dirname, `../images/${user.image}`), (err) => {
+                if (err) console.log(err);
+                else console.log(`Deleted file: ${user.image}`);
+              });
             }
-          }));
-          const updateuser= await userModel.User.findByIdAndUpdate({_id:id},{usernam:usernam,email:email,image:fileName,isAdmin:isAdmin},{new:true});
+          });
+    
+          const updateuser = await userModel.User.findByIdAndUpdate(
+            { _id: id },
+            { usernam: usernam, email: email, image: fileName, isAdmin: isAdmin },
+            { new: true }
+          );
+        } else {
+          const updateuser = await userModel.User.findByIdAndUpdate(
+            { _id: id },
+            { usernam: usernam, email: email, isAdmin: isAdmin },
+            { new: true }
+          ).select({ password: 0 });
         }
-     
-        const updateuser= await userModel.User.findByIdAndUpdate({_id:id},{usernam:usernam,email:email,isAdmin:isAdmin},{new:true}).select({password:0});
-       
-       
-        response(res,201," updated successfully",{updateuser},"") 
- 
+    
+    
       } catch (error) {
         res.status(500).json({ message: 'Error updating user', error });
       }
     };
     
+   
+
     static deleteUser = async (req, res) => {
       const { id } = req.params;
     

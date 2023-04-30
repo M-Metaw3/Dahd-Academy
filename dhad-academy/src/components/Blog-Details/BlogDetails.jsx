@@ -19,9 +19,7 @@ function BlogDetails() {
   const fetchBlogs = async () => {
     const { data } = await axios.get(`http://localhost:5000/blog/${id}`);
     setBlogs(data.body);
-console.log(blogs);
-console.log(data,"DATAAAAAAAAAAAAAAA");
-
+    console.log(data.body.comment);
   };
   const handelercomment=async (event) => {
     event.preventDefault();
