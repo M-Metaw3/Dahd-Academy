@@ -246,7 +246,7 @@ setImg(null)
               <img src={img} width={200} />
 
             </div>
-            {(uploadProgressu >= 0) || (uploadProgressu <= 100) && (
+            {(uploadProgressu > 0)  && (
   <progress value={uploadProgressu} max="100" />
 )}
             <div className="pt-1 col-12 text-center">
