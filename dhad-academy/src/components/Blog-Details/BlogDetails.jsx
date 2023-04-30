@@ -20,9 +20,6 @@ function BlogDetails() {
     const { data } = await axios.get(`http://localhost:5000/blog/${id}`);
     setBlogs(data.body);
     console.log(data.body.comment);
-console.log(blogs);
-console.log(data,"DATAAAAAAAAAAAAAAA");
-
   };
   const handelercomment=async (event) => {
     event.preventDefault();

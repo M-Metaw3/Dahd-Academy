@@ -49,6 +49,22 @@ response(res,400,"error occured",error)
     }
 
 }
+static Deleteall =async(req,res)=>{
+
+
+    console.log("DeleteContactMessages")
+    const _id = req.params.id
+
+    try {
+        const deletecontact = await contactmodel.contactModel.deleteMany();
+       
+        response(res,200,"video deleted successfully",{deletecontact},"") 
+    } catch (error) {
+response(res,400,"error occured",error) 
+        
+    }
+
+}
 
 
 static getContactMessages =async(req,res)=>{
