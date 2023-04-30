@@ -21,6 +21,8 @@ function BlogDetails() {
     setBlogs(data.body);
     console.log(data.body.comment);
 console.log(blogs);
+console.log(data,"DATAAAAAAAAAAAAAAA");
+
   };
   const handelercomment=async (event) => {
     event.preventDefault();

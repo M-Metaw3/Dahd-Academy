@@ -98,8 +98,8 @@ import axios from 'axios';
 import { Container, Row, Col, ListGroup, Button, Form } from 'react-bootstrap';
 const AddCourses = () => {
   const [courses, setCourses] = useState([]);
-  const [ addcourse, setaddcourse] = useState(false);
-  const [ idcourse, setidcourse] = useState("");
+  const [addcourse, setaddcourse] = useState(false);
+  const [idcourse, setidcourse] = useState("");
 
 
   const [formValues, setFormValues] = useState({
@@ -191,7 +191,7 @@ const AddCourses = () => {
         // Create new course
         const response = await axios.post('http://localhost:5000/course/addCourse', formData);
         console.log(response.data);
-       
+
 
         setCourses((prevCourses) => [...prevCourses, response.data]);
       }
@@ -223,10 +223,10 @@ const AddCourses = () => {
       const response = await axios.post(`http://localhost:5000/course/${idcourse}/lessons`, formData);
       setCourses((prevCourses) => {
         const index = prevCourses.findIndex((course) => course._id === idcourse);
-    
+
         const updatedCourses = [...prevCourses];
         updatedCourses[index] = response.data.body;
-      
+
         return updatedCourses;
       });
       setSelectedLesson(null);
@@ -235,7 +235,7 @@ const AddCourses = () => {
         pdf: null,
         video: '',
         meeting: '',
-        
+
       });
       setaddcourse(false)
     } catch (error) {
@@ -245,6 +245,7 @@ const AddCourses = () => {
 
   const handleCourseEdit = (course) => {
     setSelectedCourse(course);
+    Add();
     setFormValues({
       title: course.title,
       lessons: course.lessons,
@@ -307,101 +308,69 @@ const AddCourses = () => {
         console.error('Error creating lesson: ', error);
       });
   };
-  const resetForm = () => {
-    if (selectedCourse) {
-      setFormValues({
-        title: selectedCourse.title,
-        courseName: selectedCourse.courseName,
-        coursesDepartment: selectedCourse.coursesDepartment,
-        price: selectedCourse.price,
-      });
-    } else {
-      setFormValues({
-        title: '',
-        courseName: '',
-        coursesDepartment: '',
-        price: '',
-      });
-    }
-  };
+  // const resetForm = () => {
+  //   if (selectedCourse) {
+  //     setFormValues({
+  //       title: selectedCourse.title,
+  //       courseName: selectedCourse.courseName,
+  //       coursesDepartment: selectedCourse.coursesDepartment,
+  //       price: selectedCourse.price,
+  //       hours: selectedCourse.hours,
 
-const handleaddlessons = (course) => {
-  // console.log(c);
-  setaddcourse(true)
-  setidcourse(course._id)
+  //     });
+  //   } else {
+  //     setFormValues({
+  //       title: '',
+  //       courseName: '',
+  //       coursesDepartment: '',
+  //       price: '',
+  //     hours: '',
+
+
+  //     });
+  //   }
+  // };
+
+  const handleaddlessons = (course) => {
+    // console.log(c);
+    setaddcourse(true)
+    setidcourse(course._id)
+  }
+  const [showAdd, setShowAdd] = useState(false);
+  const Add = () => setShowAdd(true);
+  const All = () => setShowAdd(false);
+
+  const CancelUpdate = () =>{
+   setShowAdd(false);
+   setSelectedCourse(null);
+   setFormValues({
+    title: '',
+    lessons: [],
+    image: null,
+    courseName: '',
+    coursesDepartment: '',
+    price: '',
+    hours: '',
+  });
 }
+
   return (
 
 
-
-
     <Container>
-      <Row>
-        <Col>
-          <h1 className="my-4">Course Manager</h1>
-          <h2>Courses</h2>
-          <ListGroup>
-            {courses &&
-              courses.map((course) => (
-                <ListGroup.Item key={course._id}>
-                  <div className="d-flex justify-content-between">
-                    <div>
-                      <p>title : {course.title}</p>
-                    
-                      <p>lessons : {course.lessons ? course.lessons.length : 0}</p>
-
-                      <p>courseName : {course.courseName}</p>
-                      <p>coursesDepartment : {course.coursesDepartment}</p>
-                      <p>price : {course.price}</p>
-                      <p>hours : {course.hours}</p>
-
-<img src={`http://localhost:5000/${course.image}`} width={200} />
-                    </div>
-                    <div>
-                      <Button variant="info" onClick={() => handleCourseEdit(course)}>
-                        Edit
-                      </Button>{' '}
-                      <Button variant="danger" onClick={() => handleCourseDelete(course)}>
-                        Delete
-                      </Button>
-                      <Button variant="info" onClick={() => handleaddlessons(course)}>
-                        add lesson
-                      </Button>
-                    </div>
-                  </div>
-                  <ul>
-                    {course.lessons &&
-                      course.lessons.map((lesson) => (
-                        <li key={lesson._id}>
-                          <div className="d-flex justify-content-between">
-                            <div>{lesson.name}</div>
-                            <a href={`http://localhost:5000/${lesson.pdf}`}>pdf</a>
-                            <a href={lesson.video}>video</a>
-                            <a href={lesson.video}>meeting</a>
-
-
-                            <div>{lesson.name}</div>
-
-                            <div>
-                             {/* <Button variant="info" onClick={() => handleLessonEdit(lesson)}>
-                                Edit
-                              </Button>{' '} */}
-                              <Button variant="danger" onClick={() => handleLessonDelete(lesson)}>
-                                Delete
-                              </Button>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                  </ul>
-                </ListGroup.Item>
-              ))}
-          </ListGroup>
-        </Col>
-        <Col>
-          <h2>{selectedCourse ? `Edit Course: ${selectedCourse.title}` : 'Create Course'}</h2>
+          {/* <h1 className="my-4">Course Manager</h1> */}
+      <h3>Courses</h3>
+     <div className='py-2 instructors'>
+     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={All}>All</button>
+     <button className={`btn mx-1 ${showAdd ? "active":"" }`} onClick={Add}>Add and Update</button>
+     </div>
+          
+        {showAdd?
+          <Container className='py-2 row'>
+              <h5 className=' text-center'>{selectedCourse ? `Edit Course: ${selectedCourse.title}` : 'Create Course'}</h5>
+              <div className='col-12 col-lg-6 m-auto'>
           <Form onSubmit={handleFormSubmit}>
-            <Form.Group controlId="formTitle">
+            <Form.Group controlId="formTitle" className='pb-2'>
               <Form.Label>Title:</Form.Label>
               <Form.Control
                 type="text"
@@ -410,7 +379,7 @@ const handleaddlessons = (course) => {
                 onChange={handleFormChange}
               />
             </Form.Group>
-            <Form.Group controlId="formCourseName">
+            <Form.Group controlId="formCourseName" className='pb-2'>
               <Form.Label>Course Name:</Form.Label>
               <Form.Control
                 type="text"
@@ -420,94 +389,169 @@ const handleaddlessons = (course) => {
               />
             </Form.Group>
 
-<Form.Group controlId="formCoursesDepartment">
-  <Form.Label>Course Department:</Form.Label>
-  <Form.Control
-    as="select"
-    name="coursesDepartment"
-    value={formValues.coursesDepartment}
-    onChange={handleFormChange}
-  >
-    <option value="">-- Select Department --</option>
-    <option value="Arabic">Arabic</option>
-    <option value="Quran and Readings">Quran and Readings</option>
-    <option value="Islamic Studies">Islamic Studies</option>
-    <option value="Qualifying Courses">Qualifying Courses</option>
-    <option value="Crafts and Skills">Crafts and Skills</option>
-    <option value="Field Tourism">Field Tourism</option>
-  </Form.Control>
-</Form.Group>
-<Form.Group controlId="formDescription">
-<Form.Label>price:</Form.Label>
-<Form.Control
-as="textarea"
-name="price"
-value={formValues.price}
-onChange={handleFormChange}
-/>
-<Form.Label>hourse:</Form.Label>
-<Form.Control
-as="textarea"
-name="hours"
-value={formValues.hours}
-onChange={handleFormChange}
-/>
-</Form.Group>
-<Form.Group controlId="formImage">
-<Form.Label>Image:</Form.Label>
-<Form.Control type="file" name="image" onChange={handleFileChange} />
-</Form.Group>
-<Button variant="primary" type="submit">
-{selectedCourse ? 'Update Course' : 'Create Course'}
-</Button>
-</Form>
-{addcourse && (
-<>
-<hr />
-<h2>{ 'Create Lesson'}</h2>
-<Form onSubmit={handleLessonFormSubmit}>
-<Form.Group controlId="formLessonName">
-<Form.Label>Name:</Form.Label>
-<Form.Control
-type="text"
-name="name"
-value={lessonFormValues.name}
-onChange={handleLessonFormChange}
-/>
-</Form.Group>
-<Form.Group controlId="formLessonDescription">
-<Form.Label>meeting:</Form.Label>
-<Form.Control
-as="textarea"
-name="meeting"
-value={lessonFormValues.meeting}
-onChange={handleLessonFormChange}
-/>
-</Form.Group>
-<Form.Group controlId="formLessonPdf">
-<Form.Label>pdf:</Form.Label>
-<Form.Control type="file" name="pdf" onChange={handleLessonFileChange} />
-</Form.Group>
-
-<Form.Group controlId="formLessonVideo">
-<Form.Label>videoLink:</Form.Label>
-<Form.Control type="text" name="video" onChange={handleLessonFormChange} />
-</Form.Group>
-<Button variant="primary" type="submit">
-Create Lesson
-</Button>
-</Form>
-<Button variant="danger"  onClick={()=>setaddcourse(false)}>
-Cancel
-</Button>
-</>
+            <Form.Group controlId="formCoursesDepartment" className='pb-2'>
+              <Form.Label>Course Department:</Form.Label>
+              <Form.Control
+                as="select"
+                name="coursesDepartment"
+                value={formValues.coursesDepartment}
+                onChange={handleFormChange}
+              >
+                <option value="">-- Select Department --</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Quran and Readings">Quran and Readings</option>
+                <option value="Islamic Studies">Islamic Studies</option>
+                <option value="Qualifying Courses">Qualifying Courses</option>
+                <option value="Crafts and Skills">Crafts and Skills</option>
+                <option value="Field Tourism">Field Tourism</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="formDescription" className='pb-2'>
+              <Form.Label>price:</Form.Label>
+              <Form.Control
+                type="text"
+                name="price"
+                value={formValues.price}
+                onChange={handleFormChange}
+              />
+              <Form.Label>hourse:</Form.Label>
+              <Form.Control
+                type="text"
+                name="hours"
+                value={formValues.hours}
+                onChange={handleFormChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formImage" className='pb-2'>
+              <Form.Label>Image:</Form.Label>
+              <Form.Control type="file" name="image" onChange={handleFileChange} />
+            </Form.Group>
+            <div className="pt-2 text-center ">
+              <Button type="submit" className=' mx-2  btn-submit border-0 px-4'>
+                {selectedCourse ? 'Update Course' : 'Create Course'}
+              </Button>
+              {selectedCourse && (
+               <Button type=" button" onClick={CancelUpdate} className='mx-2 btn-submit border-0 px-5'>
+               Cancel
+               </Button>
 )}
-</Col>
-</Row>
+            </div>
+           
 
- 
-</Container>
-);
+          
+          </Form>
+          </div>
+          
+        </Container> :
+          <Container className='py-2 row'>
+            {addcourse && (
+              <div className='col-12 col-lg-6 m-auto pb-5'>
+              <h5 className=' text-center'>{'Add Lesson'}</h5>
+              <Form onSubmit={handleLessonFormSubmit} >
+                <Form.Group controlId="formLessonName" className='pb-2'>
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={lessonFormValues.name}
+                    onChange={handleLessonFormChange}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formLessonDescription" className='pb-2'>
+                  <Form.Label>Meeting Link</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="meeting"
+                    value={lessonFormValues.meeting}
+                    onChange={handleLessonFormChange}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formLessonPdf" className='pb-2'>
+                  <Form.Label>pdf</Form.Label>
+                  <Form.Control type="file" name="pdf" onChange={handleLessonFileChange} />
+                </Form.Group>
+
+                <Form.Group controlId="formLessonVideo" className='pb-2'>
+                  <Form.Label>Video Link</Form.Label>
+                  <Form.Control type="text" name="video" onChange={handleLessonFormChange} />
+                </Form.Group>
+                <div className="pt-2 text-center ">
+                <Button className='mx-2 btn-submit border-0 px-4' type="submit">
+                  Add Lesson
+                </Button>
+                <Button className='mx-2 btn-submit border-0 px-5' onClick={() => setaddcourse(false)}>
+                Cancel
+              </Button>
+                </div>
+              </Form>
+
+              
+            </div>
+          )}
+        <ListGroup className='col-12 m-auto'>
+        {courses &&
+          courses.map((course) => (
+            <ListGroup.Item key={course._id}>
+              <div className="d-flex justify-content-between">
+                <div>
+                  <p>title : {course.title}</p>
+
+                  <p>lessons : {course.lessons ? course.lessons.length : 0}</p>
+
+                  <p>courseName : {course.courseName}</p>
+                  <p>coursesDepartment : {course.coursesDepartment}</p>
+                  <p>price : {course.price}</p>
+                  <p>hours : {course.hours}</p>
+
+                  <img src={`http://localhost:5000/${course.image}`} width={200} />
+                </div>
+                <div>
+                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseEdit(course)}>
+                    Edit
+                  </Button>{' '}
+                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseDelete(course)}>
+                    Delete
+                  </Button>
+                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleaddlessons(course)}>
+                    add lesson
+                  </Button>
+                </div>
+              </div>
+              <ul>
+                {course.lessons &&
+                  course.lessons.map((lesson) => (
+                    <li key={lesson._id}>
+                      <div className="d-flex justify-content-between">
+                        <div>{lesson.name}</div>
+                        <a href={`http://localhost:5000/${lesson.pdf}`}>pdf</a>
+                        <a href={lesson.video}>video</a>
+                        <a href={lesson.video}>meeting</a>
+
+
+                        <div>{lesson.name}</div>
+
+                        <div>
+                          {/* <Button variant="info" onClick={() => handleLessonEdit(lesson)}>
+                            Edit
+                          </Button>{' '} */}
+                          <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleLessonDelete(lesson)}>
+                            Delete
+                          </Button>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+              </ul>
+            </ListGroup.Item>
+          ))}
+      </ListGroup>
+      </Container>
+}
+        
+
+
+    </Container>
+  );
 
 };
 

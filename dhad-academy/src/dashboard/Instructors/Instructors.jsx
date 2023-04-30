@@ -153,7 +153,7 @@ setImg(null)
 
   return (
     <>
-    <h>Users</h>
+    <h3>Users</h3>
      <div className='py-2 instructors'>
      <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={All}>All</button>
      <button className='btn mx-1' onClick={All}>Instructors</button>
@@ -190,7 +190,7 @@ setImg(null)
         </div>
         <div className="col-12 form-group">
           <label className="px-2 opacity-75">Image</label>
-          <input className="form-control-file" type="file" onChange={handleImageChange} />
+          <input className="form-control" type="file" onChange={handleImageChange} />
           <img src={img} width={200} />
 
         </div>
@@ -235,7 +235,7 @@ setImg(null)
             </div>
             <div className="col-12 form-group ">
               <label className="px-2 opacity-75">Image</label>
-              <input className="form-control-file" type="file" onChange={handleImageChange} />
+              <input className="form-control" type="file" onChange={handleImageChange} />
               <img src={img} width={200} />
 
             </div>

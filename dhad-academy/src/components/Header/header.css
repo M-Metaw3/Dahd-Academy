@@ -47,4 +47,8 @@ nav a:hover{
 .dropdown-menu{
   background-color: var(--bg-color) !important;
 }
+.dropdown-menu a:focus, .dropdown-menu a:active ,.dropdown-menu a:hover{
 
+  background-color: var(--bg-color) !important;
+  color: var(--primary-color);
+}

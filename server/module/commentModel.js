@@ -42,7 +42,7 @@ function validateaddcomment (obj){
 
 const schema = joi.object({
 // username : joi.string().trim().min(10).max(60).required(),
-text :joi.string().trim().min(10).required(),
+text :joi.string().trim().min(3).required(),
 
 });
 return schema.validate(obj);

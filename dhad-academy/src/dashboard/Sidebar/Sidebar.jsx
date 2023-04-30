@@ -20,9 +20,9 @@ function Sidebar() {
             <div className='d-flex'>
                 <CDBSidebar className='sidebar position-sticky top-0 vh-100 '>
                     <CDBSidebarHeader prefix={<CDBIcon icon="bars" size="lg" />}>
-                        <Container className=' d-flex align-items-center'>
+                        {/* <Container className=' d-flex align-items-center'>
                         <img width="80%" src={require("../../assets/images/logo.png")} alt="logo" />
-                        </Container>
+                        </Container> */}
                     </CDBSidebarHeader>
 
                     <CDBSidebarContent>
@@ -39,11 +39,7 @@ function Sidebar() {
                                 </CDBSidebarMenuItem>
                             </NavLink>
                            
-                            <NavLink exact="true" to="/Courses" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
-                                    Courses
-                                </CDBSidebarMenuItem>
-                            </NavLink>
+                           
                             <NavLink exact="true" to="addCourses" activeclassname="activeClicked">
                                 <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
                                 add Courses
@@ -54,12 +50,7 @@ function Sidebar() {
                                     Blogs
                                 </CDBSidebarMenuItem>
                             </NavLink>
-                            <NavLink exact="true" to="admin/allcourses" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
-                                    allcourses
-                                </CDBSidebarMenuItem>
-                            </NavLink>
-
+                        
                             <NavLink exact="true" to="contacts" activeclassname="activeClicked"
                             >
                                 <CDBSidebarMenuItem
@@ -78,7 +69,7 @@ function Sidebar() {
                     </CDBSidebarFooter>
                 </CDBSidebar>
 
-                <div className=' w-100 p-4 overflow-scroll'>
+                <div className='w-100 p-4 overflow-scroll'>
                     <Outlet />
                 </div>
             </div>

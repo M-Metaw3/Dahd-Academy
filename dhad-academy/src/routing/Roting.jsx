@@ -13,8 +13,6 @@ import BlogDetails from '../components/Blog-Details/BlogDetails';
 import Test from '../api/Test';
 import AddBlogs from '../dashboard/AddBlogs/AddBlogs';
 import AddCourses from '../dashboard/courses/AddCourses';
-import CourseList from '../dashboard/courses/CourseList';
-import CourseUpdate from '../dashboard/courses/CourseUpdate';
 import Addvideo from '../dashboard/addvideotowebsite/Addvideo';
 import Instructor from '../dashboard/Instructors/Instructors';
 import CourseDetails from '../components/Courses/CourseDetails';
@@ -52,8 +50,6 @@ const users = JSON.parse(localStorage.getItem("token"))?JSON.parse(localStorage.
         <Route path='/admin/contacts' element={<Contacts/>} />
         <Route path='/admin/Blogs' element={<AddBlogs/>} />
         <Route path='/admin/addCourses' element={<AddCourses/>} />
-        <Route path='admin/allcourses' element={<CourseList/>} />
-        <Route path='admin/updatecourses' element={<CourseUpdate/>} />
         <Route path='admin/addvideo' element={<Addvideo/>} />
         <Route path='admin/instructors' element={<Instructor/>} />
         

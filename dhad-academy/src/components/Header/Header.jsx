@@ -43,23 +43,31 @@ function Header() {
               <i className="fa-solid fa-envelope"></i>
               Info@dhadacademy.com
             </li>
-            {/* </ul>
-    <ul className="navbar-nav justify-content-end pe-3  gap-4">
-    <li className="fw-lighter" onClick={()=>{
-      i18n.changeLanguage('ar');
-    }}>
-    <i className="fa-solid fa-language"></i>
-    Languages
-    </li> */}
-            {/* <NavDropdown
-                title="Languages"
-                id={`offcanvasNavbarDropdown-expand-xl`}
-              >
-                <NavDropdown.Item  className={({ isActive }) => (isActive ? 'active' : '')}>Arabic</NavDropdown.Item>
-                <NavDropdown.Item  className={({ isActive }) => (isActive ? 'active' : '')}>English</NavDropdown.Item>
-              </NavDropdown> */}
-            <div className="vr"></div>
+          </ul>
 
+          <ul className="navbar-nav justify-content-end pe-3  gap-4">
+            {/* <li className="fw-lighter" onClick={() => {
+              i18n.changeLanguage('ar');
+            }}>
+              Languages
+            </li> */}
+            <li className='dropdown ' >
+              <button className="fw-lighter fs-5 dropdown-toggle btn py-0 border-0"  id="DropdownMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i className="fa-solid fa-language"></i>
+                Languages
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="DropdownMenu">
+                <li>
+                  <NavLink className={({ isActive }) => `dropdown-item ${isActive} ? 'active' : ''`}>Arabic</NavLink>
+                </li>
+                <li>
+                  <NavLink className={({ isActive }) => `dropdown-item ${isActive} ? 'active' : ''`}>English</NavLink>
+
+                </li>
+              </ul>
+            </li>
+            <div className="vr"></div>
+            
             {/* <li className='fw-lighter' onClick={handleShow}> */}
             {!users ? <li className='fw-lighter'>
               <NavLink to={"/myprofile"} className=" text-decoration-none">
@@ -73,6 +81,7 @@ function Header() {
               </li>}
 
           </ul>
+
 
           {/* <Modal show={show} fullscreen={true} onHide={handleClose}>
         <Modal.Header closeButton className=' text-left border-0 bg-modal'>
@@ -98,7 +107,7 @@ function Header() {
         </div>
       </nav>
 
-      <Navbar expand={'xl'} className="header px-xl-5" collapseOnSelect  >
+      <Navbar expand={'xl'} className="header px-xl-5"  >
         <Container fluid>
           <Navbar.Brand href="#home">
             <img
@@ -151,17 +160,32 @@ function Header() {
                 >
                   Services
                 </NavLink>
-                <NavDropdown
+                <div className='dropdown '>
+              <button className=" fs-5 dropdown-toggle btn px-0 border-0"  id="DropdownMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Courses
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="DropdownMenu">
+                 <li> <NavLink className="dropdown-item" to="/courses/Arabic" onClick={CloseOffcanvas} >Arabic</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/Quran and readings" onClick={CloseOffcanvas} >Quran and readings</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/Islamic studies" onClick={CloseOffcanvas} >Islamic studies</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/Qualifying courses" onClick={CloseOffcanvas} >Qualifying courses</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/Crafts and Skills" onClick={CloseOffcanvas} >Crafts and Skills</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/Field tourism" onClick={CloseOffcanvas} >Field tourism</NavLink></li>
+               
+              
+              </ul>
+                </div>
+                {/* <NavDropdown
                   title="Courses"
                   id={`offcanvasNavbarDropdown-expand-xl`}
                 >
-                  <NavDropdown.Item as={NavLink} to="/courses/Arabic" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Arabic</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Quran and readings" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Quran and readings</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Islamic studies" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Islamic studies</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Qualifying courses" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Qualifying courses</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Crafts and Skills" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Crafts and Skills</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Field tourism" onClick={CloseOffcanvas} className={({ isActive }) => (isActive ? 'active' : '')}>Field tourism</NavDropdown.Item>
-                </NavDropdown>
+                  <NavDropdown.Item as={NavLink} to="/courses/Arabic" onClick={CloseOffcanvas} >Arabic</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Quran and readings" onClick={CloseOffcanvas} >Quran and readings</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Islamic studies" onClick={CloseOffcanvas} >Islamic studies</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Qualifying courses" onClick={CloseOffcanvas} >Qualifying courses</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Crafts and Skills" onClick={CloseOffcanvas} >Crafts and Skills</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/courses/Field tourism" onClick={CloseOffcanvas} >Field tourism</NavDropdown.Item>
+                </NavDropdown> */}
                 <NavLink
                   to="/blog"
                   className={({ isActive }) => (isActive ? 'active' : '')}
@@ -200,6 +224,48 @@ function Header() {
                 >
                   Admin
                 </NavLink> : ''}
+                <div className='d-xl-none d-block'>
+                <div className="hr w-50"></div>
+            <p>
+              <i className="fa-solid fa-phone"></i>
+              +20 100 763 3800
+            </p>
+            <p>
+              <i className="fa-solid fa-envelope"></i>
+              Info@dhadacademy.com
+            </p>
+
+            <p className='dropdown ' >
+              <button className=" fs-5 fw-light dropdown-toggle btn p-0 border-0"  id="DropdownMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i className="fa-solid fa-language"></i>
+                Languages
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="DropdownMenu">
+                <li>
+                  <NavLink className={({ isActive }) => `dropdown-item ${isActive} ? 'active' : ''`}>Arabic</NavLink>
+                </li>
+                <li>
+                  <NavLink className={({ isActive }) => `dropdown-item ${isActive} ? 'active' : ''`}>English</NavLink>
+
+                </li>
+              </ul>
+            </p>
+            
+            {/* <li className='fw-lighter' onClick={handleShow}> */}
+            {!users ? <p>
+              <NavLink to={"/myprofile"} className=" text-decoration-none">
+                <i className="fa-regular fa-user"></i>
+                My Profile
+              </NavLink>
+            </p> :
+              <p onClick={hadelerLogout} >
+                <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                Logout
+              </p>}
+
+
+          
+        </div>
 
               </Nav>
 
