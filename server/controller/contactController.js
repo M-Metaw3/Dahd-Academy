@@ -8,7 +8,7 @@ class contactMessages {
 
 static contactMessages =async(req,res)=>{
     console.log('contactMessages')
-    console.log(req.body)
+    // console.log(req.body)
     const {error}= contactmodel.validatecontact(req.body)
     if (error) { 
      return   response(res,400,"Invalid Data Please Enter Valide Data","",error.details[0].message)

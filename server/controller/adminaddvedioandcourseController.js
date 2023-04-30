@@ -13,14 +13,6 @@ class admainController {
 static addCourse =async (req,res) => {
 
 
-console.log(req.body)
-console.log('req.body')
-
-
-
-
-
-
 
     try {
         const { error } = coursemodel.validateaddcourse(req.body);
@@ -89,34 +81,34 @@ static getallCourse =async (req,res) => {
 
 
 
+  const Category =req.query.coursedepartment
 
 
+console.log(Category)
+if (Category) {
+  
+  try {
+      const courses = await coursemodel.addCourse.find({coursesDepartment:Category}).select({lessons:0});
+      res.send(courses);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server Error');
+    }
+}else{
+  
+  try {
+    const courses = await coursemodel.addCourse.find();
+    res.send(courses);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
 
-console.log("getallCourse")
+}
 
 
-    try {
-        const courses = await coursemodel.addCourse.find();
-        res.send(courses);
-      } catch (error) {
-        console.error(error.message);
-        res.status(500).send('Server Error');
-      }
     
-//     try {
-//     console.log("getallCourse")
 
-// const getCourse= await coursemodel.addCourse.find();
-// console.log(getCourse)
-// response(res,200,"get all posts successfully",{getCourse},"") 
-
-    
-// } catch (error) {
-
-// response(res,400,"error occured",error) 
-
-    
-// }
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////

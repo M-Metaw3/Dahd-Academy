@@ -49,7 +49,7 @@ const courseSchema = new mongoose.Schema({
     },
     coursesDepartment: {
         type: String,
-        enum:['arabic', 'quran and readings','islamic studies','qualifying courses','crafts and Skills','field tourism'],
+        enum:['arabic', 'quran and readings','islamic studies','qualifying courses','crafts and skills','field tourism'],
         required:[true,"the coursedepartment is required field"],
         trim: true,
         lowercase: true
@@ -74,7 +74,7 @@ const courseSchema = new mongoose.Schema({
 function validateaddcourse (obj){
 
 const schema = joi.object({
-    coursesDepartment : joi.string().trim().required(),
+coursesDepartment : joi.string().trim().required(),
 courseName :joi.string().trim().min(15).required(),
 title :joi.string().trim().required(),
 price :joi.string().trim().required(),
