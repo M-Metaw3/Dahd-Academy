@@ -4,16 +4,26 @@ import axios from 'axios';
 import moment from "moment"
 import { apihttp } from "../../api/api"
 function Instructor(props) {
-  // const [blogs, setBlogs] = useState([]);
+  // const [users, setUsers] = useState([]);
 
   // useEffect(() => {
-  //   fetchBlogs();
+  //   getUsers();
   // }, []);
 
-  // const fetchBlogs = async () => {
-  //   const { data } = await axios.get('http://localhost:5000/blog');
-  //   setBlogs(data.body);
-  //   console.log(data.body);
+  // const getUsers = async (category) => {
+  //   console.log(category);
+  //   try {
+  //     const response = await axios.get(`${apihttp}userRegistration?category=instructor`,   {   headers: {
+  //       // 'Content-Type': 'multipart/form-data',
+  //       // "Authorization": `Bearer ${token.token}`,
+
+  //       }
+  //     });
+  //     setUsers(response.data.body);
+
+  //   } catch (error) {
+  //     console.log('Error getting users:', error);
+  //   }
   // };
   
   return (

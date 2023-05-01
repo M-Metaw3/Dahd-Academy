@@ -19,7 +19,7 @@ function Teachers() {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get(`${apihttp}userRegistration`,   {   headers: {
+      const response = await axios.get(`${apihttp}userRegistration?category=instructor`,   {   headers: {
         // 'Content-Type': 'multipart/form-data',
         // "Authorization": `Bearer ${token.token}`,
 
