@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import CommonSection from '../Common-section/CommonSection';
 import contact from '../../assets/images/contact.png';
@@ -17,6 +18,7 @@ function Contact() {
     subject: '',
     message: ''
   });
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,12 +34,15 @@ function Contact() {
 
       const data = await response.json();
       console.log(data);
-setFormData({name:"",phonenumber:"",subject:"",message:""})
+      setFormData({name:"",phonenumber:"",subject:"",message:""});
+      setShowPopup(true); // Show popup for success message
+      setTimeout(() => {
+        setShowPopup(false); // Hide popup after 5 seconds
+      }, 5000);
 
     } catch (error) {
       console.error(error);
     }
-
   };
 
   const handleChange = (event) => {
@@ -89,6 +94,11 @@ setFormData({name:"",phonenumber:"",subject:"",message:""})
                 </button>
               </div>
             </form>
+            {showPopup && (
+          <div className="success-popup">
+            <p>message  sended  successfully!</p>
+          </div>
+        )}
           </div>
 
           <div className="col-12 col-lg-4  row d-flex justify-content-between">

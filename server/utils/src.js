@@ -13,16 +13,16 @@ const xss = require('xss-clean');
 // app.use(xss());
 // // Set up security middleware
 // // app.use(helmet());
-// helmet({
-//     crossOriginResourcePolicy: false,
-//   })
+helmet({
+    crossOriginResourcePolicy: false,
+  })
 // app.use(express.static('public'));
-// app.use(
-//   rateLimit({
-//     windowMs: 10 * 60 * 1000, // 10 minutes
-//     max: 300, // limit each IP to 100 requests per windowMs
-//   })
-// );
+app.use(
+  rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 minutes
+    max: 500, // limit each IP to 100 requests per windowMs
+  })
+);
 app.use(mongoSanitize());
 
 // Set up body parser middleware
@@ -43,12 +43,16 @@ const videoRout = require('../routing/addVideoRouting');
 const courseRout = require('../routing/addCourseRouting');
 const conatctRout = require('../routing/contactRout');
 const blogRout = require('../routing/blogandCommentRouting');
+const sliderRoute = require('../routing/sliderRouting');
+
 
 app.use('/userRegistration', userRout);
 app.use('/blog', blogRout);
 app.use('/video', videoRout);
 app.use('/course', courseRout);
 app.use('/contact', conatctRout);
+app.use('/slider', sliderRoute);
+
 
 // Set up input validation middleware using express-validator
 // app.post(

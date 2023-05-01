@@ -8,20 +8,70 @@ const response= require('../utils/response')
 
 class Blog {
 
-static getblog = async(req, res) => {
-    try {
-      
- const getallblog=  await       blogmodel.addBlog.find().populate('comment')
-            .sort({ createdAt: -1 })
-        return    response(res,200,"get All Blogs succefully",getallblog)
+static getblog = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 3;
+    const startIndex = (page - 1) * limit;
 
-      } catch (error) {
-        return  response(res,400,"get All Blogs failed",'',error.message)
-          
-      }
-      
- 
-  };
+    const totalBlogs = await blogmodel.addBlog.countDocuments();
+    const totalPages = Math.ceil(totalBlogs / limit);
+
+    const blogs = await blogmodel.addBlog.find().populate('comment')
+      .sort({ createdAt: -1 })
+      .skip(startIndex)
+      .limit(limit);
+
+    res.set('x-total-count', totalBlogs); // set the x-total-count header
+    res.status(200).json(blogs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to get blogs' });
+  }
+};
+
+
+
+
+// static getblog = async (req, res) => {
+//   try {
+//     const page = parseInt(req.query.page) || 1; // get the page number from the query parameter or default to 1
+//     const limit = 3; // set the limit to 3 blogs per page
+//     const startIndex = (page - 1) * limit; // calculate the starting index of the blogs to fetch
+
+//     const totalBlogs = await blogmodel.addBlog.countDocuments(); // get the total number of blogs in the database
+//     const totalPages = Math.ceil(totalBlogs / limit); // calculate the total number of pages
+
+//     const blogs = await blogmodel.addBlog.find().populate('comment')
+//       .sort({ createdAt: -1 })
+//       .skip(startIndex)
+//       .limit(limit);
+
+//     return response(res, 200, `Get all blogs successfully (page ${page} of ${totalPages})`, blogs);
+//   } catch (error) {
+//     return response(res, 500, 'Failed to get all blogs', '', error.message);
+//   }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   static getoneblog = async(req, res) => {
 const id = req.params.id
 
@@ -72,7 +122,7 @@ console.log(fileName)
               return  response(res,201,"blog created successfully",{postBlog},"")
 
       } catch (error) {
-        return  response(res,400,"get All Blogs failed",'',error.message)
+        return  response(res,500,"get All Blogs failed",'',error.message)
           
       }
       
@@ -197,10 +247,10 @@ static deletecomment = async(req, res) => {
 
     
            const comment= await new commentmodel.addcomment.findByIdAndDelete(_id)
-            return  response(res,201,"comment deleted successfully",{comment},"")
+            return  response(res,200,"comment deleted successfully",{comment},"")
 
     } catch (error) {
-      return  response(res,400,"get All Blogs failed",'',error.message)
+      return  response(res,500,"get All Blogs failed",'',error.message)
         
     }
     

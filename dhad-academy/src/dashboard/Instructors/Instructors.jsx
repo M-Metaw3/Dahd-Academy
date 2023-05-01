@@ -129,12 +129,15 @@ const Instructors = () => {
     }
     if (user) {
       try {
-        await axios.put(`${apihttp}userRegistration/${selectedUser._id}`, formData, {
+     const users=   await axios.put(`${apihttp}userRegistration/${selectedUser._id}`, formData, {
           onUploadProgress: (progressEvent) => {
             const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
             setUploadProgressu(progress);
           }
         });
+        console.log(users);
+        console.log("users");
+
         getUsers();
         setSelectedUser(null);
         setUsernam('');
@@ -144,6 +147,8 @@ const Instructors = () => {
         setImage(null);
         setImage(null);
         setImg(null)
+        setUploadProgress(null);
+
       } catch (error) {
         console.log('Error updating user:', error);
       }

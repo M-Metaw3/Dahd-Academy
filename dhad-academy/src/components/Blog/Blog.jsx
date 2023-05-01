@@ -10,6 +10,8 @@ import axios from 'axios';
 
 
 function Blog() {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     useEffect(() => {
         document.title = "Contact";
         dots[0].classList.add("active-circle");
@@ -29,14 +31,26 @@ function Blog() {
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-      fetchBlogs();
-    }, []);
-  
-    const fetchBlogs = async () => {
-      const { data } = await axios.get(`${apihttp}blog`);
-      setBlogs(data.body);
-    };
-
+        fetchBlogs();
+      }, [currentPage]);
+    
+      const fetchBlogs = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/blog?page=${currentPage}`);
+          setBlogs(response.data);
+          console.log(response);
+          setTotalPages(Math.ceil(response.headers['x-total-count'] / 3)); // assume limit of 3 blogs per page
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      const handlePrevPage = () => {
+        setCurrentPage((prevPage) => prevPage - 1);
+      };
+    
+      const handleNextPage = () => {
+        setCurrentPage((prevPage) => prevPage + 1);
+      };
     return (
         <>
             <CommonSection title="BLOG" img={`${blog}`} />
@@ -78,6 +92,18 @@ function Blog() {
 
 
                 </div>
+                <div>
+        <button disabled={currentPage === 1} onClick={handlePrevPage}>
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button disabled={currentPage === totalPages} onClick={handleNextPage}>
+          Next
+        </button>
+      </div>
+  
 
             </Container>
 
