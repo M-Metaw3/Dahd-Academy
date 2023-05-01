@@ -93,13 +93,21 @@ return   response(res,200,"loggin successfully",{...other,token},"")
 
 
     static getallusers =async (req,res) => {
+const category =req.query.category
+   console.log(category)
+     
+
 
 try {
-  console.log(req.headers.authorization)
+  // console.log(req.headers.authorization)
   console.log("donw")
+if(category=='all'||category==''){
    const users= await userModel.User.find().select({password:0})
-
    return response(res,200,"users get succefully",users)
+}
+const users= await userModel.User.find({isAdmin:category}).select({password:0})
+console.log(users)
+return response(res,200,"users get succefully",users)
 } catch (error) {
    
 }
@@ -107,13 +115,6 @@ try {
       
     }
     
-
-
-
-
-    
-
-
 
     
     static updateUser = async (req, res) => {
@@ -150,7 +151,6 @@ try {
               });
             }
           });
-    
           const updateuser = await userModel.User.findByIdAndUpdate(
             { _id: id },
             { usernam: usernam, email: email, image: fileName, isAdmin: isAdmin },
@@ -163,8 +163,6 @@ try {
             { new: true }
           ).select({ password: 0 });
         }
-    
-    
       } catch (error) {
         res.status(500).json({ message: 'Error updating user', error });
       }

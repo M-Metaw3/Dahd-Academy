@@ -53,14 +53,14 @@ static Deleteall =async(req,res)=>{
 
 
     console.log("DeleteContactMessages")
-    const _id = req.params.id
+   
 
     try {
         const deletecontact = await contactmodel.contactModel.deleteMany();
        
-        response(res,200,"video deleted successfully",{deletecontact},"") 
+        response(res,200,"all messages deleted succefully",{deletecontact},"") 
     } catch (error) {
-response(res,400,"error occured",error) 
+return response(res,400,"error occured",error) 
         
     }
 

@@ -15,21 +15,22 @@ const Instructors = () => {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadProgressu, setUploadProgressu] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [category, setCategory] = useState("");
   const token = JSON.parse(localStorage.getItem("token"));
   const user = JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : null
   const nav = useNavigate();
 
 
   useEffect(() => {
-    getUsers();
+    getUsers(category);
   }, []);
 
-  const getUsers = async () => {
+  const getUsers = async (category) => {
+    console.log(category);
     try {
-      const response = await axios.get(`${apihttp}userRegistration`, {
-        headers: {
-          // 'Content-Type': 'multipart/form-data',
-          // "Authorization": `Bearer ${token.token}`,
+      const response = await axios.get(`${apihttp}userRegistration?category=${category}`,   {   headers: {
+        // 'Content-Type': 'multipart/form-data',
+        // "Authorization": `Bearer ${token.token}`,
 
         }
       });
@@ -169,32 +170,32 @@ const Instructors = () => {
   };
 
   const [showAdd, setShowAdd] = useState(false);
-  const [category, setCategory] = useState("all");
 
   const Add = () => setShowAdd(true);
-  const sellectCategory = (category) => {
-    setShowAdd(false);
-    setCategory(category)
-    console.log(category)
+  const sellectCategory = (category) =>{
+     setShowAdd(false);
+     setCategory(category)
+     console.log(category)
+     getUsers(category)
   }
 
   return (
     <>
-      <h3>Users</h3>
-      <div className='py-2 instructors'>
-        <button className={`btn mx-1 ${showAdd ? "" : "active"}`} onClick={() => sellectCategory("all")}>All</button>
-        <button className='btn mx-1' onClick={() => sellectCategory("Instructors")}>Instructors</button>
-        <button className='btn mx-1' onClick={() => sellectCategory("Users")}>Users</button>
-        <button className='btn mx-1' onClick={() => sellectCategory("Admins")}>Admins</button>
-        <button className={`btn mx-1 ${showAdd ? "active" : ""}`} onClick={Add}>Add</button>
-      </div>
+    <h3>Users</h3>
+     <div className='py-2 instructors'>
+     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={()=>sellectCategory("all")}>All</button>
+     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={()=>sellectCategory("instructor")}>Instructors</button>
+     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={()=>sellectCategory("user")}>Users</button>
+     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={()=>sellectCategory("Admin")}>Admins</button>
+     <button className={`btn mx-1 ${showAdd ? "active":"" }`} onClick={Add}>Add</button>
+     </div>
 
-      {showAdd ?
-        <Container className='py-2'>
-          {/* <h2>Create User</h2> */}
-          <div className='w-50 m-auto'>
-            <form onSubmit={handleCreateUser}>
-              <div className='row'>
+     {showAdd?
+      <Container className='py-2'>
+              
+    <div className='w-50 m-auto'>
+      <form onSubmit={handleCreateUser}>
+      <div className='row'>
                 <div className="col-12 form-group ">
                   <label className="px-2 opacity-75">Username</label>
                   <input className="form-control" type="text" value={usernam} onChange={handleUsernamChange} />
