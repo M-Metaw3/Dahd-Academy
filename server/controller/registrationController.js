@@ -100,7 +100,7 @@ const category =req.query.category
 
 try {
   // console.log(req.headers.authorization)
-  console.log("donw")
+
 if(category=='all'||category==''){
    const users= await userModel.User.find().select({password:0})
    return response(res,200,"users get succefully",users)
@@ -170,45 +170,24 @@ return response(res,200,"users get succefully",users)
     
    
 
+
+
     static deleteUser = async (req, res) => {
       const { id } = req.params;
     
       try {
-         const deleteuser = await userModel.User.findByIdAndDelete(id);
-         if (deleteuser) {
-           console.log(deleteuser)
-           await   fs.unlink(path.join(__dirname,`../images/${deleteuser.image}`), (err => {
-            if (err) console.log(err);
-            else {
-              console.log("Deleted file: example_file.txt");
-            }
-          }));
-        
+        const deleteuser = await userModel.User.findByIdAndDelete(id);
+        if (deleteuser && deleteuser.image) {
+          const imagePathToDelete = path.join(__dirname, "../images", deleteuser.image);
+          if (fs.existsSync(imagePathToDelete)) {
+            fs.unlinkSync(imagePathToDelete);
+          }
         }
-    
-      //   // Delete user image
-    
-    
-    
-    
         res.json({ message: 'User deleted successfully' });
       } catch (error) {
         res.status(500).json({ message: 'Error deleting user', error });
       }
     };
-
-
-
-
-
-
-
-
-
-
-
-
-    
     }
 
 
