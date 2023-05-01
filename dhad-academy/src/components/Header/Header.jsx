@@ -28,41 +28,51 @@ function Header() {
 
   const CloseOffcanvas = () => setMenuOpen(false)
   const [t, i18n] = useTranslation();
+  // const [lang, setLang] = useState("en");
+  // const changLang = () => {
+
+  // }
+
 
   return (
     <>
       <nav className=" d-none d-xl-block navbar navbar-expand top-nav px-xl-5 ">
         <div className='container-fluid '>
           <ul className="navbar-nav gap-4 ">
-            <li className="fw-lighter ">
+            <li className="fw-lighter ltr">
               <i className="fa-solid fa-phone"></i>
               +20 100 763 3800
             </li>
             <div className="vr"></div>
-            <li className="fw-lighter ">
+            <li className="fw-lighter ltr">
               <i className="fa-solid fa-envelope"></i>
               Info@dhadacademy.com
             </li>
           </ul>
 
           <ul className="navbar-nav justify-content-end pe-3  gap-4">
-            {/* <li className="fw-lighter" onClick={() => {
-              i18n.changeLanguage('ar');
-            }}>
-              Languages
-            </li> */}
+            
             <li className='dropdown ' >
               <button className="fw-lighter fs-5 dropdown-toggle btn py-0 border-0"  id="DropdownMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i className="fa-solid fa-language"></i>
-                Languages
+                <i className="fa-solid fa-language"></i>                
+                {t('Languages')}
               </button>
               <ul className="dropdown-menu" aria-labelledby="DropdownMenu">
-                <li>
-                  <NavLink className={({ isActive }) => `dropdown-item ${isActive} ? 'active' : ''`}>Arabic</NavLink>
+                <li
+                   className={ `dropdown-item`}
+                  onClick={() => {
+                    i18n.changeLanguage('ar');
+                  }}
+                  >
+                  Arabic
                 </li>
-                <li>
-                  <NavLink className={({ isActive }) => `dropdown-item ${isActive} ? 'active' : ''`}>English</NavLink>
-
+                <li
+                   className={ `dropdown-item`}
+                    onClick={() => {
+                      i18n.changeLanguage('en');
+                    }}
+                    >                    
+                      English
                 </li>
               </ul>
             </li>
@@ -72,12 +82,12 @@ function Header() {
             {!users ? <li className='fw-lighter'>
               <NavLink to={"/myprofile"} className=" text-decoration-none">
                 <i className="fa-regular fa-user"></i>
-                My Profile
+                {t('MyProfile')}
               </NavLink>
             </li> :
               <li onClick={hadelerLogout} className='fw-lighter'>
-                <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                Logout
+                <i className="fa-solid fa-arrow-right-from-bracket"></i>                
+                {t('Logout')}
               </li>}
 
           </ul>
@@ -144,25 +154,26 @@ function Header() {
                   className={({ isActive }) => (isActive ? 'active' : '')}
                   onClick={CloseOffcanvas}
                 >
-                  Home
+                  {t('Home')}
+
                 </NavLink>
                 <NavLink
                   to="/about"
                   className={({ isActive }) => (isActive ? 'active' : '')}
                   onClick={CloseOffcanvas}
                 >
-                  About
+                  {t('About')}
                 </NavLink>
                 <NavLink
                   to="/services"
                   className={({ isActive }) => (isActive ? 'active' : '')}
                   onClick={CloseOffcanvas}
                 >
-                  Services
+                  {t('Services')}
                 </NavLink>
                 <div className='dropdown '>
               <button className=" fs-5 dropdown-toggle btn px-0 border-0"  id="DropdownMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Courses
+              {t('Courses')}
               </button>
               <ul className="dropdown-menu" aria-labelledby="DropdownMenu">
                  <li> <NavLink className="dropdown-item" to="/courses/Arabic" onClick={CloseOffcanvas} >Arabic</NavLink></li>
@@ -175,30 +186,20 @@ function Header() {
               
               </ul>
                 </div>
-                {/* <NavDropdown
-                  title="Courses"
-                  id={`offcanvasNavbarDropdown-expand-xl`}
-                >
-                  <NavDropdown.Item as={NavLink} to="/courses/Arabic" onClick={CloseOffcanvas} >Arabic</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Quran and readings" onClick={CloseOffcanvas} >Quran and readings</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Islamic studies" onClick={CloseOffcanvas} >Islamic studies</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Qualifying courses" onClick={CloseOffcanvas} >Qualifying courses</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Crafts and Skills" onClick={CloseOffcanvas} >Crafts and Skills</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/courses/Field tourism" onClick={CloseOffcanvas} >Field tourism</NavDropdown.Item>
-                </NavDropdown> */}
+                
                 <NavLink
                   to="/blog"
                   className={({ isActive }) => (isActive ? 'active' : '')}
                   onClick={CloseOffcanvas}
                 >
-                  Blog
+              {t('Blog')}
                 </NavLink>
                 <NavLink
                   to="/instructors"
                   className={({ isActive }) => (isActive ? 'active' : '')}
                   onClick={CloseOffcanvas}
                 >
-                  Instructors
+                  {t('Instructors')}
                 </NavLink>
 
                 <NavLink
@@ -206,8 +207,8 @@ function Header() {
                   className={({ isActive }) => (isActive ? 'active' : '')}
                   onClick={CloseOffcanvas}
                 >
-                  Contacts
-                </NavLink>
+                  {t('contacts')}
+                  </NavLink>
 
 
                 <NavLink
@@ -222,7 +223,7 @@ function Header() {
                   className={({ isActive }) => (isActive ? 'active' : '')}
                   onClick={CloseOffcanvas}
                 >
-                  Admin
+                {t('Admin')}
                 </NavLink> : ''}
                 <div className='d-xl-none d-block'>
                 <div className="hr w-50"></div>
@@ -263,8 +264,6 @@ function Header() {
                 Logout
               </p>}
 
-
-          
         </div>
 
               </Nav>

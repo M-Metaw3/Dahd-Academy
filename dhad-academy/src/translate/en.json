@@ -1,0 +1,26 @@
+{
+    "Languages": "Languages",
+    "Logout": "Logout",
+    "MyProfile": "My Profile",    
+    "Home": "Home",
+    "About": "About",
+    "Services": "Services",
+    "Courses": "Courses",
+    "Blog": "Blog",
+    "Instructors": "Instructors",
+    "contacts": "contacts",
+    "Admin": "Admin",
+
+    "HeroSection":"A journey of a thousand miles begins with a single step.",
+    "HeroSection2":"We are Experts Learning Institution",
+
+    "OurServices":"Our Services",
+    "Arabic":"Arabic",
+    "QuranAndReadings":"Quran and readings",
+    "IslamicStudies":"Islamic studies",
+    "QualifyingCourses":"Qualifying Courses",
+    "CraftsAndSkills":"Crafts and Skills",
+    "FieldTrips":"Field Trips",
+    "RecentPosts":"Recent Posts"
+
+}

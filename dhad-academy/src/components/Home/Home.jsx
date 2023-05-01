@@ -8,8 +8,11 @@ import moment from "moment"
 import { Container } from 'react-bootstrap';
 import OurServices from '../Services/OurServices';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import"./home.css"
 
 const Home = () => {
+    const [t] = useTranslation();
     const dispatch = useDispatch()
     const selector2 = useSelector((state) => state.teacher);
     const [video, setVideo] = useState(null);
@@ -37,28 +40,20 @@ const Home = () => {
 
 // console.log( moment(Date).fromNow());
 
-    const [file, setfile] = useState('')
-
-    // console.log(file);
-
-    // useEffect(() => {
-    //     console.log("HomeComponent");
-
-    //     dispatch({type:"getAllTeacher"})
-    //   }, []);
 
    
     return (
         <>
             <section className="position-relative text-center">
                 {/* <Link to="/files/myfile.pdf" target="_blank" download>Download</Link> */}
-
                 {/* <a href='http://localhost:5000/197 Section Intro.mp4' download>Click to download</a> */}
-                <img src={bg} alt="" className='w-100' height={450} />
+                <img src={bg} alt="" className='home-bg-img w-100' />
                 <div className='position-absolute top-50 start-50 translate-middle text-center row w-75 m-auto d-flex justify-content-center align-items-center'>
                 <img src={require("../../assets/images/big logo.png")} alt="" className='col-6 col-md-4 mb-3 mb-md-0'/>
                 <div className='col-md-1 col-12'></div>
-                <h3 className="text-light text-uppercase col-md-6 col-12">A journey of a thousand miles begins with a single step.</h3>
+                <h3 className="text-light text-uppercase col-md-6 col-12">
+                {t('HeroSection')} 
+                </h3>
                 </div>
 
             </section>
@@ -70,9 +65,9 @@ const Home = () => {
                     <img src={require("../../assets/images/home.png")} className=' d-flex w-75 m-auto rounded-4' alt="" />
                 </div>
                 <div className='col-6 py-3'>
-                    <h2 className=' fw-semibold'>We are Experts
-                        <br/>Learning
-                        <br/> Institution</h2>
+                    <h2 className=' fw-semibold w-50'>
+                    {t('HeroSection2')}
+                    </h2>
                 </div>
                 </div>
                 <div className='services'>
@@ -86,7 +81,7 @@ const Home = () => {
             </div>
             <Container className='pb-5'>
             <div className='row pt-5  justify-content-center '>
-            <h3 className='col-12 text-center  pb-5'>Recent Posts</h3>
+            <h3 className='col-12 text-center  pb-5'>{t('RecentPosts')}</h3>
                     <div className="col-10 col-md-6 col-lg-4 pb-5">
                         <div className="card rounded-20">
                             <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />

@@ -170,11 +170,16 @@ const Instructors = () => {
   };
 
   const [showAdd, setShowAdd] = useState(false);
+  const [show, setShow] = useState("all");
 
-  const Add = () => setShowAdd(true);
+  const Add = () =>{ 
+    setShowAdd(true);
+    setShow("add");
+  }
   const sellectCategory = (category) =>{
-     setShowAdd(false);
-     setCategory(category)
+    setShowAdd(false);
+    setShow(category);
+    setCategory(category)
      console.log(category)
      getUsers(category)
   }
@@ -183,11 +188,11 @@ const Instructors = () => {
     <>
     <h3>Users</h3>
      <div className='py-2 instructors'>
-     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={()=>sellectCategory("all")}>All</button>
-     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={()=>sellectCategory("instructor")}>Instructors</button>
-     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={()=>sellectCategory("user")}>Users</button>
-     <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={()=>sellectCategory("Admin")}>Admins</button>
-     <button className={`btn mx-1 ${showAdd ? "active":"" }`} onClick={Add}>Add</button>
+     <button className={`btn mx-1 ${show==="all"? "active":"" }`}  onClick={()=>sellectCategory("all")}>All</button>
+     <button className={`btn mx-1 ${show==="instructor"? "active":"" }`}  onClick={()=>sellectCategory("instructor")}>Instructors</button>
+     <button className={`btn mx-1 ${show==="user" ?"active":"" }`}  onClick={()=>sellectCategory("user")}>Users</button>
+     <button className={`btn mx-1 ${show==="Admin" ? "active":"" }`}  onClick={()=>sellectCategory("Admin")}>Admins</button>
+     <button className={`btn mx-1 ${show==="add" ? "active":"" }`} onClick={Add}>Add</button>
      </div>
 
      {showAdd?

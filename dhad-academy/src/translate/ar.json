@@ -1,3 +1,27 @@
 {
-    "title": "ندى"
+    "Languages": "اللغات",
+    "Logout": "تسجيل الخروج",
+    "MyProfile": "الصفحة الشخصية",    
+    "Home": "الرئيسية",
+    "About": "عنا",
+    "Services": "خدمات",
+    "Courses": "كورسات",
+    "Blog": "المدونة ",
+    "Instructors": "معلمينا",
+    "contacts": "تواصل معنا",
+    "Admin": "المسؤل",
+
+    "HeroSection":"رحلة الألف ميل تبدأ بخطوة واحدة.",
+    "HeroSection2":"نحن مؤسسة تعليمية ذات خبرة",
+
+    "OurServices":"خدماتنا",
+    "Arabic":"لغة عربية",
+    "QuranAndReadings":"تحفيظ وتلاوة القرآن الكريم",
+    "IslamicStudies":"دراسات إسلامية",
+    "QualifyingCourses":"كورسات تأهيلية",
+    "CraftsAndSkills":"حرف و مهارات",
+    "FieldTrips":"رحلات ميدانية",
+    "RecentPosts":"آخر الأخبار "
+
+
 }

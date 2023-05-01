@@ -16,3 +16,7 @@ footer h6{
   background-color: #4E6C50;
   color: var(--white) !important;
 }
+footer .dropdown-toggle,footer .dropdown-toggle:hover,footer .dropdown-toggle:focus{
+  color: var(--white) !important; 
+}
+
