@@ -1,101 +1,9 @@
-// import { useState } from "react";
-// import axios from "axios";
-// // import "animate.css";
-// import './coursescss.css'
-// import { Container } from "react-bootstrap";
-// const AddCourses = () => {
-//   const [title, setTitle] = useState("");
-//   const [description, setDescription] = useState("");
-//   const [link, setLink] = useState("");
-//   const [image, setImage] = useState(null);
-//   const [uploadProgress, setUploadProgress] = useState(0);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     const formData = new FormData();
-//     formData.append("title", title);
-//     formData.append("description", description);
-//     formData.append("link", link);
-//     formData.append("image", image, image.name);
-//     try {
-//       const res = await axios.post("http://localhost:5000/course/addCourse", formData, {
-//         onUploadProgress: (progressEvent) => {
-//           const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
-//           setUploadProgress(progress);
-//         }
-//       });
-//       console.log(res.data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   return (
-//     <>
-//     <Container className='py-5'>
-//         <div className='w-50 m-auto'>
-//     <form onSubmit={handleSubmit} className="animate__animated animate__fadeIn">
-//     <div className='row'>
-
-//     <div className="col-12 form-group pb-1">
-//         <label htmlFor="title">Title</label>
-//         <input
-//           type="text"
-//           id="title"
-//           className="form-control"
-//           value={title}
-//           onChange={(e) => setTitle(e.target.value)}
-//         />
-//       </div>
-//       <div className="col-12 form-group pb-2">
-//         <label htmlFor="description">Description</label>
-//         <textarea
-//           id="description"
-//           className="form-control"
-//           value={description}
-//           onChange={(e) => setDescription(e.target.value)}
-//         ></textarea>
-//       </div>
-//       <div className="col-12 form-group pb-1">
-//         <label htmlFor="link">Link</label>
-//         <input
-//           type="text"
-//           id="link"
-//           className="form-control"
-//           value={link}
-//           onChange={(e) => setLink(e.target.value)}
-//         />
-//       </div>
-//       <div className="col-12 form-group pb-1">
-//         <label htmlFor="image">Image</label>
-//         <input
-//           type="file"
-//           id="image"
-//           className="form-control-file"
-//           accept=".jpg, .jpeg, .png"
-//           onChange={(e) => setImage(e.target.files[0])}
-//         />
-//       </div>
-//       <div>
-//         {uploadProgress > 0 && <progress value={uploadProgress} max="100" />}
-//       </div>
-//       <div className="pt-4 col-12">
-//       <button type="submit" className="btn w-100 btn-submit px-5">Add Course</button>
-//       </div>
-//     </div>
-//     </form>
-//     </div>
-//     </Container>
-//     </>
-
-//   );
-// };
-
-// export default AddCourses;
 import React, { useState, useEffect } from 'react';
 import YouTube from 'react-youtube'
 import axios from 'axios';
 import { Container, Row, Col, ListGroup, Button, Form } from 'react-bootstrap';
+import { apihttp } from "../../api/api"
+
 const AddCourses = () => {
   const [courses, setCourses] = useState([]);
   const [addcourse, setaddcourse] = useState(false);
@@ -126,7 +34,7 @@ const AddCourses = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/course/getCourse');
+      const response = await axios.get(`${apihttp}course/getCourse`);
       console.log(response.data);
       setCourses(response.data);
     } catch (error) {
@@ -177,7 +85,7 @@ const AddCourses = () => {
     try {
       if (selectedCourse) {
         console.log(selectedCourse);
-        const response = await axios.put(`http://localhost:5000/course/updateCourse/${selectedCourse._id}`, formData);
+        const response = await axios.put(`${apihttp}course/updateCourse/${selectedCourse._id}`, formData);
         console.log(response);
         console.log(response.data);
         setCourses((prevCourses) => {
@@ -189,7 +97,7 @@ const AddCourses = () => {
         setSelectedCourse(null);
       } else {
         // Create new course
-        const response = await axios.post('http://localhost:5000/course/addCourse', formData);
+        const response = await axios.post(`${apihttp}course/addCourse`, formData);
         console.log(response.data);
 
 
@@ -220,7 +128,7 @@ const AddCourses = () => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:5000/course/${idcourse}/lessons`, formData);
+      const response = await axios.post(`${apihttp}course/${idcourse}/lessons`, formData);
       setCourses((prevCourses) => {
         const index = prevCourses.findIndex((course) => course._id === idcourse);
 
@@ -259,7 +167,7 @@ const AddCourses = () => {
   const handleCourseDelete = async (course) => {
     console.log(course);
     try {
-      await axios.delete(`http://localhost:5000/course/deleteCourse/${course._id}`);
+      await axios.delete(`${apihttp}course/deleteCourse/${course._id}`);
       setCourses((prevCourses) => prevCourses.filter((c) => c._id !== course._id));
     } catch (error) {
       console.error(error);
@@ -279,7 +187,7 @@ const AddCourses = () => {
   const handleLessonDelete = async (lesson) => {
     console.log(lesson.course_id);
     try {
-      await axios.delete(`http://localhost:5000/course/${lesson.course_id}/lessons/${lesson._id}`);
+      await axios.delete(`${apihttp}course/${lesson.course_id}/lessons/${lesson._id}`);
       setCourses((prevCourses) => {
         const index = prevCourses.findIndex((course) => course._id === lesson.course_id);
         const updatedCourses = [...prevCourses];
@@ -496,41 +404,21 @@ const AddCourses = () => {
             <ListGroup.Item key={course._id} className='my-2'>
               <div className="">
               <div className="py-3 d-flex justify-content-center">
-                <img src={`http://localhost:5000/${course.image}`} width={"30%"} height={200} />
+                <img src={`${apihttp}${course.image}`} width={"30%"} height={200} />
                 </div>
                 <div>
                 <p className=' fw-bold'>title: <span className=' fw-normal'> {course.title}</span></p>
 
                 <p className=' fw-bold'>lessons: <span className=' fw-normal'> {course.lessons ? course.lessons.length : 0}</span> </p>
-
-                <p className=' fw-bold'>courseName: <span className=' fw-normal'> {course.courseName}</span></p>
-                <p className=' fw-bold'>coursesDepartment: <span className=' fw-normal'> {course.coursesDepartment}</span></p>
-                <p className=' fw-bold'>price: <span className=' fw-normal'> {course.price}</span></p>
-                <p className=' fw-bold'>hours: <span className=' fw-normal'> {course.hours}</span></p>
-                
-                </div>
-                <div className=' text-center py-3'>
-                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseEdit(course)}>
-                    Edit
-                  </Button>{' '}
-                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseDelete(course)}>
-                    Delete
-                  </Button>
-                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleaddlessons(course)}>
-                    Add lesson
-                  </Button>
-                </div>
-              </div>
-              {course.lessons.length?
-              <div className='py-4'>
-                <h4>Lessons</h4>
-                  <ol >
+                {course.lessons.length?
+              <div className=''>
+                  <ol>
               {
                 course.lessons.map((lesson) => (
                   <li key={lesson._id}>
                     <div className="d-flex justify-content-between">
                       <div>{lesson.name}</div>
-                      <a href={`http://localhost:5000/${lesson.pdf}`}>pdf</a>
+                      <a href={`${apihttp}${lesson.pdf}`}>pdf</a>
                       <a href={lesson.video}>video</a>
                       <a href={lesson.video}>meeting</a>
 
@@ -550,6 +438,25 @@ const AddCourses = () => {
               :""
             
 }
+                <p className=' fw-bold'>courseName: <span className=' fw-normal'> {course.courseName}</span></p>
+                <p className=' fw-bold'>coursesDepartment: <span className=' fw-normal'> {course.coursesDepartment}</span></p>
+                <p className=' fw-bold'>price: <span className=' fw-normal'> {course.price}</span></p>
+                <p className=' fw-bold'>hours: <span className=' fw-normal'> {course.hours}</span></p>
+                
+                </div>
+                <div className=' text-center py-3'>
+                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseEdit(course)}>
+                    Edit
+                  </Button>{' '}
+                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseDelete(course)}>
+                    Delete
+                  </Button>
+                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleaddlessons(course)}>
+                    Add lesson
+                  </Button>
+                </div>
+              </div>
+
               
             </ListGroup.Item>
           ))}

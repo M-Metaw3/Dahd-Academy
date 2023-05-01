@@ -33,7 +33,7 @@ function Courses() {
       <div className="row d-flex justify-content-center">
       {courses.map((course) => (
                 <div key={course._id} className="col-10 col-md-6 col-lg-4 pb-5">
-                <NavLink to={"/course/Arabic for non-native speakers"} className="text-decoration-none">
+                <NavLink to={`/course/${course.title}`} className="text-decoration-none">
                     <div className="card rounded-3">
                     <img src={require("../../assets/images/course.png")} className="rounded-img-top " alt="..." />
                             <div className="card-body">

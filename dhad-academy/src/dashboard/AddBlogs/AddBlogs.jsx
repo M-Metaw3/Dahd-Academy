@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from "moment"
 import { Container } from 'react-bootstrap';
+import { apihttp } from "../../api/api"
 
 const AddBlogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -18,7 +19,7 @@ const AddBlogs = () => {
   }, []);
 
   const fetchBlogs = async () => {
-    const { data } = await axios.get('http://localhost:5000/blog');
+    const { data } = await axios.get(`${apihttp}blog`);
     setBlogs(data.body);
     console.log(data.body);
   };
@@ -37,7 +38,7 @@ const AddBlogs = () => {
     formData.append('image', image);
 
     try {
-      const { data } = await axios.post('http://localhost:5000/blog/addblog', formData, {
+      const { data } = await axios.post(`${apihttp}blog/addblog`, formData, {
         onUploadProgress: (progressEvent) => {
           const progress = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
@@ -62,7 +63,7 @@ const AddBlogs = () => {
 
   const handleDeleteBlog = async (blog) => {
     try {
-      await axios.delete(`http://localhost:5000/blog/${blog._id}`);
+      await axios.delete(`${apihttp}blog/${blog._id}`);
       fetchBlogs();
       setErrorMessage('');
 
@@ -169,7 +170,7 @@ const AddBlogs = () => {
           <p>{moment(blog.createdAt).fromNow()}</p>
           <div className="py-3 d-flex justify-content-center">
             <img
-              src={`http://localhost:5000/${blog.image}`}
+              src={`${apihttp}${blog.image}`}
               alt={blog.title}
               className="img-fluid mb-3 w-25 "
               style={{ maxHeight: '300px' }}

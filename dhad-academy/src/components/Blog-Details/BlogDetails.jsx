@@ -4,33 +4,35 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { apihttp } from "../../api/api"
 
 function BlogDetails() {
     const { id } = useParams();
     const [blogs, setBlogs] = useState({});
     const [text, setcomment] = useState("");
     const users = JSON.parse(localStorage.getItem("token"))?JSON.parse(localStorage.getItem("token")):null
-    const nav = useNavigate()
+    const nav = useNavigate();
 
   useEffect(() => {
     fetchBlogs();
+
   }, []);
 
   const fetchBlogs = async () => {
-    const { data } = await axios.get(`http://localhost:5000/blog/${id}`);
+    const { data } = await axios.get(`${apihttp}blog/${id}`);
     setBlogs(data.body);
     console.log(data.body.comment);
+
   };
   const handelercomment=async (event) => {
     event.preventDefault();
     console.log(text);
     const formData = new FormData();
-
     formData.append('text',text);
 
 if(users){
     try {
-   const comments = await axios.post(`http://localhost:5000/blog/comment/${id}`, {text}, {
+   const comments = await axios.post(`${apihttp}blog/comment/${id}`, {text}, {
           headers: {
             // 'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${users.token}`,
@@ -47,18 +49,20 @@ nav('/myprofile')
       }
  
   }
-//   console.log(blogs.updatedAt.split("T")[0])
-
+console.log(blogs.updatedAt);
     return (
-        <>
-            <img src={require("../../assets/images/image 5.png")} width={"100%"} height={300} alt="..." />
+        <> 
+            <img src={`${apihttp}${blogs.image}`} width={"100%"} height={400} alt="..." />
             <Container className=' py-5'>
                 <Row className='d-flex justify-content-between'>
                     <Col sm="12" md="9">
                         <h3>{blogs.title}</h3>
                     </Col>
                     <Col sm="12" md="3" className=' text-md-end'>
-                        <p>{(blogs.updatedAt)}</p>
+                        {blogs.updatedAt?
+                        <p>{blogs.updatedAt.split("T")[0]}</p>
+                        :""
+}
                     </Col>
                     <Col >
                         <p>{blogs.description}</p>
@@ -72,7 +76,7 @@ nav('/myprofile')
 <>
   
                     <Col xs={1} className=' text-center p-2'>
-                        <img width={70} height={70} className=' rounded-circle ' src={`http://localhost:5000/${comment.image}`} alt="" srcset="" />
+                        <img width={70} height={70} className=' rounded-circle ' src={`${apihttp}${comment.image}`} alt="" srcset="" />
                     </Col>
                     <Col xs={11} className='p-2'>
 

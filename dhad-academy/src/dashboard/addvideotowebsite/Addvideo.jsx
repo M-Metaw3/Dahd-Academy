@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
+import { apihttp } from "../../api/api"
 
 function Addvideo() {
 
@@ -40,7 +41,7 @@ function Addvideo() {
 
     if (videoId) {
       // If we have a video ID, update the existing video
-      await axios.put(`http://localhost:5000/video/updateVideo/${videoId}`, formData, config)
+      await axios.put(`${apihttp}video/updateVideo/${videoId}`, formData, config)
         .then(response => {
           console.log(response);
         })
@@ -49,7 +50,7 @@ function Addvideo() {
         });
     } else {
       // Otherwise, add a new video
-      await axios.post('http://localhost:5000/video/addVideo', formData, config)
+      await axios.post(`${apihttp}video/addVideo`, formData, config)
         .then(response => {
           console.log(response);
           setVideoId(response.data._id);
@@ -63,7 +64,7 @@ function Addvideo() {
   async function handleDelete(id) {
 
 
-    await axios.delete(`http://localhost:5000/video/deleteVideo/${id}`)
+    await axios.delete(`${apihttp}video/deleteVideo/${id}`)
       .then(response => {
         console.log(response);
         setFile(null);
@@ -80,7 +81,7 @@ function Addvideo() {
   //   // Fetch the video data when the component mounts
   //       const headers = { Range: 'bytes=0-' };
 
-  // await  axios.get('http://localhost:5000/video/getVideo',{ headers, responseType: 'blob' })
+  // await  axios.get(`${apihttp}video/getVideo`,{ headers, responseType: 'blob' })
   //     .then(response => {
   //         setVideo(response.data.body.getVideo)
   //         console.log(response);
@@ -95,7 +96,7 @@ function Addvideo() {
     const fetchVideo = async () => {
       try {
         const headers = { Range: 'bytes=0-' };
-        const response = await axios.get('http://localhost:5000/video/getVideo', { headers, responseType: 'blob' });
+        const response = await axios.get(`${apihttp}video/getVideo`, { headers, responseType: 'blob' });
         const videoUrl = URL.createObjectURL(response.data);
         const videoId = response.headers['video-id'];
 

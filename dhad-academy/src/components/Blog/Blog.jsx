@@ -26,7 +26,6 @@ function Blog() {
 
     };
 
-
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
@@ -45,12 +44,12 @@ function Blog() {
                 <div className="row d-flex  justify-content-center justify-content-md-start">
                 {blogs.map((blog) => (
 
-                    <div className="col-10 col-sm-7 col-md-6 col-lg-4 pb-5">
+                    <div key={blog.id} className="col-10 col-sm-7 col-md-6 col-lg-4 pb-5">
                         <div className="card rounded-20">
                             
                             <img src={`${apihttp}${blog.image}`} className="rounded-img-top" height={"320"} alt="..." />
                             <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
+                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{blog.updatedAt.split("T")[0]}</p>
                                 <h6 className="card-text">{blog.title} </h6>
                                 <NavLink to={`/blog/${blog.id}`} className='text-decoration-none '>
                                     Read More<i className="fa-solid fa-arrow-right-long ps-2 fs-6"></i>
