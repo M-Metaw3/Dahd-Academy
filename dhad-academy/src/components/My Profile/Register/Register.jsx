@@ -2,7 +2,10 @@ import React from 'react'
 import actions from '../../../actions/actions'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 function Register() {
+  const [t] = useTranslation();
   const loginSucceful = useSelector((state) => state.users)
 
   const dispatch = useDispatch()
@@ -38,36 +41,36 @@ function Register() {
 
   return (
     <>
-      <div className='py-5'>
-        <div className='w-50 m-auto'>
-          <h4 className='pb-3'>Register</h4>
+      <div className=''>
+        <div className='w-75 m-auto'>
+          <h4 className='pb-3'>{t('Register')}</h4>
           <form className='' onSubmit={handleSubmit} encType="multipart/form-data">
             <div className='row'>
               <div className="col-12 form-group">
-                <label className="px-2 opacity-75" htmlFor="email">Email</label>
+                <label className="px-2 opacity-75" htmlFor="email">{t('Email')}</label>
                 <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required id="email" className="form-control" />
               </div>
               <div className="col-12 form-group">
-                <label className="px-2 opacity-75" htmlFor="Full-Name">Full Name</label>
+                <label className="px-2 opacity-75" htmlFor="Full-Name">{t('FullName')}</label>
                 <input type="text" value={name} onChange={(event) => setName(event.target.value)} required id="Full-Name" className="form-control" />
               </div>
 
               <div className="col-12 form-group">
-                <label className="px-2 opacity-75" htmlFor="Password">Password</label>
+                <label className="px-2 opacity-75" htmlFor="Password">{t('Password')}</label>
                 <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required id="Password" className="form-control" />
               </div>
 
               <div className="form-group col-12 ">
-                <label className="px-2 opacity-75" htmlFor="Confirm-Password" >Confirm Password</label>
+                <label className="px-2 opacity-75" htmlFor="Confirm-Password" >{t('ConfirmPassword')}</label>
                 <input type="password" value={conpassword} onChange={(event) => setconPassword(event.target.value)} required id="Confirm-Password" className="form-control" />
               </div>
               <div className="form-group col-12 ">
-                <label htmlFor="image">Image:</label>
+                <label className="px-2 opacity-75"  htmlFor="image">{t('Image')}</label>
                 <input type="file" id="image" className='form-control' onChange={handleImageChange} accept="image/*" required />
               </div>
               <img src={Show} alt="" />
               <div className="pt-4 col-12">
-                <button type="submit" className="w-100 btn-submit btn px-5">Register</button>
+                <button type="submit" className="w-100 btn-submit btn px-5">{t('Register')}</button>
                 <p>{loginSucceful.registrationfail ? loginSucceful.registrationfail : ""}</p>
                 <p>{loginSucceful.registration ? loginSucceful.registration : ""}</p>
 

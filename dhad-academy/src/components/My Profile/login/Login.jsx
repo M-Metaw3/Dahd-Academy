@@ -5,8 +5,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {apihttp} from '../../../api/api'
+import { useTranslation } from 'react-i18next';
 
 function Login() {
+  const [t] = useTranslation();
+
   const dispatch = useDispatch()  
 
 
@@ -57,30 +60,26 @@ const handleSubmitloggin= async(event) => {
   
   }
   
-
-
-
-
   return (
     <>
-        <Container className='py-5'>
-        <div className='w-50 m-auto'>
-        <h4 className='pb-3'>Login</h4>
+        <Container className=''>
+        <div className='w-75 m-auto'>
+        <h4 className='pb-3'>{t('LogIn')}</h4>
     <form className=''  onSubmit={handleSubmitloggin}>
               <div className='row'>
                 <div className="col-12 form-group ">
-                  <label className="px-2 opacity-75" htmlFor="email">Email</label>
+                  <label className="px-2 opacity-75" htmlFor="email">{t('Email')}</label>
                   <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required id="email" className="form-control" />
                 </div>
 
                 <div className="col-12 form-group ">
-                  <label className="px-2 opacity-75" htmlFor="Password">Password</label>
+                  <label className="px-2 opacity-75" htmlFor="Password">{t('Password')}</label>
                   <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required id="Password" className="form-control" />
                 </div>
 
             
               <div className="pt-4 col-12">
-                <button type="submit" className="w-100 btn-submit btn px-5">Login</button>
+                <button type="submit" className="w-100 btn-submit btn px-5">{t('LogIn')}</button>
                 <p>{error?error:''}</p>
               </div>
               </div>

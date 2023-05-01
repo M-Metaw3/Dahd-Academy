@@ -5,14 +5,16 @@ import { Container } from 'react-bootstrap';
 import './services.css'
 import { NavLink } from 'react-router-dom';
 import OurServices from './OurServices';
+import { useTranslation } from 'react-i18next';
 
 function Services() {
+  const [t] = useTranslation();
   useEffect(() => {
     document.title = "Services";
   }, []);
   return (
     <div>
-      <CommonSection title="services" img={`${services}`} />
+      <CommonSection title={`${t('Services')}`} img={`${services}`} />
       <Container className='services py-5'>
         <div className='row d-flex align-items-center justify-content-center '>
           <div className='col-8 col-md-4 '>
@@ -23,12 +25,12 @@ function Services() {
               <div className="col-6 ">
                 <p><i className="fa-solid fa-star fa-xl"></i></p>
                 <h4>8+</h4>
-                <p>Years Experience</p>
+                <p>{t('YearsExperience')}</p>
               </div>
               <div className="col-6">
                 <p><i className="fa-solid fa-book-open fa-xl"></i></p>
                 <h4>40+</h4>
-                <p>Available Courses</p>
+                <p>{t('AvailableCourses')}</p>
               </div>
             </div>
             <div className="row py-3">
@@ -37,14 +39,14 @@ function Services() {
                   <i className="fa-solid fa-user-group fa-xl"></i>
                 </p>
                 <h4>300+</h4>
-                <p>Graduate Students</p>
+                <p>{t('GraduateStudents')}</p>
               </div>
               <div className="col-6">
                 <p>
                   <i className="fa-solid fa-briefcase fa-xl"></i>
                 </p>
                 <h4>34+</h4>
-                <p>Best Instructors</p>
+                <p>{t('BestInstructors')}</p>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@
     border-left: 3px solid var(--primary-color);
     padding: 20px;
     list-style: none;
-    text-align: left;
+    text-align: start;
     max-width: 90%;
     /* margin-left: 4rem; */
     position: relative;
@@ -35,7 +35,7 @@
     left: -90px;
     content: attr(data-date);
     color: var(--primary-color);
-    text-align: left;
+    text-align: start;
     /* min-width: 100px; */
   }
   
@@ -51,25 +51,88 @@
     content: "";
     top: 8px;
   }
+
+  .right-timeline{
+    border-right: 3px solid var(--primary-color);
+    padding: 20px;
+    list-style: none;
+    text-align: start;
+    max-width: 90%;
+    /* margin-left: 4rem; */
+    position: relative;
+
+  }
+  
+
+  
+  .right-timeline .event {
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    position: relative;
+  }
+  
+
+  .right-timeline .event:last-of-type {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border: none;
+  }
+  
+  .right-timeline .event:before,
+  .right-timeline .event:after {
+    position: absolute;
+    display: block;
+    top: 0;
+  }
+  
+  .right-timeline .event:before {
+    right: -90px;
+    content: attr(data-date);
+    color: var(--primary-color);
+    text-align: start;
+    /* min-width: 100px; */
+  }
+  
+ 
+  
+  .right-timeline .event:after {
+    box-shadow: 0 0 0 3px var(--primary-color);
+    right: -25.8px;
+    background:var(--bg-color);
+    border-radius: 50%;
+    height: 9px;
+    width: 9px;
+    content: "";
+    top: 8px;
+  }
   
 
 
+
+
+  
   @media (max-width: 767px) {
-    .timeline {
+    .timeline,.right-timeline {
       max-width: 98%;
       padding: 25px;
     margin: 0;
     }
-    .timeline .event {
+    .timeline .event,.right-timeline .event {
       padding-bottom: 5px;
       margin: 0;
         padding-top: 30px;
       }
       .timeline .event:before {
         left: 0px;
-        text-align: left;
       }
+      .right-timeline .event:before {
+        right:  0px;
+      }
+     
       .timeline .event:after {
         left: -31.8px;
+      }
+      .right-timeline .event:after {
+        right:  -31.8px;
       }
   }

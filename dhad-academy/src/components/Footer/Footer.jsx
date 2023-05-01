@@ -10,14 +10,14 @@ function Footer() {
       <footer className="">
         <div className="p-4">
           <div className="row d-flex align-items-center justify-content-center">
-            <div className="col-lg-6 col-md-12 mb-4 mb-md-0 d-flex align-items-center justify-content-center">
+            <div className="col-lg-6 col-md-12 mb-5 mb-md-0 d-flex align-items-center justify-content-center">
               <img src={require("../../assets/images/logo.png")} alt="" width={"50%"} />
             </div>
-            <div className="col-sm-12 col-md-6 mb-4 mb-md-0 mt-md-4">
-              <div className="row d-flex  justify-content-center px-lg-5 ">
-                <div className="col-6 mb-4 mb-md-0 ps-lg-5">
-                  <h6 className="text-uppercase mb-2 ">QUICK LINKS</h6>
-                  <ul className="list-unstyled">
+            <div className="col-sm-12 col-lg-6 mb-4 mb-md-0 mt-md-4">
+              <div className="row d-flex  justify-content-center px-md-5 fs-6">
+                <div className="col-6 mb-1 mb-md-0 px-lg-5 p-0">
+                  <h6 className="text-uppercase  mb-2">{t('QUICK-LINKS')}</h6>
+                  <ul className="list-unstyled p-0">
                     <li className='mb-2'>
                       <NavLink to="/home"
                       >
@@ -70,10 +70,10 @@ function Footer() {
                   </ul>
                 </div>
 
-                <div className="col-6 mb-4 mb-md-0 ">
-                  <h6 className="text-uppercase mb-2">COURSE CATEGORIES</h6>
+                <div className="col-6 mb-1 mb-md-0 p-0">
+                  <h6 className="mb-2">{t('COURSE-CATEGORIES')}</h6>
 
-                  <ul className="list-unstyled">
+                  <ul className="list-unstyled p-0">
                     <li className='mb-2'>
                       <a href="/courses/Arabic" >{t('Arabic')}</a>
                     </li>
