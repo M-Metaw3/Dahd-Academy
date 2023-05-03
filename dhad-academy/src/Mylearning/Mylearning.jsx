@@ -54,7 +54,7 @@ console.log(lessons.lessons);
       </div>
       <div className="card-body">
         <ul>
-          {coursesUsers?coursesUsers.map((course) => (
+          {coursesUsers&&coursesUsers?.courseId!=null?coursesUsers.map((course) => (
             <div>
             <li >{course.courseId?.title }</li>
              <li >{course.courseId?.price}</li>
