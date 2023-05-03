@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import "./sidebar.css"
 import {
     CDBSidebar,
@@ -14,6 +14,12 @@ import { Container } from 'react-bootstrap';
 import RoutesDashboard from '../Routes/RoutesDashboard';
 
 function Sidebar() {
+    const nav = useNavigate()
+    const hadelerLogout = () => {
+      console.log("object");
+      localStorage.removeItem("token")
+      nav('/')
+    }
     return (
 
 <>
@@ -28,13 +34,8 @@ function Sidebar() {
                     <CDBSidebarContent>
                         <CDBSidebarMenu>
                        
-                        <NavLink exact="true" to="admin/addvideo" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-user"}>
-                                    Add video
-                                </CDBSidebarMenuItem>
-                            </NavLink>
                             <NavLink exact="true" to="admin/instructors" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-user"}>
+                                <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-user-group"}>
                                   Users
                                 </CDBSidebarMenuItem>
                             </NavLink>
@@ -42,11 +43,11 @@ function Sidebar() {
                            
                             <NavLink exact="true" to="addCourses" activeclassname="activeClicked">
                                 <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
-                                add Courses
+                                 Courses
                                 </CDBSidebarMenuItem>
                             </NavLink>
                             <NavLink exact="true" to="Blogs" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
+                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-envelopes-bulk">
                                     Blogs
                                 </CDBSidebarMenuItem>
                             </NavLink>
@@ -54,17 +55,22 @@ function Sidebar() {
                             <NavLink exact="true" to="contacts" activeclassname="activeClicked"
                             >
                                 <CDBSidebarMenuItem
-                                    className='active-item'
-                                    icon="fa-regular fa-envelope" >
-                                    Contact
+                                    icon="fa-solid fa-message" >
+                                    Contacts
                                 </CDBSidebarMenuItem>
                                 </NavLink>
+                                <NavLink exact="true" to="admin/addvideo" activeclassname="activeClicked">
+                                <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-video"}>
+                                    Add video
+                                </CDBSidebarMenuItem>
+                            </NavLink>
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
 
                     <CDBSidebarFooter className=' text-center '>
-                        <div className=' px-2 py-3'>
+                        <div className='px-1 py-3 cursor-pointer' onClick={hadelerLogout}>
                             Logout
+
                         </div>
                     </CDBSidebarFooter>
                 </CDBSidebar>

@@ -43,7 +43,7 @@ function About() {
         <img src={require("../../assets/images/history.png")} className='w-100 rounded-4 py-2' alt="" />
         </div>
         <div className='col-12 col-md-6 py-3 py-md-5 '>
-              <ul className={`${i18n.language=="en"? "timeline ":"right-timeline " }`}>
+              <ul className={`${i18n.language=="en"? "timeline":"right-timeline " }`}>
                 <li className="event" data-date="2015">
                 <p>{t('2015')}</p>
                 </li>

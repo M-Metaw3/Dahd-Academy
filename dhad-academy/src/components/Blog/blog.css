@@ -5,6 +5,7 @@
     border: 2px solid rgba(var(--secondry-color-rgb),30%);
     margin:0 10px;
     color:rgba(var(--secondry-color-rgb),30%);
+    background-color: transparent;
 }
  .active-circle {
     background-color: var(--primary-color);

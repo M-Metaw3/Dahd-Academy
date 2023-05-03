@@ -5,6 +5,8 @@ import contact from '../../assets/images/contact.png';
 import { Container } from 'react-bootstrap';
 import './contact.css';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
+import { NavLink } from 'react-router-dom';
 
 function Contact() {
   const [t] = useTranslation();
@@ -102,25 +104,35 @@ function Contact() {
           </div>
 
           <div className="col-12 col-lg-4  row d-flex justify-content-between">
-          <div className='col-12 col-md-5 col-lg-12 '>
+          <div className='col-12 col-md-5 col-lg-12'>
               <h5>{t('PhoneNumbers')}</h5>
               <div className="hr w-100"></div>
-              <p className=''>
-                <i className="fa-solid fa-phone"></i>(+2) 0100 763 3800
+              <div className={`ltr ${i18n.language=="en" ? "":"text-end"}`}>
+              <p>
+                <i className="fa-solid fa-phone"></i>
+                (+2) 0100 763 3800
               </p>
-              <p className=''>
+              <p>
                 <i className="fa-solid fa-phone"></i>(+2) 0109 764 5047
               </p>
-              <p className=''>
+              <p>
                 <i className="fa-solid fa-phone"></i>
                 (+2) 0110 040 6408
               </p>
+              </div>
+              
                {/* <p><img src={require("../../assets/images/Vector.png")}  alt="" /></p> */}
              </div>
-             <div className='col-12 col-md-5 col-lg-12  '>
+             <div className='col-12 col-md-5 col-lg-12 email '>
                <h5 >{t('Email')}</h5>
                <div className='hr w-100'></div>
-               <p><i className="fa-regular fa-envelope"></i>Info@dhadacademy.com</p>
+               <div className={`ltr ${i18n.language=="en" ? "":"text-end"}`}>
+               <p>
+               <NavLink to="mailto:Info@dhadacademy.com" className=" fw-light">
+               <i className="fa-regular fa-envelope"></i>Info@dhadacademy.com
+               </NavLink>
+               </p>
+            </div>
              </div>
              <div className='col-12 col-md-5 col-lg-12 '>
               <h5>{t('Address')}</h5>
@@ -130,7 +142,7 @@ function Contact() {
             <div className='col-12 col-md-5 col-lg-12  '>
               <h5 >{t('WorkingHours')}</h5>
                <div className='hr w-100 '></div>
-               <p className=''><i className="fa-regular fa-clock "></i>10:00 AM - 06:00 PM</p>
+               <p className=''><i className="fa-regular fa-clock "></i>10:00 {t('AM')} - 06:00 {t('PM')}</p>
              </div>
            </div>
 

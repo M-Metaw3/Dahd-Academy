@@ -5,9 +5,12 @@ import RoutesDashboard from '../Routes/RoutesDashboard'
 function Admin() {
   return (
     <>
+    <div className=' ltr'>
     <Sidebar>
     </Sidebar>
     <RoutesDashboard/>
+    </div>
+    
 
     </>
   )

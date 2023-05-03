@@ -26,9 +26,9 @@ const Instructors = () => {
   }, []);
 
   const getUsers = async (category) => {
-    console.log(category);
     try {
-      const response = await axios.get(`${apihttp}userRegistration?category=${category}`,   {   headers: {
+      const response = await axios.get(`${apihttp}userRegistration?category=${category}`,
+         {   headers: {
         // 'Content-Type': 'multipart/form-data',
         // "Authorization": `Bearer ${token.token}`,
 
@@ -67,9 +67,7 @@ const Instructors = () => {
 
   const handleCreateUser = async (event) => {
     event.preventDefault();
-
     const formData = new FormData();
-
     formData.append('name', usernam);
     formData.append('email', email);
     formData.append('password', password);
@@ -82,14 +80,14 @@ const Instructors = () => {
         await axios.post(`${apihttp}userRegistration`, formData, {
           headers: {
             // 'Content-Type': 'multipart/form-data',
-            // Authorization: `Bearer ${token.token}`,
+            Authorization: `Bearer ${user.token}`,
 
           }, onUploadProgress: (progressEvent) => {
             const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
             setUploadProgress(progress);
           }
         });
-        getUsers();
+        getUsers(category);
         setUsernam('');
         setEmail('');
         setPassword('');
@@ -127,27 +125,40 @@ const Instructors = () => {
     if (image) {
       formData.append('image', image);
     }
+    console.log("users");
+    getUsers(category);
+    setSelectedUser(null);
+    console.log(selectedUser,"ssssssssss")
+    setUsernam('');
+    setEmail('');
+    setPassword('');
+    setIsAdmin('user');
+    setImage(null);
+    setImage(null);
+    setImg(null)
+    setUploadProgress(null);
+
+
     if (user) {
       try {
-     const users=   await axios.put(`${apihttp}userRegistration/${selectedUser._id}`, formData, {
+
+     const res=  await axios.put(`${apihttp}userRegistration/${selectedUser._id}`,formData,
+     {
+       headers: {
+         // 'Content-Type': 'multipart/form-data',
+         Authorization: `Bearer ${user.token}`,
+
+       }
+       
+     }, {
           onUploadProgress: (progressEvent) => {
             const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
             setUploadProgressu(progress);
           }
-        });
-        console.log(users);
-        console.log("users");
-
-        getUsers();
-        setSelectedUser(null);
-        setUsernam('');
-        setEmail('');
-        setPassword('');
-        setIsAdmin('user');
-        setImage(null);
-        setImage(null);
-        setImg(null)
-        setUploadProgress(null);
+          
+        }
+        );
+  
 
       } catch (error) {
         console.log('Error updating user:', error);
@@ -156,13 +167,22 @@ const Instructors = () => {
     else {
       nav('/myprofile')
     }
+  
   };
 
   const handleDeleteUser = async (id) => {
     if (user) {
       try {
-        await axios.delete(`${apihttp}userRegistration/${id}`);
-        getUsers();
+        await axios.delete(`${apihttp}userRegistration/${id}`,
+        {
+          headers: {
+            // 'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${user.token}`,
+
+          }
+          
+        });
+        getUsers(category);
       } catch (error) {
         console.log('Error deleting user:', error);
       }
@@ -201,9 +221,9 @@ const Instructors = () => {
      </div>
 
      {showAdd?
-      <Container className='py-2'>
+      <div className='py-2 row'>
               
-    <div className='w-50 m-auto'>
+    <div className='col-12 col-lg-6 m-auto'>
       <form onSubmit={handleCreateUser}>
       <div className='row'>
                 <div className="col-12 form-group ">
@@ -242,12 +262,11 @@ const Instructors = () => {
               </div>
             </form>
           </div>
-        </Container> :
+        </div> :
 
-        <Container className='py-2'>
-          {selectedUser && (
-            <div>
-              <div className='w-50 m-auto'>
+<div className='py-2 row'>
+{selectedUser && (
+    <div className='col-12 col-lg-6 m-auto'>
                 {/* <h2 className=' text-center'>Edit User</h2> */}
                 <form onSubmit={handleUpdateUser}>
                   <div className='row'>
@@ -288,27 +307,26 @@ const Instructors = () => {
                 </form>
               </div>
 
-            </div>
 
           )}
           {users ? users.map((user) => (
 
-            <div key={user._id} className="card m-1 m-lg-4">
+            <div key={user._id} className="card my-2">
               <div className="card-body d-flex row align-items-center">
-                <div className='col-1 text-center'>
+                <div className='col-12 col-lg-6  d-flex'>
                   {/* <i className=" w-50 fa-regular fa-circle-user fa-2xl"></i> */}
-                  <img src={`${apihttp}${user.image}`} alt="img" className=' rounded-circle' width={70} height={70} />
+                  <img src={`${apihttp}${user.image}`} alt="img" className='mx-3 rounded-circle' width={70} height={70} />
+                  {/* <span>{user.usernam}</span> */}
+                  <div className=''>
+                  <p>{user.usernam}</p>
+                  <p>{user.email}</p>
+                </div>
                 </div>
 
-                <div className='col-5 d-flex flex-column'>
-                  <span>{user.usernam}</span>
-                  <span>{user.email}</span>
-                </div>
-                <div className='col-2 text-center border-end border-start'>
-                  <span>{user.isAdmin}</span>
-                </div>
+                  <span className='col-5 col-lg-2 text-center border-end border-start'>{user.isAdmin}</span>
+              
 
-                <div className='col-4 d-flex justify-content-evenly'>
+                <div className='col-7 col-lg-4 d-flex justify-content-evenly'>
                   <button onClick={() => handleSelectUser(user)} className='btn border-0 text-decoration-underline fs-5' >Edit</button>
                   <button onClick={() => handleDeleteUser(user._id)} className='btn border-0 text-decoration-underline fs-5'>Delete</button>
                 </div>
@@ -316,7 +334,7 @@ const Instructors = () => {
             </div>
           )) : ''}
 
-        </Container>
+        </div>
       }
     </>
 

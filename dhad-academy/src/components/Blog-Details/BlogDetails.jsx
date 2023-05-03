@@ -6,14 +6,18 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { apihttp } from '../../api/api';
+import { useTranslation } from 'react-i18next';
+
 
 function BlogDetails() {
+  const [t] = useTranslation();
+
   const { id } = useParams();
   const [blogs, setBlogs] = useState({});
   const [text, setComment] = useState('');
   const users = JSON.parse(localStorage.getItem('token')) || null;
+  // const userImg = JSON.parse(localStorage.getItem('token')).image;
   const nav = useNavigate();
-
   useEffect(() => {
     fetchBlogs();
   }, []);
@@ -37,12 +41,12 @@ function BlogDetails() {
           { text },
           {
             headers: {
-             
+
               Authorization: `Bearer ${users.token}`,
             },
           }
         );
-console.log(data);
+        console.log(data);
         setBlogs((prevBlogs) => ({
           ...prevBlogs,
           comment: [...prevBlogs.comment, data.body.comment],
@@ -82,36 +86,62 @@ console.log(data);
           </Col>
         </Row>
         <hr className=" my-3" />
-        <h5 className=" mt-4 fw-normal">Comment</h5>
+        <h5 className=" mt-4 fw-normal">{t('Comments')}</h5>
         <div className="hr"></div>
         <Row className=" d-flex justify-content-center mt-4 align-items-start">
           {blogs && blogs.comment
             ? blogs.comment.map((comment) => (
-                <>
-                  <Col xs={1} className=" text-center p-2">
-                    <img
-                      width={70}
-                      height={70}
-                      className=" rounded-circle "
-                      src={`${apihttp}${comment.image}`}
-                      alt=""
-                      srcset=""
-                    />
-                  </Col>
-                  <Col xs={11} className="p-2">
-                    <h5>{comment.username}</h5>
-                    <p>{comment.text}</p>
-                  </Col>
-                </>
-              ))
+              <>
+                <Col xs={1} className=" text-center p-2">
+                  <img
+                    width={50}
+                    height={50}
+                    className=" rounded-circle "
+                    src={`${apihttp}${comment.image}`}
+                    alt=""
+                    srcset=""
+                  />
+                </Col>
+                <Col xs={11} className="p-2">
+                  <h5>{comment.username}</h5>
+                  <p>{comment.text}</p>
+                </Col>
+              </>
+            ))
             : ''}
         </Row>
-        <h5 className=" mt-4 fw-normal">Write Comment</h5>
+        <h5 className=" mt-4 fw-normal">{t('WriteComment')}</h5>
         <div className="hr"></div>
         <Row className="d-flex align-items-center mt-4">
-          <Col xs={1} className=" text-center ">
-            <i className=" w-25 fa-regular fa-circle-user fa-2xl"></i>
-          </Col>
+          
+{users ?
+  <Col xs={1} className=" text-center ">
+    <img
+      width={50}
+      height={50}
+      className=" rounded-circle "
+      src={`${apihttp}${users.image}`}
+      alt=""
+      srcset=""
+    />
+
+
+
+  </Col>
+  :
+  <Col xs={1} className=" text-center ">
+
+    <img
+      width={50}
+      height={50}
+      className="rounded-circle "
+      src={require("../../assets/images/user.png")}
+      alt=""
+      srcset=""
+    />
+  </Col>
+
+}
 
           <Col xs={11} className="">
             <form
@@ -124,13 +154,13 @@ console.log(data);
                   type="text"
                   value={text}
                   onChange={(e) => setComment(e.target.value)}
-                  placeholder="Write Comment"
-                  className="form-control"
+                  placeholder={t('WriteComment')}
+                  className="mx-3 mx-md-1 form-control"
                 />
               </div>
               <div className="col-4 col-sm-3 col-md-2">
-                <button type="submit" className="btn btn-primary px-4">
-                  Submit
+                <button type="submit" className="btn btn-submit w-100">
+                  {t('Post')}
                 </button>
               </div>
             </form>

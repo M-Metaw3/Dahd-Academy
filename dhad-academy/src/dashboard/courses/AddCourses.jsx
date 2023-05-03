@@ -3,12 +3,14 @@ import YouTube from 'react-youtube'
 import axios from 'axios';
 import { Container, Row, Col, ListGroup, Button, Form } from 'react-bootstrap';
 import { apihttp } from "../../api/api"
+import { useNavigate } from 'react-router';
 
 const AddCourses = () => {
   const [courses, setCourses] = useState([]);
   const [addcourse, setaddcourse] = useState(false);
   const [idcourse, setidcourse] = useState("");
-
+  const user = JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : null
+  const nav = useNavigate();
 
   const [formValues, setFormValues] = useState({
     title: '',
@@ -81,11 +83,18 @@ const AddCourses = () => {
     if (formValues.image) {
       formData.append('image', formValues.image);
     }
+    if (user) {
 
     try {
       if (selectedCourse) {
         console.log(selectedCourse);
-        const response = await axios.put(`${apihttp}course/updateCourse/${selectedCourse._id}`, formData);
+        const response = await axios.put(`${apihttp}course/updateCourse/${selectedCourse._id}`, formData, {
+          headers: {
+            // 'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${user.token}`,
+
+          }
+        });
         console.log(response);
         console.log(response.data);
         setCourses((prevCourses) => {
@@ -97,7 +106,15 @@ const AddCourses = () => {
         setSelectedCourse(null);
       } else {
         // Create new course
-        const response = await axios.post(`${apihttp}course/addCourse`, formData);
+        const response = await axios.post(`${apihttp}course/addCourse`, formData,
+        {
+          headers: {
+            // 'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${user.token}`,
+
+          }
+          
+        });
         console.log(response.data);
 
 
@@ -115,6 +132,10 @@ const AddCourses = () => {
     } catch (error) {
       console.error(error);
     }
+  }
+  else {
+    nav('/myprofile')
+  }
   };
 
   const handleLessonFormSubmit = async (event) => {
@@ -126,9 +147,16 @@ const AddCourses = () => {
     if (lessonFormValues.pdf) {
       formData.append('image', lessonFormValues.pdf);
     }
+    if (user) {
 
     try {
-      const response = await axios.post(`${apihttp}course/${idcourse}/lessons`, formData);
+      const response = await axios.post(`${apihttp}course/${idcourse}/lessons`, formData, {
+        headers: {
+          // 'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${user.token}`,
+
+        }
+      });
       setCourses((prevCourses) => {
         const index = prevCourses.findIndex((course) => course._id === idcourse);
 
@@ -149,6 +177,10 @@ const AddCourses = () => {
     } catch (error) {
       console.error(error);
     }
+  }
+  else {
+    nav('/myprofile')
+  }
   };
 
   const handleCourseEdit = (course) => {
@@ -166,28 +198,37 @@ const AddCourses = () => {
 
   const handleCourseDelete = async (course) => {
     console.log(course);
+    if (user) {
+
     try {
-      await axios.delete(`${apihttp}course/deleteCourse/${course._id}`);
+      await axios.delete(`${apihttp}course/deleteCourse/${course._id}`, {
+        headers: {
+          // 'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${user.token}`,
+
+        }
+      });
       setCourses((prevCourses) => prevCourses.filter((c) => c._id !== course._id));
     } catch (error) {
       console.error(error);
     }
+  }
+  else {
+    nav('/myprofile')
+  }
   };
-
-  // const handleLessonEdit = (lesson) => {
-  //   setSelectedLesson(lesson);
-  //   setLessonFormValues({
-  //     name: lesson.name,
-  //     pdf: null,
-  //     video: lesson.video,
-  //     meeting: lesson.meeting,
-  //   });
-  // };
 
   const handleLessonDelete = async (lesson) => {
     console.log(lesson.course_id);
+    if (user) {
     try {
-      await axios.delete(`${apihttp}course/${lesson.course_id}/lessons/${lesson._id}`);
+      await axios.delete(`${apihttp}course/${lesson.course_id}/lessons/${lesson._id}`, {
+        headers: {
+          // 'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${user.token}`,
+
+        }
+      });
       setCourses((prevCourses) => {
         const index = prevCourses.findIndex((course) => course._id === lesson.course_id);
         const updatedCourses = [...prevCourses];
@@ -197,6 +238,10 @@ const AddCourses = () => {
     } catch (error) {
       console.error(error);
     }
+  }
+  else {
+    nav('/myprofile')
+  }
   };
   const handleLessonSubmit = (event) => {
     event.preventDefault();
@@ -204,8 +249,16 @@ const AddCourses = () => {
       name: lessonFormValues.name,
       courseId: selectedCourse._id,
     };
+    if (user) {
+
     axios
-      .post('/api/lessons', newLesson)
+      .post('/api/lessons', newLesson, {
+        headers: {
+          // 'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${user.token}`,
+
+        }
+      })
       .then((response) => {
         const updatedCourse = { ...selectedCourse };
         updatedCourse.lessons.push(response.data);
@@ -215,30 +268,12 @@ const AddCourses = () => {
       .catch((error) => {
         console.error('Error creating lesson: ', error);
       });
+    }
+    else {
+      nav('/myprofile')
+    }
   };
-  // const resetForm = () => {
-  //   if (selectedCourse) {
-  //     setFormValues({
-  //       title: selectedCourse.title,
-  //       courseName: selectedCourse.courseName,
-  //       coursesDepartment: selectedCourse.coursesDepartment,
-  //       price: selectedCourse.price,
-  //       hours: selectedCourse.hours,
-
-  //     });
-  //   } else {
-  //     setFormValues({
-  //       title: '',
-  //       courseName: '',
-  //       coursesDepartment: '',
-  //       price: '',
-  //     hours: '',
-
-
-  //     });
-  //   }
-  // };
-
+ 
   const handleaddlessons = (course) => {
     // console.log(c);
     setaddcourse(true)
@@ -264,17 +299,17 @@ const AddCourses = () => {
 
   return (
 
-
-    <Container>
-          {/* <h1 className="my-4">Course Manager</h1> */}
+    <>
       <h3>Courses</h3>
-     <div className='py-2 instructors'>
+      <div className='py-2 instructors'>
      <button className={`btn mx-1 ${showAdd ? "":"active" }`}  onClick={All}>All</button>
      <button className={`btn mx-1 ${showAdd ? "active":"" }`} onClick={Add}>Add and Update</button>
-     </div>
+     </div>  
+          {/* <h1 className="my-4">Course Manager</h1> */}
+    
           
         {showAdd?
-          <Container className='py-2 row'>
+          <div className='py-2 row'>
               <h5 className=' text-center'>{selectedCourse ? `Edit Course: ${selectedCourse.title}` : 'Create Course'}</h5>
               <div className='col-12 col-lg-6 m-auto'>
           <Form onSubmit={handleFormSubmit}>
@@ -350,9 +385,10 @@ const AddCourses = () => {
           </Form>
           </div>
           
-        </Container> :
-          <Container className='py-2 row'>
-            {addcourse && (
+        </div> :
+          <div className='py-2'>
+           <div className=' row'>
+           {addcourse && (
               <div className='col-12 col-lg-6 m-auto pb-5'>
               <h5 className=' text-center'>{'Add Lesson'}</h5>
               <Form onSubmit={handleLessonFormSubmit} >
@@ -396,15 +432,16 @@ const AddCourses = () => {
               
             </div>
           )}
-                    <Container className='py-2 row'>
-
-        <ListGroup className='col-12 m-auto'>
+           </div>
+                  
+          <div className='py-2 row d-flex justify-content-evenly fs-5'>
         {courses &&
           courses.map((course) => (
-            <ListGroup.Item key={course._id} className='my-2'>
-              <div className="">
-              <div className="py-3 d-flex justify-content-center">
-                <img src={`${apihttp}${course.image}`} width={"30%"} height={200} />
+            <div className='col-12 col-lg-5  card mb-3' key={course._id} >
+          <div className="card-body my-2 d-flex flex-column justify-content-between">
+
+              <div className="py-1 d-flex justify-content-center">
+                <img src={`${apihttp}${course.image}`} width={"60%"} height={200} alt={course.title} />
                 </div>
                 <div>
                 <p className=' fw-bold'>title: <span className=' fw-normal'> {course.title}</span></p>
@@ -444,30 +481,30 @@ const AddCourses = () => {
                 <p className=' fw-bold'>hours: <span className=' fw-normal'> {course.hours}</span></p>
                 
                 </div>
-                <div className=' text-center py-3'>
-                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseEdit(course)}>
+                <div className=' py-3 row d-flex justify-content-center'>
+                  <Button className='m-2 btn-submit col-8 col-lg-5  border-0 px-5' onClick={() => handleCourseEdit(course)}>
                     Edit
                   </Button>{' '}
-                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleCourseDelete(course)}>
+                  <Button className='m-2 btn-submit col-8 col-lg-5  border-0 px-5' onClick={() => handleCourseDelete(course)}>
                     Delete
                   </Button>
-                  <Button className='mx-2 btn-submit border-0 px-5' onClick={() => handleaddlessons(course)}>
+                  <Button className='m-2 btn-submit col-8 col-lg-5  border-0 px-5' onClick={() => handleaddlessons(course)}>
                     Add lesson
                   </Button>
                 </div>
               </div>
 
-              
-            </ListGroup.Item>
+            </div>
+
           ))}
-      </ListGroup>
-      </Container>
-      </Container>
+
+      </div>
+      </div>
 }
         
 
 
-    </Container>
+    </>
   );
 
 };

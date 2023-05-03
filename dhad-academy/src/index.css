@@ -28,3 +28,6 @@
 .ltr{
   direction: ltr;
 }
+.cursor-pointer{
+  cursor: pointer;
+}

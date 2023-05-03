@@ -8,6 +8,7 @@
     "Courses": "Courses",
     "Blog": "Blog",
     "Instructors": "Instructors",
+    "Instructor": "Instructor",
     "contacts": "contacts",
     "Admin": "Dashboard",
 
@@ -59,8 +60,16 @@
     "Phone1":"(+2) 0100 763 3800 ",
     "Address":"Address",
     "Addres":"Ibn Al-Roumi St, Seventh District, Nasr City, Cairo",
-    "WorkingHours":"Working Hours"
+    "WorkingHours":"Working Hours",
 
+    "Comments":"Comments",
+    "WriteComment":"Write Comment",
+    "Post":"post",
+    "AM":"AM",
+    "PM":"PM",
+
+    "Hours":"Hours",
+    "EGP":"EGP"
 
 
 }

@@ -45,8 +45,8 @@ function Header() {
             </li>
             <div className="vr"></div>
             <li className="fw-lighter ltr">
-              <i className="fa-solid fa-envelope"></i>
-              Info@dhadacademy.com
+              <NavLink to="mailto:Info@dhadacademy.com">
+              <i className="fa-solid fa-envelope"></i> Info@dhadacademy.com</NavLink>
             </li>
           </ul>
 
@@ -85,8 +85,8 @@ function Header() {
                 {t('MyProfile')}
               </NavLink>
             </li> :
-              <li onClick={hadelerLogout} className='fw-lighter'>
-                <i className="fa-solid fa-arrow-right-from-bracket"></i>                
+              <li onClick={hadelerLogout} className='fw-lighter '>
+                  <i className="fa-solid fa-arrow-right-from-bracket"></i>                
                 {t('Logout')}
               </li>}
 
@@ -176,12 +176,12 @@ function Header() {
               {t('Courses')}
               </button>
               <ul className="dropdown-menu" aria-labelledby="DropdownMenu">
-                 <li> <NavLink className="dropdown-item" to="/courses/Arabic" onClick={CloseOffcanvas} >Arabic</NavLink></li>
-                 <li> <NavLink className="dropdown-item" to="/courses/Quran and readings" onClick={CloseOffcanvas} >Quran and readings</NavLink></li>
-                 <li> <NavLink className="dropdown-item" to="/courses/Islamic studies" onClick={CloseOffcanvas} >Islamic studies</NavLink></li>
-                 <li> <NavLink className="dropdown-item" to="/courses/Qualifying courses" onClick={CloseOffcanvas} >Qualifying courses</NavLink></li>
-                 <li> <NavLink className="dropdown-item" to="/courses/Crafts and Skills" onClick={CloseOffcanvas} >Crafts and Skills</NavLink></li>
-                 <li> <NavLink className="dropdown-item" to="/courses/Field tourism" onClick={CloseOffcanvas} >Field tourism</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/Arabic" onClick={CloseOffcanvas} >{t('Arabic')}</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/QuranAndReadings" onClick={CloseOffcanvas} >{t('QuranAndReadings')}</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/IslamicStudies" onClick={CloseOffcanvas} >{t('IslamicStudies')}</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/QualifyingCourses" onClick={CloseOffcanvas} >{t('QualifyingCourses')}</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/CraftsAndSkills" onClick={CloseOffcanvas} >{t('CraftsAndSkills')}</NavLink></li>
+                 <li> <NavLink className="dropdown-item" to="/courses/FieldTrips" onClick={CloseOffcanvas} >{t('FieldTrips')} </NavLink></li>
                
               
               </ul>
@@ -227,43 +227,62 @@ function Header() {
                 </NavLink> : ''}
                 <div className='d-xl-none d-block'>
                 <div className="hr w-50"></div>
-            <p>
-              <i className="fa-solid fa-phone"></i>
-              +20 100 763 3800
-            </p>
-            <p>
-              <i className="fa-solid fa-envelope"></i>
-              Info@dhadacademy.com
-            </p>
+                
 
-            <p className='dropdown ' >
-              <button className=" fs-5 fw-light dropdown-toggle btn p-0 border-0"  id="DropdownMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div className='dropdown my-2' >
+              <button className="fs-5 fw-light dropdown-toggle btn p-0 border-0"  id="DropdownMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i className="fa-solid fa-language"></i>
-                Languages
+                {t('Languages')}
               </button>
               <ul className="dropdown-menu" aria-labelledby="DropdownMenu">
-                <li>
-                  <NavLink className={({ isActive }) => `dropdown-item ${isActive} ? 'active' : ''`}>Arabic</NavLink>
-                </li>
-                <li>
-                  <NavLink className={({ isActive }) => `dropdown-item ${isActive} ? 'active' : ''`}>English</NavLink>
 
+                <li
+                   className={ "dropdown-item"}
+                  onClick={() => {
+                    i18n.changeLanguage('ar');
+                    CloseOffcanvas();
+                  }}
+                  >
+                  Arabic
+                </li>
+                <li
+                   className={ "dropdown-item"}
+                  onClick={() => {
+                    i18n.changeLanguage('en');
+                    CloseOffcanvas();
+
+                  }}
+                  >                
+                      English
                 </li>
               </ul>
-            </p>
+            </div>
             
             {/* <li className='fw-lighter' onClick={handleShow}> */}
-            {!users ? <p>
+            {!users ? <li onClick={CloseOffcanvas} className='my-2'>
               <NavLink to={"/myprofile"} className=" text-decoration-none">
                 <i className="fa-regular fa-user"></i>
                 My Profile
               </NavLink>
-            </p> :
-              <p onClick={hadelerLogout} >
-                <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                Logout
-              </p>}
+            </li> :
+              <li 
+                  className=' my-2 cursor-pointer'
+                onClick={()=>{
+                hadelerLogout();
+                CloseOffcanvas();
+              }}>
+                <i className=" fa-solid fa-arrow-right-from-bracket"></i>
+                {t('Logout')}
 
+              </li>}
+              <li className="fw-lighter ltr my-2">
+              <i className="fa-solid fa-phone"></i>
+              +20 100 763 3800
+            </li>
+            <li className="fw-lighter ltr my-2">
+              <NavLink to="mailto:Info@dhadacademy.com">
+              <i className="fa-solid fa-envelope"></i> Info@dhadacademy.com</NavLink>
+            </li>
         </div>
 
               </Nav>

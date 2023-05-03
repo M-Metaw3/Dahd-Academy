@@ -7,7 +7,12 @@ import instructor from "../../assets/images/image 5.png"
 import "./teachers.css";
 import axios from 'axios';
 import {apihttp} from "../../api/api"
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
+
 function Teachers() {
+  const [t] = useTranslation();
+
     useEffect(() => {
         document.title ="Teachers";  
       }, []);
@@ -32,7 +37,7 @@ function Teachers() {
   };
   return (
     <>
-      <CommonSection title="INSTRUCTORS" img={`${teachers}`} />
+      <CommonSection title={t('Instructors')} img={`${teachers}`} />
       <Container className='py-5'>
         <Row xs={2} lg={3} className=''>
         {instructors?instructors.map((instructor) => (

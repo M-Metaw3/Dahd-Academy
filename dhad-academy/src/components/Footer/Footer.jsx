@@ -34,7 +34,7 @@ function Footer() {
                       <NavLink to="/services"
                       >{t('Services')}</NavLink>
                     </li>
-                    <li className='mb-2'>
+                    {/* <li className='mb-2'>
                     <div className='dropdown '>
               <button className=" fs-5 dropdown-toggle btn px-0 border-0"  id="DropdownMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               {t('Courses')}
@@ -50,6 +50,12 @@ function Footer() {
               
               </ul>
                 </div>
+                    </li> */}
+                    <li className='mb-2'>
+              <NavLink className="" >
+              {t('Courses')}
+              </NavLink>
+              
                     </li>
                   
                     <li className='mb-2'>

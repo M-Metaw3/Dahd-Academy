@@ -6,42 +6,59 @@ import moment from "moment"
 import { Container } from 'react-bootstrap';
 import "./contact.css"
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 function Contacts() {
 
 
-  // const dispatch = useDispatch()
-  // const messages = useSelector((state) => state.teacher.teachers)
-  // useEffect(() => {
-  //     dispatch(actions.getALLcontact())
-  // }, [dispatch]);
 
-
-
+  const user = JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : null
+  const nav = useNavigate();
 
   const [contacts, setContacts] = useState([]);
 
   // Handler to delete a single contact
   const handleDeleteContact = async (id) => {
+    if (user) {
     try {
-      const response = await axios.delete(`http://localhost:5000/contact/deleteMessage/${id}`);
+      const response = await axios.delete(`http://localhost:5000/contact/deleteMessage/${id}`,
+      {
+        headers: {
+         
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       console.log(response);
       setContacts(contacts.filter(contact => contact._id !== id));
       console.log(response.data.message);
     } catch (error) {
       console.error(error);
     }
+} else {
+  nav('/myprofile');
+}
   };
 
   // Handler to delete all contacts
   const handleDeleteAllContacts = async () => {
-    try {
-      const response = await axios.delete('http://localhost:5000/contact/deleteMessage');
+
+    if (user) {
+      try {
+      const response = await axios.delete('http://localhost:5000/contact/deleteMessage',
+      {
+        headers: {
+         
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       setContacts([]);
       console.log(response.data.message);
     } catch (error) {
       console.error(error);
     }
+  } else {
+    nav('/myprofile');
+  }
   };
 
   // Fetch contacts on component mount
@@ -56,6 +73,7 @@ function Contacts() {
       } catch (error) {
         console.error(error);
       }
+      
     };
 
     fetchContacts();

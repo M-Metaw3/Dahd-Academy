@@ -3,6 +3,7 @@ import axios from 'axios';
 import moment from "moment"
 import { Container } from 'react-bootstrap';
 import { apihttp } from "../../api/api"
+import { useNavigate } from 'react-router';
 
 const AddBlogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -13,15 +14,16 @@ const AddBlogs = () => {
   const [updatingBlogId, setUpdatingBlogId] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
-
+  const user = JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : null
+  const nav = useNavigate();
   useEffect(() => {
     fetchBlogs();
   }, []);
 
   const fetchBlogs = async () => {
     const { data } = await axios.get(`${apihttp}blog`);
-    setBlogs(data.body);
-    console.log(data.body);
+    setBlogs(data);
+    console.log(data,"dd");
   };
 
   const handleFileChange = (event) => {
@@ -36,7 +38,7 @@ const AddBlogs = () => {
     formData.append('description', description);
     formData.append('details', details);
     formData.append('image', image);
-
+    if (user) {
     try {
       const { data } = await axios.post(`${apihttp}blog/addblog`, formData, {
         onUploadProgress: (progressEvent) => {
@@ -45,6 +47,11 @@ const AddBlogs = () => {
           );
           setUploadProgress(progress);
         },
+        headers: {
+          // 'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${user.token}`,
+
+        }
       });
       fetchBlogs();
       setTitle('');
@@ -58,12 +65,25 @@ const AddBlogs = () => {
       console.error(error);
       setErrorMessage('Error uploading file. Please try again.');
     }
+  }
+    else {
+      nav('/myprofile')
+    }
+  
   };
 
 
   const handleDeleteBlog = async (blog) => {
+    if (user) {
+
     try {
-      await axios.delete(`${apihttp}blog/${blog._id}`);
+      await axios.delete(`${apihttp}blog/${blog._id}`,{
+      headers: {
+        // 'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${user.token}`,
+
+      }
+    });
       fetchBlogs();
       setErrorMessage('');
 
@@ -71,6 +91,11 @@ const AddBlogs = () => {
       console.error(error);
       setErrorMessage('Error deleting file. Please try again.');
     }
+  }
+  else {
+    nav('/myprofile')
+  }
+
   };
 
   const [showAdd, setShowAdd] = useState(false);
@@ -86,7 +111,7 @@ const AddBlogs = () => {
      <button className={`btn mx-1 ${showAdd ? "active":"" }`} onClick={Add}>Add</button>
      </div>
       {showAdd?
-      <Container className='py-2 row'>
+      <div className='py-2 row'>
             <div className='col-12 col-lg-6 m-auto'>
 
       <form onSubmit={ handleAddBlog}>
@@ -161,25 +186,24 @@ const AddBlogs = () => {
         <div className="alert alert-danger mt-3">{errorMessage}</div>
       )}
 
-      </Container>
-: <div>
+      </div>
+: <div className='row d-flex justify-content-evenly fs-5'>
 {blogs.map((blog) => (
-        <div className="card mb-3" key={blog._id}>
+        <div className="col-12 col-lg-5  card mb-3" key={blog._id}>
           <div className="card-body">
             
           <p>{moment(blog.createdAt).fromNow()}</p>
-          <div className="py-3 d-flex justify-content-center">
+          <div className="py-1 d-flex justify-content-center">
             <img
               src={`${apihttp}${blog.image}`}
               alt={blog.title}
-              className="img-fluid mb-3 w-25 "
-              style={{ maxHeight: '300px' }}
+              width={"60%"} height={200}
             />
             </div>
-            <p className=' fw-bold'>title: <span className=' fw-normal'>  {blog.title}</span></p>
-            <p className=' fw-bold'>Description: <span className=' fw-normal'>  {blog.description}</span></p>
+            <p className=' m-0 fw-bold'>title: <span className=' fw-normal'>  {blog.title}</span></p>
+            <p className=' m-0 fw-bold'>Description: <span className=' fw-normal'>  {blog.description}</span></p>
 
-            <p className=' fw-bold'>Details: <span className=' fw-normal'>  {blog.details}</span></p>
+            <p className='m-0 fw-bold'>Details: <span className=' fw-normal'>  {blog.details}</span></p>
           
           <div className="pt-3 text-center">
             <button
