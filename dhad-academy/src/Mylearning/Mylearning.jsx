@@ -31,10 +31,11 @@ console.log(lessons.lessons);
   const handellersendLessons = (course) => {
     
     console.log("course");
-console.log(course);
+
     dispatch({type:"getalllessons",payload:course})
     console.log(course)
-    if (course.lessons.length>0) {
+    
+    if (course?.lessons.length>0) {
       
       nav(`/course/${course.title}`)
     }
@@ -55,11 +56,11 @@ console.log(course);
         <ul>
           {coursesUsers?coursesUsers.map((course) => (
             <div>
-            <li >{course.courseId.title }</li>
-             <li >{course.courseId.price}</li>
-             <li >{course.courseId.price}</li>
+            <li >{course.courseId?.title }</li>
+             <li >{course.courseId?.price}</li>
+             <li >{course.courseId?.price}</li>
 
-<button onClick={()=>handellersendLessons(course.courseId)}>checkLessons</button>
+<button onClick={()=>handellersendLessons(course?.courseId)}>checkLessons</button>
             </div>
           )):"no courses yet"}
         </ul>

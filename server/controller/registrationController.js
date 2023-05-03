@@ -287,22 +287,51 @@ console.log(req.params.id)
 
 
 
-static enrollment =    async (req, res) => {
-      try {
-        const { userId, courseId, userName } = req.body;
+// static enrollment =    async (req, res) => {
+//       try {
+//         const { userId, courseId, userName } = req.body;
         
-        const enrollmentRequest = new EnrollmentRequest({
-          userId:req.user.id,
-          courseId:req.params.id,
-          userName:req.user.email
-        });
-        await enrollmentRequest.save();
-        res.status(201).json({ message: 'Enrollment request submitted successfully',body: enrollmentRequest});
+//         const enrollmentRequest = new EnrollmentRequest({
+//           userId:req.user.id,
+//           courseId:req.params.id,
+//           userName:req.user.email
+//         });
+//         await enrollmentRequest.save();
+//         res.status(201).json({ message: 'Enrollment request submitted successfully',body: enrollmentRequest});
        
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-      }
-    };
+//       } catch (error) {
+//         res.status(500).json({ error: error.message });
+//       }
+//     };
+
+
+static enrollment = async (req, res) => {
+  try {
+    // const { userId, courseId, userName } = req.body;
+   const userId= req.user.id
+   const courseId= req.params.id
+   const userName= req.user.email
+
+    // Check if enrollment request already exists for this user and course
+    const existingEnrollmentRequest = await EnrollmentRequest.findOne({ userId, courseId });
+    console.log(existingEnrollmentRequest)
+    if (existingEnrollmentRequest) {
+    return  res.status(400).json({ error: 'Enrollment request already exists for this user and course' });
+     
+    }
+
+    const enrollmentRequest = new EnrollmentRequest({
+      userId: req.user.id,
+      courseId: req.params.id,
+      userName: req.user.email
+    });
+
+    await enrollmentRequest.save();
+    res.status(201).json({ message: 'Enrollment request submitted successfully', body: enrollmentRequest });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 
 static getrequestesenrolled = async (req, res) => {

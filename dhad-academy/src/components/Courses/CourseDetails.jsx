@@ -18,12 +18,12 @@ function CourseDetails() {
      <h3>Lesson {i+1} </h3>
      <div className="hr w-100">Lesson</div>
      <p>video</p>
-     <a href={el.video} target="_blank" rel="noopener noreferrer">video</a>
+     <a href={el?.video} target="_blank" rel="noopener noreferrer">video</a>
      <p>pdf</p>
-     <a href={`http://localhost:5000/${el.pdf}`} target="_blank" rel="noopener noreferrer">pdf</a>
+     <a href={`http://localhost:5000/${el?.pdf}`} target="_blank" rel="noopener noreferrer">pdf</a>
 
      <p>Google Meet</p>
-     <a href={el.meeting} target="_blank" rel="noopener noreferrer">Google Meet</a>
+     <a href={el?.meeting} target="_blank" rel="noopener noreferrer">Google Meet</a>
 
      <br />
     
