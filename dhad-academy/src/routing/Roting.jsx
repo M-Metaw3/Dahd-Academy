@@ -17,6 +17,7 @@ import Addvideo from '../dashboard/addvideotowebsite/Addvideo';
 import Instructor from '../dashboard/Instructors/Instructors';
 import CourseDetails from '../components/Courses/CourseDetails';
 import MyProfile from '../components/My Profile/MyProfile';
+import Mylearning from '../Mylearning/Mylearning';
 
 const Roting = () => {
 // const users = JSON.parse(localStorage.getItem("token"))
@@ -39,6 +40,8 @@ const users = JSON.parse(localStorage.getItem("token"))?JSON.parse(localStorage.
         <Route path="/course/:name" element={<CourseDetails/>} />
         <Route path="/services" element={<Services/>} />
         <Route path="/instructors" element={<Teachers/>} />
+    {users? <Route path="/mylearning" element={<Mylearning/>} /> : <Route path="/mylearning" element={<MyProfile/>} />}
+
         <Route path="/contact" element={<Contact/>} />
         <Route path="/blog" element={<Blog/>} />
         <Route path="/blog/:id" element={<BlogDetails/>} />

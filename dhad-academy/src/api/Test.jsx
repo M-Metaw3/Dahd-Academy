@@ -2390,134 +2390,134 @@
 
 
 
+// ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 
 
 
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import Dropzone from 'react-dropzone';
+// import Slider from 'react-slick';
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
+// const Test = () => {
+//     const [updatedFile, setUpdatedFile] = useState(null);
+//     const [files, setFiles] = useState([]);
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Dropzone from 'react-dropzone';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-const Test = () => {
-    const [updatedFile, setUpdatedFile] = useState(null);
-    const [files, setFiles] = useState([]);
+//   useEffect(() => {
+//     fetchFiles();
+//   }, []);
 
-  useEffect(() => {
-    fetchFiles();
-  }, []);
+//   const fetchFiles = async () => {
+//     try {
+//       const response = await axios.get('http://localhost:5000/slider');
+//       setFiles(response.data);
+//       console.log(response.data)
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
 
-  const fetchFiles = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/slider');
-      setFiles(response.data);
-      console.log(response.data)
-    } catch (error) {
-      console.error(error);
-    }
-  };
+//   const handleUpload = async (acceptedFiles) => {
+//     try {
+//       const formData = new FormData();
+//       formData.append('image', acceptedFiles[0]);
+//       const response = await axios.post('http://localhost:5000/slider', formData);
+//       setFiles((prevFiles) => [...prevFiles, response.data]);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
 
-  const handleUpload = async (acceptedFiles) => {
-    try {
-      const formData = new FormData();
-      formData.append('image', acceptedFiles[0]);
-      const response = await axios.post('http://localhost:5000/slider', formData);
-      setFiles((prevFiles) => [...prevFiles, response.data]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+//   const handleDownload = async (fileId) => {
+//     try {
+//       const response = await axios.get(`http://localhost:5000/slider/${fileId}`, {
+//         responseType: 'blob',
+//       });
+//       console.log(response);
+//       const url = window.URL.createObjectURL(new Blob([response.data]));
+//       const link = document.createElement('a');
+//       link.href = url;
+//       link.setAttribute('download', `${fileId}`);
+//       document.body.appendChild(link);
+//       link.click();
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
 
-  const handleDownload = async (fileId) => {
-    try {
-      const response = await axios.get(`http://localhost:5000/slider/${fileId}`, {
-        responseType: 'blob',
-      });
-      console.log(response);
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `${fileId}`);
-      document.body.appendChild(link);
-      link.click();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+//   const handleUpdate = async (fileId) => {
+//     if (!updatedFile) {
+//       return;
+//     }
+//     try {
+//       const formData = new FormData();
+//       formData.append('file', updatedFile);
+//       const response = await axios.put(`http://localhost:5000/slider/${fileId}`, formData);
+//       setFiles((prevFiles) =>
+//         prevFiles.map((file) => (file._id === fileId ? response.data : file))
+//       );
+//       setUpdatedFile(null);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
 
-  const handleUpdate = async (fileId) => {
-    if (!updatedFile) {
-      return;
-    }
-    try {
-      const formData = new FormData();
-      formData.append('file', updatedFile);
-      const response = await axios.put(`http://localhost:5000/slider/${fileId}`, formData);
-      setFiles((prevFiles) =>
-        prevFiles.map((file) => (file._id === fileId ? response.data : file))
-      );
-      setUpdatedFile(null);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+//   const handleDelete = async (fileId) => {
+//     try {
+//       await axios.delete(`http://localhost:5000/slider/${fileId}`);
+//       setFiles((prevFiles) =>
+//         prevFiles.filter((file) => file._id !== fileId)
+//       );
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+//   const settings = {
+//     dots: true,
+//     infinite: true,
+//     speed: 500,
+//     slidesToShow: 1,
+//     slidesToScroll: 1,
+//     autoplay: true, // enable autoplay
+//     autoplaySpeed: 2000 // set autoplay speed to 4 seconds
+//   };
+//   return (
+//     <div>
 
-  const handleDelete = async (fileId) => {
-    try {
-      await axios.delete(`http://localhost:5000/slider/${fileId}`);
-      setFiles((prevFiles) =>
-        prevFiles.filter((file) => file._id !== fileId)
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true, // enable autoplay
-    autoplaySpeed: 2000 // set autoplay speed to 4 seconds
-  };
-  return (
-    <div>
+// <Slider {...settings}>
+//       {files.map((file) => (
+//         <div key={file._id}>
+//           <img width={700} height={400} src={`http://localhost:5000/${file.name}`} alt={file.name} />
+//         </div>
+//       ))}
+//     </Slider>
 
-<Slider {...settings}>
-      {files.map((file) => (
-        <div key={file._id}>
-          <img width={700} height={400} src={`http://localhost:5000/${file.name}`} alt={file.name} />
-        </div>
-      ))}
-    </Slider>
+//       <h1>File Uploader</h1>
+//       <Dropzone onDrop={handleUpload}>
+//         {({ getRootProps, getInputProps }) => (
+//           <div {...getRootProps()} style={{ border: '1px solid black' }}>
+//             <input {...getInputProps()} />
+//             <p>Drag and drop a file here, or click to select a file</p>
+//           </div>
+//         )}
+//       </Dropzone>
+//       <h2>Files</h2>
+//       <ul>
+//         {files.map((file) => (
+//           <li key={file._id}>
+//             {file.name} ({file.mimetype})
+//             <img src={`http://localhost:5000/${file.name}`} width={200} />
+//             <button onClick={() => handleDownload(file._id)}>Download</button>
+//             <button onClick={() => handleDelete(file._id)}>Delete</button>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
 
-      <h1>File Uploader</h1>
-      <Dropzone onDrop={handleUpload}>
-        {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps()} style={{ border: '1px solid black' }}>
-            <input {...getInputProps()} />
-            <p>Drag and drop a file here, or click to select a file</p>
-          </div>
-        )}
-      </Dropzone>
-      <h2>Files</h2>
-      <ul>
-        {files.map((file) => (
-          <li key={file._id}>
-            {file.name} ({file.mimetype})
-            <img src={`http://localhost:5000/${file.name}`} width={200} />
-            <button onClick={() => handleDownload(file._id)}>Download</button>
-            <button onClick={() => handleDelete(file._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-export default Test;
+// export default Test;
 
 
 
@@ -2636,3 +2636,122 @@ export default Test;
 // }
 
 // export default Test;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { apihttp } from "./api"
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+function Test() {
+  const [enrollmentRequests, setEnrollmentRequests] = useState([]);
+  const user = JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : null
+
+  useEffect(() => {
+    async function fetchEnrollmentRequests() {
+      try {
+        const response = await axios.get(`${apihttp}userRegistration/enrollment-requests`);
+        setEnrollmentRequests(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchEnrollmentRequests();
+  }, []);
+
+  async function handleAccept(enrollmentRequest) {
+    try {
+      const response = await axios.put(`${apihttp}userRegistration/courses/${enrollmentRequest._id}`, {
+        enrollmentRequest:{courseId:enrollmentRequest.courseId._id,Userid:enrollmentRequest.userId._id },
+    
+      },{
+
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
+      });
+      if (response.status === 201) {
+        setEnrollmentRequests(prevState => prevState.filter(req => req._id !== enrollmentRequest._id));
+        toast.success('You have successfully enrolled in the course contact us to display all matrials!'); // Display a success message using toast
+
+      }
+      console.log(response)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleReject(enrollmentRequest) {
+    try {
+      console.log(enrollmentRequest._id);
+      const response = await axios.delete(`${apihttp}userRegistration/courses/${enrollmentRequest._id}`, {
+        status: 'rejected'
+      },{   headers: {
+        Authorization: `Bearer ${user.token}`
+      }});
+      console.log(response);
+      if (response.status == 200) {
+        setEnrollmentRequests(prevState => prevState.filter(req => req._id !== enrollmentRequest._id));
+        toast.dark('You have successfully rejected in the course!'); // Display a success message using toast
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return (
+    <div className="container mt-5">
+      <h1 className="mb-4">Enrollment Requests</h1>
+          <h1> counte of requests {enrollmentRequests ?enrollmentRequests.length:""}</h1>
+      <ToastContainer />
+
+      <table className="table">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>User</th>
+            <th>email</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {enrollmentRequests ? enrollmentRequests.map((enrollmentRequest) => (
+            <tr key={enrollmentRequest._id}>
+              <td><img src={`http://localhost:5000/${enrollmentRequest.userId?.image}`}alt="" width={150} srcset="" /></td>
+              <td>{enrollmentRequest.userId?.username}</td>
+
+              <td>{enrollmentRequest.userId?.email}</td>
+              <td>{enrollmentRequest.courseId?.courseName}</td>
+              <td>{enrollmentRequest.status}</td>
+              <td>{enrollmentRequest.status}</td>
+
+              <td>
+                <button className="btn btn-success mr-2" onClick={() => handleAccept(enrollmentRequest)}>Accept</button>
+                <button className="btn btn-danger" onClick={() => handleReject(enrollmentRequest)}>Reject</button>
+              </td>
+            </tr>
+          )) : "loading..."}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default Test;
