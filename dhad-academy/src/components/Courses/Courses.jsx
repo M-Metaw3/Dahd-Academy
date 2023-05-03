@@ -75,13 +75,19 @@ function Courses() {
         })
         .then((response) => {
           if (response.status === 201) { // Check if the response status is successful
-            toast.success('You have successfully enrolled in the course contact us to display all matrials!'); // Display a success message using toast
             // nav(`/course/${course.title}`); // Redirect to the course page
-            console.log(response);
+            toast.success('You have successfully enrolled in the course contact us to display all matrials!'); // Display a success message using toast
+            
+          }
+          if (response.status === 400) { // Check if the response status is successful
+            // nav(`/course/${course.title}`); // Redirect to the course page
+            toast.warning(' You Already Enrollment request '); // Display a success message using toast
+          
           }
         });
       } catch (error) {
-        console.log('Error creating user:', error);
+        toast.warning(' You Already Enrollment request '); // Display a success message using toast
+        
       }
     } else {
       nav('/myprofile');

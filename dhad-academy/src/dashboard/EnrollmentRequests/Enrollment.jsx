@@ -12,7 +12,11 @@ function Enrollment() {
   useEffect(() => {
     async function fetchEnrollmentRequests() {
       try {
-        const response = await axios.get(`${apihttp}userRegistration/enrollment-requests`);
+        const response = await axios.get(`${apihttp}userRegistration/enrollment-requests`,{},{
+          headers: {
+            Authorization: `Bearer ${user.token}`
+          }
+        });
         setEnrollmentRequests(response.data);
         console.log(response.data);
       } catch (error) {

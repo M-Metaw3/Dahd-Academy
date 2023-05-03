@@ -36,7 +36,7 @@ router.put('/courses/:id',auth.isAdmin, users.addUserCourse)
 router.delete('/courses/:id', users.removeUserCourse);
 router.get('/courses/:userId', users.getUserCourses);
 router.post('/enrollment/:id',auth.isUser,users.enrollment)
-router.get('/enrollment-requests',users.getrequestesenrolled)
+router.get('/enrollment-requests',auth.isAdmin,users.getrequestesenrolled)
 
 router.put('/:id',(req, res,next) => {
 

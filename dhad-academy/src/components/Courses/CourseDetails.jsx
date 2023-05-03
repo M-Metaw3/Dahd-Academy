@@ -22,14 +22,14 @@ function CourseDetails() {
           <h3>{t("Lesson")} {i+1} </h3>
      <div className="hr w-100"></div>
      <p>
-     <a href={el.video} target="_blank" rel="noopener noreferrer">{el.name} {t("Video")}</a>      
+     <a href={el?.video} target="_blank" rel="noopener noreferrer">{el.name} {t("Video")}</a>      
      </p>
      <p>
-     <a href={`http://localhost:5000/${el.pdf}`} target="_blank" rel="noopener noreferrer">{el.name} {t("PDF")}</a>      
+     <a href={`http://localhost:5000/${el?.pdf}`} target="_blank" rel="noopener noreferrer">{el?.name} {t("PDF")}</a>      
      </p>
 
      <p>
-     <a href={el.meeting} target="_blank" rel="noopener noreferrer">{el.name} Google Meet</a>
+     <a href={el?.meeting} target="_blank" rel="noopener noreferrer">{el?.name} Google Meet</a>
      </p>
 
        </div>
