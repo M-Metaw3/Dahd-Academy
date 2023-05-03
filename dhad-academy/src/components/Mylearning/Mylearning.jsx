@@ -65,7 +65,10 @@ console.log(lessons.lessons);
 </div>
 </div>
 </div>
-          )):"no courses yet"}
+          )):
+          <div className="d-flex justify-content-center align-items-center" style={{height:"200px"}}>
+           <p>no courses yet</p> 
+            </div>}
                 </div>
 
     </Container>
