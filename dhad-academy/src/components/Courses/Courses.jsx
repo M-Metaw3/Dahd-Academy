@@ -133,9 +133,9 @@ function Courses() {
                     <img src={`${apihttp}${course.image}`} height={250} className="rounded-img-top " alt="..." />
                     <div className="card-body d-flex flex-column justify-content-between" style={{height:"200px"}}>
                                 <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{course.hours} {t('Hours')}</p>
-                                <h6 className="card-text">{course.title} </h6>
+                                <h6 className="card-text">{course.courseName} </h6>
                                 <div className=' d-flex  '>
-                                <span className=' '>{course.price} {t('EGP')}</span>
+                                <span className=' '>{course.title} {t('EGP')}</span>
                                 <p className='px-3 text-decoration-line-through'>{course.price} {t('EGP')}</p>
                           
                                 </div>

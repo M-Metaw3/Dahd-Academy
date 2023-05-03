@@ -219,13 +219,13 @@ function Header() {
                   </NavLink>
 
 
-                <NavLink
+                {/* <NavLink
                   to="/test"
                   className={({ isActive }) => (isActive ? 'active' : '')}
                   onClick={CloseOffcanvas}
                 >
                   Test
-                </NavLink>
+                </NavLink> */}
                 {users && users.isAdmin == 'Admin' ? <NavLink
                   to="/admin"
                   className={({ isActive }) => (isActive ? 'active' : '')}

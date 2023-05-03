@@ -41,3 +41,12 @@
  a{
   text-decoration: none;
 }
+.btn-accecpt{
+  background-color: var(--secondry-color);
+  color: var(--white);
+}
+.btn-delete{
+background-color: var(--primary-color);
+color: var(--white);
+
+}

@@ -318,7 +318,7 @@ const Instructors = () => {
                   <img src={`${apihttp}${user.image}`} alt="img" className='mx-3 rounded-circle' width={70} height={70} />
                   {/* <span>{user.usernam}</span> */}
                   <div className=''>
-                  <p>{user.usernam}</p>
+                  <p>{user.username}</p>
                   <p>{user.email}</p>
                 </div>
                 </div>

@@ -43,7 +43,7 @@ function Teachers() {
         {instructors?instructors.map((instructor) => (
             
           <Col key={instructor._id}>
-            <Instructor name={instructor.usernam} img={`${apihttp}${instructor.image}`} position={instructor.isAdmin} />
+            <Instructor name={instructor.username} img={`${apihttp}${instructor.image}`} position={instructor.isAdmin} />
           </Col>
              )):''} 
 

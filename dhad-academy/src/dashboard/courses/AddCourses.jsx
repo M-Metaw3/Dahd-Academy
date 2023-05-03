@@ -310,18 +310,9 @@ const AddCourses = () => {
           
         {showAdd?
           <div className='py-2 row'>
-              <h5 className=' text-center'>{selectedCourse ? `Edit Course: ${selectedCourse.title}` : 'Create Course'}</h5>
+              <h5 className=' text-center'>{selectedCourse ? `Edit Course: ${selectedCourse.courseName}` : 'Create Course'}</h5>
               <div className='col-12 col-lg-6 m-auto'>
           <Form onSubmit={handleFormSubmit}>
-            <Form.Group controlId="formTitle" className='pb-2'>
-              <Form.Label>Title:</Form.Label>
-              <Form.Control
-                type="text"
-                name="title"
-                value={formValues.title}
-                onChange={handleFormChange}
-              />
-            </Form.Group>
             <Form.Group controlId="formCourseName" className='pb-2'>
               <Form.Label>Course Name:</Form.Label>
               <Form.Control
@@ -357,6 +348,17 @@ const AddCourses = () => {
                 value={formValues.price}
                 onChange={handleFormChange}
               />
+              </Form.Group>
+              <Form.Group controlId="formTitle" className='pb-2'>
+              <Form.Label>Price after discount:</Form.Label>
+              <Form.Control
+                type="text"
+                name="title"
+                value={formValues.title}
+                onChange={handleFormChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formHours" className='pb-2'>
               <Form.Label>hourse:</Form.Label>
               <Form.Control
                 type="text"
@@ -437,14 +439,14 @@ const AddCourses = () => {
           <div className='py-2 row d-flex justify-content-evenly fs-5'>
         {courses &&
           courses.map((course) => (
-            <div className='col-12 col-lg-5  card mb-3' key={course._id} >
+            <div className='col-12 col-md-8 col-lg-5  card mb-3' key={course._id} >
           <div className="card-body my-2 d-flex flex-column justify-content-between">
 
               <div className="py-1 d-flex justify-content-center">
-                <img src={`${apihttp}${course.image}`} width={"60%"} height={200} alt={course.title} />
+                <img src={`${apihttp}${course.image}`} width={"60%"} height={200} alt={course.courseName} />
                 </div>
                 <div>
-                <p className=' fw-bold'>title: <span className=' fw-normal'> {course.title}</span></p>
+                <p className=' fw-bold'>courseName: <span className=' fw-normal'> {course.courseName}</span></p>
 
                 <p className=' fw-bold'>lessons: <span className=' fw-normal'> {course.lessons ? course.lessons.length : 0}</span> </p>
                 {course.lessons.length?
@@ -475,20 +477,20 @@ const AddCourses = () => {
               :""
             
 }
-                <p className=' fw-bold'>courseName: <span className=' fw-normal'> {course.courseName}</span></p>
                 <p className=' fw-bold'>coursesDepartment: <span className=' fw-normal'> {course.coursesDepartment}</span></p>
                 <p className=' fw-bold'>price: <span className=' fw-normal'> {course.price}</span></p>
+                <p className=' fw-bold'>Discount: <span className=' fw-normal'> {course.title}</span></p>
                 <p className=' fw-bold'>hours: <span className=' fw-normal'> {course.hours}</span></p>
                 
                 </div>
                 <div className=' py-3 row d-flex justify-content-center'>
-                  <Button className='m-2 btn-submit col-8 col-lg-5  border-0 px-5' onClick={() => handleCourseEdit(course)}>
+                  <Button className='m-2 btn-submit col-8 col-xl-5  border-0 px-5' onClick={() => handleCourseEdit(course)}>
                     Edit
                   </Button>{' '}
-                  <Button className='m-2 btn-submit col-8 col-lg-5  border-0 px-5' onClick={() => handleCourseDelete(course)}>
+                  <Button className='m-2 btn-submit col-8 col-xl-5  border-0 px-5' onClick={() => handleCourseDelete(course)}>
                     Delete
                   </Button>
-                  <Button className='m-2 btn-submit col-8 col-lg-5  border-0 px-5' onClick={() => handleaddlessons(course)}>
+                  <Button className='m-2 btn-submit col-8 col-xl-6   border-0 px-5' onClick={() => handleaddlessons(course)}>
                     Add lesson
                   </Button>
                 </div>

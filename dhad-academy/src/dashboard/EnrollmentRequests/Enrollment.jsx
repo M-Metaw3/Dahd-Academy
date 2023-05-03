@@ -12,7 +12,7 @@ function Enrollment() {
   useEffect(() => {
     async function fetchEnrollmentRequests() {
       try {
-        const response = await axios.get(`${apihttp}userRegistration/enrollment-requests`,{},{
+        const response = await axios.get(`${apihttp}userRegistration/enrollment-requests`,{
           headers: {
             Authorization: `Bearer ${user.token}`
           }
@@ -73,11 +73,12 @@ function Enrollment() {
           <div className='py-2'>
           <span>Total requests: {enrollmentRequests ?enrollmentRequests.length:""}</span>
       <ToastContainer />
-      <table className="table">
-        <thead>
+      <div className='table-responsive'>
+      <table className="table align-middle text-center">
+        <thead >
           <tr>
-            <th>image</th>
-            <th>User</th>
+            <th>User Name</th>
+            <th>Image</th>
             <th>email</th>
             <th>Course</th>
             <th>Status</th>
@@ -87,22 +88,22 @@ function Enrollment() {
         <tbody>
           {enrollmentRequests ? enrollmentRequests.map((enrollmentRequest) => (
             <tr key={enrollmentRequest._id}>
-              <td><img src={`${apihttp}${enrollmentRequest.userId?.image}`}alt="" width={150} srcset="" /></td>
               <td>{enrollmentRequest.userId?.usernam}</td>
-
+              <td><img src={`${apihttp}${enrollmentRequest.userId?.image}`}alt="" width={100} height={100} srcset="" /></td>
               <td>{enrollmentRequest.userId?.email}</td>
               <td>{enrollmentRequest.courseId?.courseName}</td>
               <td>{enrollmentRequest.status}</td>
-              <td>{enrollmentRequest.status}</td>
 
               <td>
-                <button className="btn btn-success mr-2" onClick={() => handleAccept(enrollmentRequest)}>Accept</button>
-                <button className="btn btn-danger" onClick={() => handleReject(enrollmentRequest)}>Reject</button>
+                <button className="btn btn-accecpt mx-2" onClick={() => handleAccept(enrollmentRequest)}>Accept</button>
+                <button className="btn btn-delete " onClick={() => handleReject(enrollmentRequest)}>Reject</button>
               </td>
             </tr>
           )) : "loading..."}
         </tbody>
       </table>
+      </div>
+     
       </div>
     </>
   );
