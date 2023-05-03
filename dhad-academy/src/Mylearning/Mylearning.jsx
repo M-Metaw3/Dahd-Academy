@@ -36,7 +36,7 @@ console.log(course);
     console.log(course)
     if (course.lessons.length>0) {
       
-      nav(`/course/${course.coursesDepartment}`)
+      nav(`/course/${course.title}`)
     }
     else{
         toast.success('no lessons in this course yet '); // Display a success message using toast
