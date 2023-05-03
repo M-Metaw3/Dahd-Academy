@@ -11,6 +11,7 @@
     "Instructor": "Instructor",
     "contacts": "contacts",
     "Admin": "Dashboard",
+    "MyCources":" My Cources",
 
     "HeroSection":"A journey of a thousand miles begins with a single step.",
     "HeroSection2":"We are Experts Learning Institution",
@@ -69,7 +70,13 @@
     "PM":"PM",
 
     "Hours":"Hours",
-    "EGP":"EGP"
+    "EGP":"EGP",
+    "EnrollNow":"Enroll Now",
+    "StartNow":"Start Now",
+    "Lessons":"Lessons",
+    "Lesson":"Lesson",
+    "Video":"Video",
+    "PDF":"PDF"
 
 
 }

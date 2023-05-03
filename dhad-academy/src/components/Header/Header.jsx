@@ -176,7 +176,7 @@ function Header() {
                   className={({ isActive }) => (isActive ? 'active' : '')}
                   onClick={CloseOffcanvas}
                 >
-                 Mylearning
+                {t('MyCources')}
                 </NavLink>:""}
                 <div className='dropdown '>
               <button className=" fs-5 dropdown-toggle btn px-0 border-0"  id="DropdownMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">

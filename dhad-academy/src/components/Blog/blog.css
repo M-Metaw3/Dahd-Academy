@@ -13,14 +13,7 @@
     border: none;
 }
 
-.rounded-img-top{
-    border-top-left-radius:  20px;
-    border-top-right-radius: 20px;
-}
-.rounded-20{
-    border-radius:  20px !important;
 
-}
 .card a ,.card i{
     color: var(--secondry-color) !important; 
 }

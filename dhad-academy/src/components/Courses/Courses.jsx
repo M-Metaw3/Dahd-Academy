@@ -123,11 +123,10 @@ function Courses() {
       <ToastContainer />
       {courses.map((course) => (
                 <div key={course._id} className="col-10 col-md-6 col-lg-4 pb-5">
-                {/* <NavLink to={`/course/${course.title}`} className="text-decoration-none"> */}
-                    <div className="card rounded-3">
+                    <div className="card rounded-20">
                     <img src={`${apihttp}${course.image}`} height={250} className="rounded-img-top " alt="..." />
                     <div className="card-body d-flex flex-column justify-content-between" style={{height:"200px"}}>
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{course.hours} Hours</p>
+                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{course.hours} {t('Hours')}</p>
                                 <h6 className="card-text">{course.title} </h6>
                                 <div className=' d-flex  '>
                                 <span className=' '>{course.price} {t('EGP')}</span>
@@ -137,11 +136,10 @@ function Courses() {
 
                         
         <button onClick={()=>handellerEnroll(course)} className="w-100 btn-submit btn px-5">
-        Enroll Now
+        {t("EnrollNow")}
         </button>
         </div>
                     </div>
-                {/* </NavLink> */}
                     </div>
                         ))} 
 
