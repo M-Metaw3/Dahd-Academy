@@ -4,55 +4,56 @@ const joi = require('joi')
 var jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
-
-    // usernam:{
-    //     type:String,
-
-    // }
-    usernam: {
-        type:String,
-        required:[true,"enter your name please"],
-        trim: true,
-        minLength:3,
-        maxLength:50
-        
+    username: {
+      type: String,
+      required: [true, 'Please enter your name'],
+      trim: true,
+      minLength: 3,
+      maxLength: 50
     },
     email: {
-        type: String,
-        required:[true,"the email is required field"],
-        validate:
-            [
-                validator.default.isEmail, "email not valid"
-            ],
-        trim: true,
-        unique: true,
-        lowercase: true
+      type: String,
+      required: [true, 'Please enter your email'],
+      validate: [validator.default.isEmail, 'Please enter a valid email'],
+      trim: true,
+      unique: true,
+      lowercase: true
     },
     password: {
-        type: String,
-        trim: true,
-        required: [true, 'the password is required field']
+      type: String,
+      trim: true,
+      required: [true, 'Please enter your password']
     },
     image: {
-        type: String,
-        trim: true,
-      
+      type: String,
+      trim: true
     },
-    isAdmin:{
-        type:String,
-        enum:["Admin","instructor","user"],
-        default:"user"
+    isAdmin: {
+      type: String,
+      enum: ['Admin', 'instructor', 'user'],
+      default: 'user'
     },
-  
-    blocked:{
-        type:Boolean,
-        default:false
-    }
-},{timestamps:true})
+    blocked: {
+      type: Boolean,
+      default: false
+    },
+    courses: [
+      {
+        courseId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'addCourse'
+        },
+        progress: {
+          type: Number,
+          default: 0
+        }
+      }
+    ]
+  }, { timestamps: true });
 
 userSchema.methods.generateAuthToken = function(){
 
-   return jwt.sign({id:this._id,usernam:this.usernam,admin:this.isAdmin,email:this.email,image:this.image},process.env.TOKEN,{expiresIn:"1d"})
+   return jwt.sign({courses:this.courses,id:this._id,username:this.username,admin:this.isAdmin,email:this.email,image:this.image},process.env.TOKEN,{expiresIn:"1d"})
 
 }
 function validateRegistration (obj){

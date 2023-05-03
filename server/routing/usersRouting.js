@@ -3,6 +3,7 @@ const users = require('../controller/registrationController')
 const multer = require('multer')
 const path =require('path')
 const fs = require('fs')
+const auth=require("../midleware/authentication");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -31,6 +32,12 @@ router.post('/', (req, res,next) => {
   });
 },users.userRegistration);
 router.post('/login',users.userLogin)
+router.put('/courses/:id',auth.isAdmin, users.addUserCourse)
+router.delete('/courses/:id', users.removeUserCourse);
+router.get('/courses/:userId', users.getUserCourses);
+router.post('/enrollment/:id',auth.isUser,users.enrollment)
+router.get('/enrollment-requests',users.getrequestesenrolled)
+
 router.put('/:id',(req, res,next) => {
 
   upload(req, res, (err) => {

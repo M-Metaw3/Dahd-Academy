@@ -28,47 +28,42 @@ const lessonSchema = new mongoose.Schema({
 });
 
 const courseSchema = new mongoose.Schema({
-    title : {
+  title: {
     type: String,
     required: true,
   },
-
-
   lessons: [lessonSchema],
-
- image: {
-        type: String,
-        trim: true,
-        default:''
-    },
- courseName: {
-        type: String,
-        required:[true,"the courseName is required field"],
-        trim: true,
-        lowercase: true
-    },
-    coursesDepartment: {
-        type: String,
-        enum:['arabic', 'quran and readings','islamic studies','qualifying courses','crafts and skills','field tourism'],
-        required:[true,"the coursedepartment is required field"],
-        trim: true,
-        lowercase: true
-    },
-    price: {
-        type: String,
-        required:[true,"the price is required field"],
-        trim: true,
-        lowercase: true
-    },
-    hours: {
-        type: String,
-        required:[true,"the price is required field"],
-        trim: true,
-        lowercase: true
-    },
-
-    
-},{timestamps:true});
+  image: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  courseName: {
+    type: String,
+    required: [true, 'the courseName is required field'],
+    trim: true,
+    lowercase: true
+  },
+  coursesDepartment: {
+    type: String,
+    enum: ['arabic', 'quran and readings', 'islamic studies', 'qualifying courses', 'crafts and skills', 'field tourism'],
+    required: [true, 'the coursedepartment is required field'],
+    trim: true,
+    lowercase: true
+  },
+  price: {
+    type: String,
+    required: [true, 'the price is required field'],
+    trim: true,
+    lowercase: true
+  },
+  hours: {
+    type: String,
+    required: [true, 'the price is required field'],
+    trim: true,
+    lowercase: true
+  },
+}, { timestamps: true })
 
 
 function validateaddcourse (obj){

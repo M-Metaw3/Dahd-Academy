@@ -6,6 +6,7 @@ import AddBlogs from '../AddBlogs/AddBlogs';
 import AddCourses from '../courses/AddCourses';
 import Addvideo from '../addvideotowebsite/Addvideo';
 import Instructor from '../../components/Instructor/Instructor';
+import EnrollmentRequests from '../CoursesEnrollment/EnrollmentRequests';
 
 function RoutesDashboard() {
   return (
@@ -17,6 +18,8 @@ function RoutesDashboard() {
         <Route path='/admin/addCourses' element={<AddCourses/>} />
         <Route path='admin/addvideo' element={<Addvideo/>} />
         <Route path='admin/instructors' element={<Instructor/>} />
+        <Route path='/admin/enrolled' element={<EnrollmentRequests/>} />
+
 
         <Route path="/admin" element={<Contacts/>} />
         </Route>

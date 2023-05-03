@@ -2,7 +2,6 @@ const coursemodel= require('../module/addCourseModel')
 const videomodel= require('../module/addVideosModel')
 const fs = require('fs')
 const path =require('path')
-
 const response= require('../utils/response')
 
 

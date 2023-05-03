@@ -4,12 +4,17 @@ import course from "../../assets/images/courses.png"
 import { Container } from 'react-bootstrap';
 import { NavLink, useParams } from 'react-router-dom';
 import axios from "axios";
-import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { apihttp } from "../../api/api"
-
-
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 function Courses() {
   const [t] = useTranslation();
+
+  const user = JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : null
+  const nav = useNavigate();
 
   useEffect(() => {
     document.title ="Courses";  
@@ -17,6 +22,7 @@ function Courses() {
   const {name}=useParams();
 
   const [courses, setCourses] = useState([]);
+  const [coursesUsers, setcoursesUsers] = useState([]);
 
   const getCourseName =() => {
   
@@ -58,6 +64,51 @@ function Courses() {
     fetchData();
     getCourseName();
   }, [name]);
+
+  const handellerEnroll = async (course) => { 
+    if (user) {
+      try {
+        await axios.post(`${apihttp}userRegistration/enrollment/${course._id}`, null, {
+          headers: {
+            Authorization: `Bearer ${user.token}`
+          }
+        })
+        .then((response) => {
+          if (response.status === 201) { // Check if the response status is successful
+            toast.success('You have successfully enrolled in the course contact us to display all matrials!'); // Display a success message using toast
+            // nav(`/course/${course.title}`); // Redirect to the course page
+            console.log(response);
+          }
+        });
+      } catch (error) {
+        console.log('Error creating user:', error);
+      }
+    } else {
+      nav('/myprofile');
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${apihttp}userRegistration/courses/${user._id}`);
+        
+        console.log(res.data);
+        setcoursesUsers(res.data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
+
+
+
+
+    
+  
   
   useEffect(() => {  
     getCourseName();
@@ -69,27 +120,39 @@ function Courses() {
       <CommonSection title={t(`${name}`)} img={`${course}`} />
       <Container className='py-5'>
       <div className="row d-flex justify-content-center">
+      <ToastContainer />
       {courses.map((course) => (
                 <div key={course._id} className="col-10 col-md-6 col-lg-4 pb-5">
-                <NavLink to={`/course/${course.title}`} className="text-decoration-none">
-                    <div className="card rounded-20 ">
-                    <img src={`${apihttp}${course.image}`} height={300} className="rounded-img-top " alt="..." />
-                            <div className="card-body d-flex flex-column justify-content-evenly" style={{height:"150px"}}>
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{course.hours} {`${t('Hours')}`}</p>
+                {/* <NavLink to={`/course/${course.title}`} className="text-decoration-none"> */}
+                    <div className="card rounded-3">
+                    <img src={`${apihttp}${course.image}`} height={250} className="rounded-img-top " alt="..." />
+                    <div className="card-body d-flex flex-column justify-content-between" style={{height:"200px"}}>
+                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{course.hours} Hours</p>
                                 <h6 className="card-text">{course.title} </h6>
                                 <div className=' d-flex  '>
                                 <span className=' '>{course.price} {t('EGP')}</span>
                                 <p className='px-3 text-decoration-line-through'>{course.price} {t('EGP')}</p>
                           
                                 </div>
-                                </div>
+
+                        
+        <button onClick={()=>handellerEnroll(course)} className="w-100 btn-submit btn px-5">
+        Enroll Now
+        </button>
+        </div>
                     </div>
-                </NavLink>
+                {/* </NavLink> */}
                     </div>
                         ))} 
 
                 </div>
       </Container>
+           <div>     {coursesUsers.map((el)=>(<div>
+                    <h1>{el.course}</h1>
+                  </div>))}
+                  
+               
+                </div>
     </>
   )
 }

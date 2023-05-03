@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 const response= require('../utils/response')
 const fs = require('fs')
 const path =require('path')
-
+const EnrollmentRequest = require('../module/userRequestCourses');
 
 class users {
 
@@ -30,7 +30,7 @@ static userRegistration =async(req,res)=>{
 
            const hashingPassword  =await bycrpt.hash(password,12)
            const createuser= await new userModel.User(
-   {isAdmin:isAdmin,image:fileName,usernam:req.body.name,email:email,password:hashingPassword  }
+   {isAdmin:isAdmin,image:fileName,username:req.body.name,email:email,password:hashingPassword  }
 
            )
            
@@ -188,7 +188,148 @@ return response(res,200,"users get succefully",users)
         res.status(500).json({ message: 'Error deleting user', error });
       }
     };
-    }
+
+
+    // static addUserCourse = async (req, res) => {
+    //   try {
+    //     console.log("done")
+    //     const _id= req.params.id
+    //     const user = await userModel.User.findByIdAndUpdate("6450d62081a6ff3759fff8a5", {
+    //       $push: { courses:  _id  }
+    //     }, { new: true });
+    //     console.log(user)
+    //     response(res, 201, 'courses updated successfully', {  user }, '');
+      
+    //   } catch (error) {
+        
+        
+    //   }
+      
+    // };
+    // }
+    static addUserCourse = async (req, res) => {
+      try {
+       
+        console.log()
+        const {Userid,courseId} = req.body.enrollmentRequest;
+        console.log(req.params.id)
+       
+        const user = await userModel.User.findByIdAndUpdate(
+          Userid,
+          { $push: { courses: {courseId} } },
+          { new: true }
+          );
+   const delet = await EnrollmentRequest.findByIdAndDelete(req.params.id)
+
+        response(res, 201, 'Course added successfully', { user }, '');
+      } catch (error) {
+        response(res, 500, 'Error adding course', {}, error.message);
+      }
+    };
+
+
+
+
+
+
+
+
+    static removeUserCourse = async (req, res) => {
+   
+      try {
+        // const { userId, courseId } = req.body;
+        // const user = await userModel.User.findByIdAndUpdate(
+        //   userId,
+        //   { $pull: { courses: { courseId } } },
+        //   { new: true }
+        // );
+    
+        // res.status(200).json(user);
+console.log(req.params.id)
+
+        const delet = await EnrollmentRequest.findByIdAndDelete(req.params.id)
+        console.log(delet)
+        console.log("delet")
+
+        if (delet) {
+          response(res, 200, 'Course deleted successfully', { delet }, '');
+       
+        }else{
+        return  res.status(400).json("not found");
+        return 
+        }
+
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    };
+
+
+
+
+    static getUserCourses = async (req, res) => {
+      try {
+        const userId = req.params.userId;
+        const user = await userModel.User.findById(userId).populate('courses.courseId');
+        const courses = user.courses;
+        res.status(200).json(courses);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    };
+
+
+
+
+
+
+
+
+
+
+static enrollment =    async (req, res) => {
+      try {
+        const { userId, courseId, userName } = req.body;
+        
+        const enrollmentRequest = new EnrollmentRequest({
+          userId:req.user.id,
+          courseId:req.params.id,
+          userName:req.user.email
+        });
+        await enrollmentRequest.save();
+        res.status(201).json({ message: 'Enrollment request submitted successfully',body: enrollmentRequest});
+       
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    };
+
+
+static getrequestesenrolled = async (req, res) => {
+  try {
+  
+    const enrollmentRequests = await EnrollmentRequest.find().populate('userId courseId');
+    
+    res.status(200).json(enrollmentRequests);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+
+
 
 
 
