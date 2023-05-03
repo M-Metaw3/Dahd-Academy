@@ -2735,7 +2735,7 @@ function Test() {
           {enrollmentRequests ? enrollmentRequests.map((enrollmentRequest) => (
             <tr key={enrollmentRequest._id}>
               <td><img src={`http://localhost:5000/${enrollmentRequest.userId?.image}`}alt="" width={150} srcset="" /></td>
-              <td>{enrollmentRequest.userId?.username}</td>
+              <td>{enrollmentRequest.userId?.usernam}</td>
 
               <td>{enrollmentRequest.userId?.email}</td>
               <td>{enrollmentRequest.courseId?.courseName}</td>

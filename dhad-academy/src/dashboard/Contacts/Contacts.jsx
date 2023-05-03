@@ -87,7 +87,7 @@ function Contacts() {
     <>
     <h3>Contacts</h3>
     <div className='py-2 '>
-      <span>Total: {contacts.length}</span>
+    <span>Total: {contacts.length}</span>
      <button className="btn mx-3 btn-delete"  onClick={handleDeleteAllContacts}>Delete All</button>
 
      </div>

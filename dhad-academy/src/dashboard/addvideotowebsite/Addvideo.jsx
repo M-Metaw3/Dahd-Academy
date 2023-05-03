@@ -110,8 +110,8 @@ function Addvideo() {
 
   return (
     <>
-      <Container className="py-5">
-        <div className='w-50 m-auto'>
+      <div className="py-5 row">
+      <div className='col-12 col-lg-6 m-auto'>
           <form onSubmit={handleSubmit}>
             <div className='row'>
               {error && <div className="alert alert-danger">{error}</div>}
@@ -139,11 +139,11 @@ function Addvideo() {
           </form>
 
           <div>
-            <div>
-              <video width={500} controls>
+      <div className='col-12 pt-5  m-auto'>
+                      <video width={"100%"}  controls>
                 {video && <source src={video} type="video/mp4" />}
               </video>
-            </div>
+              </div>
             {/* {
    video? video.map((el)=>(
        <>
@@ -156,7 +156,7 @@ function Addvideo() {
  :"no videose" } */}
           </div>
         </div>
-      </Container>
+      </div>
     </>
 
 

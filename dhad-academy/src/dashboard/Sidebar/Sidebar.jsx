@@ -40,9 +40,9 @@ function Sidebar() {
                                 </CDBSidebarMenuItem>
                             </NavLink>
                            
-                            <NavLink exact="true" to="admin/enrolled" activeclassname="activeClicked">
-                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-book">
-                                 enrolled
+                            <NavLink exact="true" to="admin/requestes" activeclassname="activeClicked">
+                                <CDBSidebarMenuItem className='active-item' icon="fa-solid fa-file-circle-question">
+                                Requestes
                                 </CDBSidebarMenuItem>
                             </NavLink>
                            
@@ -66,6 +66,11 @@ function Sidebar() {
                                 <NavLink exact="true" to="admin/addvideo" activeclassname="activeClicked">
                                 <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-video"}>
                                     Add video
+                                </CDBSidebarMenuItem>
+                            </NavLink>
+                            <NavLink exact="true" to="admin/slider" activeclassname="activeClicked">
+                                <CDBSidebarMenuItem className='active-item' icon={"fa-solid fa-images"}>
+                                    Slider
                                 </CDBSidebarMenuItem>
                             </NavLink>
                         </CDBSidebarMenu>

@@ -66,7 +66,7 @@ function Blog() {
                         <div className="card rounded-20">
                             
                             <img src={`${apihttp}${blog.image}`} className="rounded-img-top" height={"320"} alt="..." />
-                            <div className="card-body d-flex flex-column justify-content-evenly" style={{height:"150px"}}>
+                            <div className="card-body d-flex flex-column justify-content-between" style={{height:"150px"}}>
                                 <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{blog.updatedAt.split("T")[0]}</p>
                                 <h6 className="card-text">{blog.title} </h6>
                                 <NavLink to={`/blog/${blog.id}`} className='text-decoration-none d-flex align-items-center'>
