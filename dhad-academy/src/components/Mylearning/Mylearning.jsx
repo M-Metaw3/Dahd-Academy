@@ -52,7 +52,7 @@ console.log(lessons.lessons);
     <Container className='py-5'>
     <div className="row d-flex justify-content-center">
       <ToastContainer />
-          {coursesUsers?coursesUsers.map((course) => (
+{coursesUsers&&coursesUsers?.courseId!=null?coursesUsers.map((course) => (
             <div className="col-10 col-md-6 col-lg-4 pb-5">
             <div className="card rounded-20">
             <img src={`${apihttp}${course.courseId?.image}`} height={250} className="rounded-img-top" alt="..." />
