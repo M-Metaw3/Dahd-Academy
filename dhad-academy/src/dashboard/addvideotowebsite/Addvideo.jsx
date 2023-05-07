@@ -110,7 +110,8 @@ function Addvideo() {
 
   return (
     <>
-      <div className="py-5 row">
+          <h3>Video</h3>
+          <div className='py-2 row'>
       <div className='col-12 col-lg-6 m-auto'>
           <form onSubmit={handleSubmit}>
             <div className='row'>

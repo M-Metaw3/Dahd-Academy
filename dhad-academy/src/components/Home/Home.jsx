@@ -10,6 +10,9 @@ import OurServices from '../Services/OurServices';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import"./home.css"
+import { apihttp } from "../../api/api"
+import i18n from 'i18next';
+
 
 const Home = () => {
     const [t] = useTranslation();
@@ -39,7 +42,25 @@ const Home = () => {
       }, []);
 
 // console.log( moment(Date).fromNow());
+const [blogs, setBlogs] = useState([]);
+const [totalPages, setTotalPages] = useState(1);
+const [currentPage, setCurrentPage] = useState(1);
 
+
+    useEffect(() => {
+        fetchBlogs();
+      }, [currentPage]);
+    
+      const fetchBlogs = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/blog?page=${currentPage}`);
+          setBlogs(response.data);
+          console.log(response);
+          setTotalPages(Math.ceil(response.headers['x-total-count'] / 3)); // assume limit of 3 blogs per page
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
    
     return (
@@ -80,46 +101,29 @@ const Home = () => {
               </video>
             </div>
             <Container className='pb-5'>
-            <div className='row pt-5  justify-content-center '>
+            <div className='row pt-5 blogs  justify-content-center '>
             <h3 className='col-12 text-center  pb-5'>{t('RecentPosts')}</h3>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                        <div className="card rounded-20">
-                            <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <NavLink to={"/blog/1"} className='text-decoration-none text-dark'>
-                                    Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i>
-                                </NavLink>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                        <div className="card rounded-20">
-                            <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-10 col-md-6 col-lg-4 pb-5">
-                        <div className="card rounded-20">
-                            <img src={require("../../assets/images/image 5.png")} className="rounded-img-top " alt="..." />
-                            <div className="card-body">
-                                <p className="card-title"><i className="fa-regular fa-clock pe-1"></i> January 10, 2022</p>
-                                <h6 className="card-text">
-                                    New batch graduation ceremony
-                                </h6>
-                                <a href="/" className='text-decoration-none text-dark'>Read More<i className="fa-solid fa-arrow-right-long ps-2 text-dark fs-6"></i></a>
-                            </div>
-                        </div>
-                    </div>
+            {blogs.map((blog) => (
+
+<div key={blog.id} className="col-10 col-sm-7 col-md-6 col-lg-4  pb-5">
+    <div className="card rounded-20">
+        
+        <img src={`${apihttp}${blog.image}`} className="rounded-img-top" height={"320"} alt="..." />
+        <div className="card-body d-flex flex-column justify-content-between" style={{height:"150px"}}>
+            <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{blog.updatedAt.split("T")[0]}</p>
+            <h6 className="card-text">{blog.title} </h6>
+            <NavLink to={`/blog/${blog.id}`} className='text-decoration-none d-flex align-items-center'>
+            {t('ReadMore')}
+            {
+              i18n.language=="en"?<i className="fa-solid fa-arrow-right-long px-2 fs-6"></i>
+              : <i className="fa-solid fa-arrow-left-long px-2 fs-6"></i>
+            }
+            </NavLink>
+        </div>
+    </div>
+
+</div>
+          ))}
                 </div>
 
                 

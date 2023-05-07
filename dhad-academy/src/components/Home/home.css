@@ -6,3 +6,6 @@ height: 450px;
         height: 300px;
         }
   }
+  .card a ,.card i{
+    color: var(--secondry-color) !important; 
+}
