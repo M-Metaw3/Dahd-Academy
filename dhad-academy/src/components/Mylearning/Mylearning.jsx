@@ -43,9 +43,7 @@ console.log(lessons.lessons);
       nav(`/course/${course.title}`)
     }
     else{
-        toast.success('no lessons in this course yet '); // Display a success message using toast
-     
-      
+        toast.success('no lessons in this course yet '); // Display a success message using toast     
     }
   }
   return (
@@ -53,18 +51,19 @@ console.log(lessons.lessons);
     <div className="row d-flex justify-content-center">
       <ToastContainer />
 {coursesUsers&&coursesUsers?.courseId!=null?coursesUsers.map((course) => (
-            <div className="col-10 col-md-6 col-lg-4 pb-5">
-            <div className="card rounded-20">
-            <img src={`${apihttp}${course.courseId?.image}`} height={250} className="rounded-img-top" alt="..." />
-            <div className="card-body d-flex flex-column justify-content-between" style={{height:"200px"}}>
-            <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{course.courseId?.hours} {t('Hours')}</p>
-            <h6 className="card-text">{course.courseId?.title } </h6>
-            <h6 className="card-text">{course.courseId?.lessons.length} {t("Lessons")} </h6>
+  <div className="col-10 col-md-6 col-lg-4 pb-5">
+  <div className="card rounded-20">
+  <img src={`${apihttp}${course.courseId?.image}`} height={250} className="rounded-img-top" alt="..." />
+  <div className="card-body d-flex flex-column justify-content-between" style={{height:"200px"}}>
+  <p className="card-title"><i className="fa-regular fa-clock pe-1"></i>{course.courseId?.hours} {t('Hours')}</p>
+  <h6 className="card-text">{course.courseId?.title } </h6>
+  <h6 className="card-text">{course.courseId?.lessons.length} {t("Lessons")} </h6>
 
 <button onClick={()=>handellersendLessons(course?.courseId)} className="w-100 btn-submit btn px-5">{t("StartNow")}</button>
 </div>
 </div>
 </div>
+
           )):
           <div className="d-flex justify-content-center align-items-center" style={{height:"200px"}}>
            <p>no courses yet</p> 
