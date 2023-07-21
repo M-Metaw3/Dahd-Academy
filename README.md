@@ -1,4 +1,5 @@
 # Dahd-Academy
+#SUPPORT ARABIC AND ENGLISH
 #MERN
 dahd
 
